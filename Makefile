@@ -17,7 +17,7 @@ COMPONENT_FILES	:=
 
 # Specify the top level testbench to be simulated
 # (do not include the source folder in the name)
-TB 				:= 
+TB 				:= tb_frame_tracker.sv
 
 # Directories where source code is located
 SRC 			:= source
