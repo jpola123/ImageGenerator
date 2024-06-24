@@ -64,7 +64,7 @@ task check_obj_code;
     input [2:0] expected;
 begin
     @(negedge tb_clk);
-    if(expected == obj_code)
+    if(expected == tb_obj_code)
         $info("Object code is correct.");
     else
         $error("Object code is incorrect");
