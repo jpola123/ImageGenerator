@@ -43,6 +43,11 @@ always_ff @(posedge clk, negedge nrst) begin
 end
 
 always_comb begin
+    next_X = current_X;
+    next_Y = current_Y;
+    next_d = 1'b0;
+    next_frame = frame;
+    
     if(enable) begin
         if((current_X == 4'd15) && (current_Y == 4'd11)) begin
             next_X = 4'b0;
