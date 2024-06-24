@@ -179,6 +179,33 @@ initial begin
             tb_border = 1'b0; 
         check_obj_code(map1[tb_x][tb_y]);
     end
+    /*
+    Test Case 2: See if correct obj_code is outputted if a new map is put in. 
+    */
+    tb_test_num += 1;
+    tb_test_case = "Changing the map";
+    $display("\n\n%s", tb_test_case);
+    #(CLK_PERIOD * 191);
+        for(integer i = 0; i < 192; i = i + 1) begin
+        #(CLK_PERIOD);
+        if(map2[tb_x][tb_y] == 3'b001)
+            tb_head = 1'b1;
+        else
+            tb_head = 1'b0;
+        if(map2[tb_x][tb_y] == 3'b010)
+            tb_body = 1'b1;
+        else
+            tb_body = 1'b0;
+        if(map2[tb_x][tb_y] == 3'b011)
+            tb_apple = 1'b1;
+        else
+            tb_apple= 1'b0;
+        if(map2[tb_x][tb_y] == 3'b100)
+            tb_border = 1'b1;
+        else
+            tb_border = 1'b0; 
+        check_obj_code(map1[tb_x][tb_y]);
+    end
     $finish;
 
 end
