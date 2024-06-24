@@ -4,7 +4,7 @@ typedef enum logic [2:0] {
 
 module frame_tracker (
     input logic body, head, apple, border, enable, clk, nrst,
-    output obj_code_t obj_code,
+    output logic [2:0] obj_code,
     output logic [3:0] x, y,
     output logic diff
 );
@@ -47,7 +47,7 @@ always_comb begin
     next_Y = current_Y;
     next_d = 1'b0;
     next_frame = frame;
-    
+
     if(enable) begin
         if((current_X == 4'd15) && (current_Y == 4'd11)) begin
             next_X = 4'b0;
@@ -68,10 +68,10 @@ always_comb begin
     end
 
     if((current_X == 4'd0) || (current_X == 4'd15) || (current_Y == 4'd0) || (current_Y == 4'd11)) begin
-        if(frame[current_X][current_Y] != border_c && border) begin
+        if((frame[current_X][current_Y] != 3'b100) && (border)) begin
             next_d = 1'b1;
-            next_frame[current_X][current_Y] = border_c;
-            obj_code = border_c;
+            next_frame[current_X][current_Y] = 3'b100;
+            obj_code = 3'b100;
         end
         else begin
             next_d = 1'b0;
@@ -79,25 +79,25 @@ always_comb begin
             obj_code = frame[current_X][current_Y];
         end
     end
-    else if(body && frame[current_X][current_Y] != snake_body) begin
+    else if((body) && (frame[current_X][current_Y] != 3'b010)) begin
         next_d = 1'b1;
-        next_frame[current_X][current_Y] = snake_body;
-        obj_code = snake_body;
+        next_frame[current_X][current_Y] = 3'b010;
+        obj_code = 3'b010;
     end
-    else if(head && frame[current_X][current_Y] != snake_head) begin
+    else if((head) && (frame[current_X][current_Y] != 3'b001)) begin
         next_d = 1'b1;
-        next_frame[current_X][current_Y] = snake_head;
-        obj_code = snake_head;
+        next_frame[current_X][current_Y] = 3'b001;
+        obj_code = 3'b001;
     end
-    else if(apple && frame[current_X][current_Y] != apple_c) begin
+    else if((apple) && (frame[current_X][current_Y] != 3'b011)) begin
         next_d = 1'b1;
-        next_frame[current_X][current_Y] = apple_c;
-        obj_code = apple_c;
+        next_frame[current_X][current_Y] = 3'b011;
+        obj_code = 3'b011;
     end
-    else if(~(apple || head || body || border) && (frame[current_X][current_Y] != blank)) begin
+    else if(~(apple || head || body || border) && (frame[current_X][current_Y] != 3'b000)) begin
         next_d = 1'b1;
-        next_frame[current_X][current_Y] = blank;
-        obj_code = blank;
+        next_frame[current_X][current_Y] = 3'b000;
+        obj_code = 3'b000;
     end
     else begin
         next_d = 1'b0;
