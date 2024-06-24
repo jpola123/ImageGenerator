@@ -9,15 +9,15 @@ export LD_LIBRARY_PATH := /home/shay/a/ece270/lib:$(LD_LIBRARY_PATH)
 
 # Specify the name of the top level file
 # (do not include the source folder in the name)
-TOP_FILE		:= stop_watch.sv
+TOP_FILE		:= frame_tracker.sv
 
 # Specify the name of component or sub-module files
 # (do not include the source folder in the name)
-COMPONENT_FILES	:= counter.sv clock_divider.sv edge_detect.sv fsm.sv synchronizer.sv bcd.sv ssdec.sv
+COMPONENT_FILES	:= 
 
 # Specify the top level testbench to be simulated
 # (do not include the source folder in the name)
-TB 				:= tb_stop_watch.sv
+TB 				:= 
 
 # Directories where source code is located
 SRC 			:= source
