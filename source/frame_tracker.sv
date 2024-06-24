@@ -9,7 +9,7 @@ module frame_tracker (
     output logic diff
 );
 
-logic [16:0][12:0][2:0] frame, next_frame;
+logic [15:0][11:0][2:0] frame, next_frame;
 logic [3:0] current_X, next_X, current_Y, next_Y;
 logic next_d, d;
 
