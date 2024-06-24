@@ -12,9 +12,6 @@ logic tb_body, tb_head, tb_apple, tb_border, tb_enable, tb_clk, tb_nrst, tb_diff
 logic [2:0] tb_obj_code;
 logic [3:0] tb_x, tb_y;
 
-logic [16:0][12:0][2:0] map1;
-logic [16:0][12:0][2:0] map2;
-logic [16:0][12:0][2:0] map3;
 task reset_dut;
     @(negedge tb_clk);
     tb_nrst = 1'b0; 
@@ -93,46 +90,6 @@ initial begin
     tb_head = 1'b0;
     tb_enable = 1'b1;
     tb_test_num = -1;
-    for(integer i = 0; i < 16; i++) begin
-        for(integer j = 0; j < 12; j++) begin
-            if((i == 0) || (i == 15) || (j == 0) || (j == 11)) begin
-                map1[i][j] = 3'b100;
-                map2[i][j] = 3'b100;
-                map3[i][j] = 3'b100;
-            end
-            else if((i == 4) && (j == 4)) begin
-                map1[i][j] = 3'b001;
-                map2[i][j] = 3'b010;
-                map3[i][j] = 3'b000;
-            end
-            else if((i == 5) && (j == 4)) begin
-                map1[i][j] = 3'b000;
-                map2[i][j] = 3'b001;
-                map3[i][j] = 3'b010;
-            end
-            else if((i == 6) && (j == 4)) begin
-                map1[i][j] = 3'b011;
-                map2[i][j] = 3'b000;
-                map3[i][j] = 3'b001;
-            end
-            else if((i == 7) && (j == 4)) begin
-                map1[i][j] = 3'b000;
-                map2[i][j] = 3'b011;
-                map3[i][j] = 3'b000;
-            end
-            else if((i == 8) && (j == 4)) begin
-                map1[i][j] = 3'b000;
-                map2[i][j] = 3'b000;
-                map3[i][j] = 3'b011;
-            end
-            else begin
-                map1[i][j] = 3'b000;
-                map2[i][j] = 3'b000;
-                map3[i][j] = 3'b000;
-            end
-        end
-    end
-    
     
     #(0.1);
 
@@ -153,60 +110,71 @@ initial begin
     reset_dut;
 
     /*
-    Test Case 1: See if correct obj_code is outputted for x and y value (MAP 1)
+    Test Case 1: Set an initial map, then change it.
     */
     tb_test_num += 1;
     tb_test_case = "Test of Map one";
     $display("\n\n%s", tb_test_case);
     reset_dut;
-    for(integer i = 0; i < 192; i = i + 1) begin
-        #(CLK_PERIOD);
-        if(map1[tb_x][tb_y] == 3'b001)
-            tb_head = 1'b1;
-        else
+    for(integer i = 0; i < 15; i = i + 1) begin
+        for(integer j = 0; j < 11; j = j + 1) begin
+            #(CLK_PERIOD);
+            tb_border = 1'b0;
             tb_head = 1'b0;
-        if(map1[tb_x][tb_y] == 3'b010)
-            tb_body = 1'b1;
-        else
-            tb_body = 1'b0;
-        if(map1[tb_x][tb_y] == 3'b011)
-            tb_apple = 1'b1;
-        else
-            tb_apple= 1'b0;
-        if(map1[tb_x][tb_y] == 3'b100)
-            tb_border = 1'b1;
-        else
-            tb_border = 1'b0; 
-        check_obj_code(map1[tb_x][tb_y]);
+            tb_apple = 1'b0;
+            tb_body = 1'b0; 
+             if((i == 15) ||  (i == 0) || (j == 0) || (j == 11)) begin
+                tb_border = 1'b1;
+                check_obj_code(3'b100);
+             end
+             else if((i == 4) || (j == 4)) begin
+                tb_head = 1'b1;
+                check_obj_code(3'b001);
+             end
+             else if((i == 7) || (j == 4)) begin
+                tb_apple = 1'b1;
+                check_obj_code(3'b011);
+             end
+             else begin
+                check_obj_code (3'b011);
+             end
+        end
     end
-    /*
-    Test Case 2: See if correct obj_code is outputted if a new map is put in. 
-    */
-    tb_test_num += 1;
-    tb_test_case = "Changing the map";
-    $display("\n\n%s", tb_test_case);
+    
     #(CLK_PERIOD * 191);
-        for(integer i = 0; i < 192; i = i + 1) begin
-        #(CLK_PERIOD);
-        if(map2[tb_x][tb_y] == 3'b001)
-            tb_head = 1'b1;
-        else
+    for(integer i = 0; i < 15; i = i + 1) begin
+        for(integer j = 0; j < 11; j = j + 1) begin
+            #(CLK_PERIOD);
+            tb_border = 1'b0;
             tb_head = 1'b0;
-        if(map2[tb_x][tb_y] == 3'b010)
-            tb_body = 1'b1;
-        else
-            tb_body = 1'b0;
-        if(map2[tb_x][tb_y] == 3'b011)
-            tb_apple = 1'b1;
-        else
-            tb_apple= 1'b0;
-        if(map2[tb_x][tb_y] == 3'b100)
-            tb_border = 1'b1;
-        else
-            tb_border = 1'b0; 
-        check_obj_code(map1[tb_x][tb_y]);
+            tb_apple = 1'b0;
+            tb_body = 1'b0; 
+             if((i == 15) ||  (i == 0) || (j == 0) || (j == 11)) begin
+                tb_border = 1'b1;
+                check_obj_code(3'b100);
+                check_diff(1'b0);
+             end
+             else if((i == 5) || (j == 4)) begin
+                tb_head = 1'b1;
+                check_obj_code(3'b001);
+                check_diff(1'b1);
+             end
+             else if((i == 7) || (j == 4)) begin
+                tb_apple = 1'b1;
+                check_obj_code(3'b011);
+                check_diff(1'b0);
+             end
+             else if((i == 4) || (j == 4)) begin
+                tb_body = 1'1;
+                check_obj_code(3'b010);
+                check_diff(1'b1);
+            end
+             else begin
+                check_obj_code(3'b011);
+                check_diff(1'b0);
+             end
+        end
     end
-    $finish;
 
 end
 
