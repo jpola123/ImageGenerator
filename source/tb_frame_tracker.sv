@@ -165,7 +165,7 @@ initial begin
                 check_diff(1'b0);
              end
              else if((i == 4) || (j == 4)) begin
-                tb_body = 1'1;
+                tb_body = 1'b1;
                 check_obj_code(3'b010);
                 check_diff(1'b1);
             end
