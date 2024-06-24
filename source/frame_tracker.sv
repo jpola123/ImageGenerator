@@ -99,7 +99,7 @@ always_comb begin
     end
 end
 
-assign X = current_X;
-assign Y = current_Y;
+assign x = current_X;
+assign y = current_Y;
 
 endmodule
