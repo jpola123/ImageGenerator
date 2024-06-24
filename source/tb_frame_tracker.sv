@@ -8,7 +8,7 @@ integer tb_test_num;
 string tb_test_case;
 
 //DUT Ports
-logic tb_body, tb_head, tb_apple, tb_border, tb_enable, tb_clk, tb_nrst, diff;
+logic tb_body, tb_head, tb_apple, tb_border, tb_enable, tb_clk, tb_nrst, tb_diff;
 logic [2:0] tb_obj_code;
 logic [3:0] tb_x, tb_y;
 logic tb_diff;
@@ -53,7 +53,7 @@ task check_diff;
     input logic expected;
 begin
     @(negedge tb_clk);
-    if(expected == diff)
+    if(expected == tb_diff)
         $info("diff is correct.");
     else
         $error("diff is incorrect.");
