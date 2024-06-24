@@ -8,6 +8,6 @@ module image_generator (
     output logic sync, n_cs, dc, wr, sn_rst
     output logic [7:0] D,
     output logic [3:0] x, y
-);S
+);
 
 endmodule;

@@ -9,9 +9,9 @@ logic [16:0][12:0][2:0] frame, next_frame;
 logic [3:0] current_X, next_X, current_Y, next_Y;
 
 generate 
-    for(integer i = 0; i < 16; i = i + 1) begin
-        for(integer j = 0; j < 12; j = j + 1) begin
-            always_ff @(posedge clk, negedge nrst)
+    for(genvar i = 0; i < 16; i = i + 1) begin
+        for(genvar j = 0; j < 12; j = j + 1) begin
+            always_ff @(posedge clk, negedge nrst) begin
                 if(~nrst) begin
                     frame[i][j] <= 3'b0;
                     current_X <= 4'b0;
@@ -22,6 +22,7 @@ generate
                     current_X <= next_X;
                     current_Y <= next_Y;
                 end
+            end
         end
     end
 endgenerate
