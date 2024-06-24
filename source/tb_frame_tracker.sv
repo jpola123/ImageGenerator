@@ -176,6 +176,8 @@ initial begin
         end
     end
 
+    $finish;
+
 end
 
 
