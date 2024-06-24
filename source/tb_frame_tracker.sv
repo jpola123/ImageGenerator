@@ -103,7 +103,7 @@ initial begin
     $display("\n\n%s", tb_test_case);
 
     reset_dut;
-    #(CLK_PERIOD * 10);
+    #(CLK_PERIOD * 100);
 
     check_diff(1'b0);
     check_obj_code(3'b000);
