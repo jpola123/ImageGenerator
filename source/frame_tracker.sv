@@ -41,7 +41,7 @@ always_ff @(posedge clk, negedge nrst) begin
 end
 
 always_comb begin
-    diff = 1'b0;
+    diff_temp = 1'b0;
     if(enable) begin
         if((current_X == 4'd15) && (current_Y == 4'd11)) begin
             next_X = 4'b0;
