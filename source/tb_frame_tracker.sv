@@ -127,11 +127,11 @@ initial begin
                 tb_border = 1'b1;
                 check_obj_code(3'b100);
              end
-             else if((i == 4) || (j == 4)) begin
+             else if((i == 4) && (j == 4)) begin
                 tb_head = 1'b1;
                 check_obj_code(3'b001);
              end
-             else if((i == 7) || (j == 4)) begin
+             else if((i == 7) && (j == 4)) begin
                 tb_apple = 1'b1;
                 check_obj_code(3'b011);
              end
@@ -154,17 +154,17 @@ initial begin
                 check_obj_code(3'b100);
                 check_diff(1'b0);
              end
-             else if((i == 5) || (j == 4)) begin
+             else if((i == 5) && (j == 4)) begin
                 tb_head = 1'b1;
                 check_obj_code(3'b001);
                 check_diff(1'b1);
              end
-             else if((i == 7) || (j == 4)) begin
+             else if((i == 7) && (j == 4)) begin
                 tb_apple = 1'b1;
                 check_obj_code(3'b011);
                 check_diff(1'b0);
              end
-             else if((i == 4) || (j == 4)) begin
+             else if((i == 4) && (j == 4)) begin
                 tb_body = 1'b1;
                 check_obj_code(3'b010);
                 check_diff(1'b1);
