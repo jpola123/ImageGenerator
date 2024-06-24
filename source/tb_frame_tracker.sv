@@ -116,8 +116,8 @@ initial begin
     tb_test_case = "Test of Map one";
     $display("\n\n%s", tb_test_case);
     reset_dut;
-    for(integer i = 0; i < 15; i = i + 1) begin
-        for(integer j = 0; j < 11; j = j + 1) begin
+    for(integer i = 0; i < 16; i = i + 1) begin
+        for(integer j = 0; j < 12; j = j + 1) begin
             #(CLK_PERIOD);
             tb_border = 1'b0;
             tb_head = 1'b0;
@@ -142,8 +142,8 @@ initial begin
     end
     
     #(CLK_PERIOD * 191);
-    for(integer i = 0; i < 15; i = i + 1) begin
-        for(integer j = 0; j < 11; j = j + 1) begin
+    for(integer i = 0; i < 16; i = i + 1) begin
+        for(integer j = 0; j < 12; j = j + 1) begin
             #(CLK_PERIOD);
             tb_border = 1'b0;
             tb_head = 1'b0;
