@@ -176,7 +176,7 @@ initial begin
         if(map1[tb_x][tb_y] == 3'b100)
             tb_border = 1'b1;
         else
-            tb_body = 1'b0; 
+            tb_border = 1'b0; 
         check_obj_code(map1[tb_x][tb_y]);
     end
     $finish;
