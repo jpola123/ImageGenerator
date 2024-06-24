@@ -1,3 +1,7 @@
+typedef enum logic [2:0] {  
+    blank = 0, snake_head = 1, snake_body = 2, apple_c = 3, border_c = 4
+} obj_code_t;
+
 module frame_tracker (
     input logic body, head, apple, border, enable, clk, nrst, sync,
     output obj_code_t obj_code,
@@ -53,11 +57,11 @@ always_comb begin
             next_frame[current_X][current_Y] = frame[current_X][current_Y];
         end
     end
-    else if(snakeBody && frame[current_X][current_Y] != snake_body) begin
+    else if(body && frame[current_X][current_Y] != snake_body) begin
         diff = 1'b1;
         next_frame[current_X][current_Y] = snake_body;
     end
-    else if(snakeHead && frame[current_X][current_Y] != snake_head) begin
+    else if(head && frame[current_X][current_Y] != snake_head) begin
         diff = 1'b1;
         next_frame[current_X][current_Y] = snake_head;
     end
