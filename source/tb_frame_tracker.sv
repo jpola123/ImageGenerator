@@ -162,6 +162,22 @@ initial begin
     reset_dut;
     for(integer i = 0; i < 192; i = i + 1) begin
         #(CLK_PERIOD);
+        if(map1[tb_x][tb_y] == 3'b001)
+            tb_head = 1'b1;
+        else
+            tb_head = 1'b0;
+        if(map1[tb_x][tb_y] == 3'b010)
+            tb_body = 1'b1;
+        else
+            tb_body = 1'b0;
+        if(map1[tb_x][tb_y] == 3'b011)
+            tb_apple_c = 1'b1;
+        else
+            tb_apple_c = 1'b0;
+        if(map1[tb_x][tb_y] == 3'b100)
+            tb_border = 1'b1;
+        else
+            tb_body = 1'b0; 
         check_obj_code(map1[tb_x][tb_y]);
     end
     $finish;
