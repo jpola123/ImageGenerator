@@ -11,7 +11,6 @@ string tb_test_case;
 logic tb_body, tb_head, tb_apple, tb_border, tb_enable, tb_clk, tb_nrst, tb_diff;
 logic [2:0] tb_obj_code;
 logic [3:0] tb_x, tb_y;
-logic tb_diff;
 
 logic [16:0][12:0][2:0] map1;
 logic [16:0][12:0][2:0] map2;
@@ -171,9 +170,9 @@ initial begin
         else
             tb_body = 1'b0;
         if(map1[tb_x][tb_y] == 3'b011)
-            tb_apple_c = 1'b1;
+            tb_apple = 1'b1;
         else
-            tb_apple_c = 1'b0;
+            tb_apple= 1'b0;
         if(map1[tb_x][tb_y] == 3'b100)
             tb_border = 1'b1;
         else
