@@ -18,18 +18,26 @@ generate
             always_ff @(posedge clk, negedge nrst) begin
                 if(~nrst) begin
                     frame[i][j] <= 3'b0;
-                    current_X <= 4'b0;
-                    current_Y <= 4'b0;
                 end
                 else begin
                     frame[i][j] <= next_frame;
-                    current_X <= next_X;
-                    current_Y <= next_Y;
                 end
             end
         end
     end
 endgenerate
+
+always_ff @(posedge clk, negedge nrst) begin
+    if(~nrst) begin
+        current_X <= 4'b0;
+        current_Y <= 4'b0;
+    end
+    else begin
+        current_X <= next_X;
+        current_Y <= next_Y;
+    end
+
+end
 
 always_comb begin
     if(enable) begin
