@@ -46,46 +46,27 @@ always_comb begin
         next_Y = current_Y;
     end
 
-    if(sync) begin //subject to change (maybe just make everything zero, then read default values from rest of system?)
-        for(integer i = 0; i < 16; i = i + 1) begin
-            for(integer j = 0; j < 12; j = j + 1) begin
-                if((i == 0) || (i == 15) || (j == 0) || (j == 11)) begin
-                    next_frame[i][j] = border_c;
-                end
-                else if((i == 4) && (j == 4)) begin
-                    next_frame[i][j] = snake_head;
-                end
-                else if((i == 8) && (j == 4)) begin
-                    next_frame[i][j] = apple_c;
-                end
-                else begin
-                    next_frame[i][j] = blank;
-                end
-            end
+    if((current_X == 4'd0) || (current_X == 4'd15) || (current_Y == 4'd0) || (current_Y == 4'd11)) begin
+        if(frame[current_X][current_Y] != border_c && border) begin
+            diff = 1'b0;
+            next_frame[current_X][current_Y] = frame[current_X][current_Y];
         end
+    end
+    else if(snakeBody && frame[current_X][current_Y] != snake_body) begin
         diff = 1'b1;
+        next_frame[current_X][current_Y] = snake_body;
+    end
+    else if(snakeHead && frame[current_X][current_Y] != snake_head) begin
+        diff = 1'b1;
+        next_frame[current_X][current_Y] = snake_head;
+    end
+    else if(apple && frame[current_X][current_Y] != apple_c) begin
+        diff = 1'b1;
+        next_frame[current_X][current_Y] = apple_c;
     end
     else begin
-        if((current_X == 4'd0) || (current_X == 4'd15) || (current_Y == 4'd0) || (current_Y == 4'd11)) begin
-            diff = 1'b0;
-            next_frame[current_X][current_Y] = frame[current_X][current_Y];
-        end
-        else if(snakeBody && frame[current_X][current_Y] != snake_body) begin
-            diff = 1'b1;
-            next_frame[current_X][current_Y] = snake_body;
-        end
-        else if(snakeHead && frame[current_X][current_Y] != snake_head) begin
-            diff = 1'b1;
-            next_frame[current_X][current_Y] = snake_head;
-        end
-        else if(apple && frame[current_X][current_Y] != apple_c) begin
-            diff = 1'b1;
-            next_frame[current_X][current_Y] = apple_c;
-        end
-        else begin
-            diff = 1'b0;
-            next_frame[current_X][current_Y] = frame[current_X][current_Y];
-        end
+        diff = 1'b0;
+        next_frame[current_X][current_Y] = frame[current_X][current_Y];
     end
 end
 
