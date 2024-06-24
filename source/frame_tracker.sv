@@ -3,7 +3,7 @@ typedef enum logic [2:0] {
 } obj_code_t;
 
 module frame_tracker (
-    input logic body, head, apple, border, enable, clk, nrst, sync,
+    input logic body, head, apple, border, enable, clk, nrst,
     output obj_code_t obj_code,
     output logic [3:0] x, y,
     output logic diff
