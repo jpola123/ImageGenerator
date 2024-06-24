@@ -13,6 +13,9 @@ logic [2:0] tb_obj_code;
 logic [3:0] tb_x, tb_y;
 logic tb_diff;
 
+logic [16:0][12:0][2:0] map1;
+logic [16:0][12:0][2:0] map2;
+logic [16:0][12:0][2:0] map3;
 task reset_dut;
     @(negedge tb_clk);
     tb_nrst = 1'b0; 
@@ -91,11 +94,51 @@ initial begin
     tb_head = 1'b0;
     tb_enable = 1'b1;
     tb_test_num = -1;
+    for(integer i = 0; i < 16; i++) begin
+        for(integer j = 0; j < 12; j++) begin
+            if((i == 0) || (i == 15) || (j == 0) || (j == 11)) begin
+                map1[i][j] = 3'b100;
+                map2[i][j] = 3'b100;
+                map3[i][j] = 3'b100;
+            end
+            else if((i == 4) && (j == 4)) begin
+                map1[i][j] = 3'b001;
+                map2[i][j] = 3'b010;
+                map3[i][j] = 3'b000;
+            end
+            else if((i == 5) && (j == 4)) begin
+                map1[i][j] = 3'b000;
+                map2[i][j] = 3'b001;
+                map3[i][j] = 3'b010;
+            end
+            else if((i == 6) && (j == 4)) begin
+                map1[i][j] = 3'b011;
+                map2[i][j] = 3'b000;
+                map3[i][j] = 3'b001;
+            end
+            else if((i == 7) && (j == 4)) begin
+                map1[i][j] = 3'b000;
+                map2[i][j] = 3'b011;
+                map3[i][j] = 3'b000;
+            end
+            else if((i == 8) && (j == 4)) begin
+                map1[i][j] = 3'b000;
+                map2[i][j] = 3'b000;
+                map3[i][j] = 3'b011;
+            end
+            else begin
+                map1[i][j] = 3'b000;
+                map2[i][j] = 3'b000;
+                map3[i][j] = 3'b000;
+            end
+        end
+    end
+    
     
     #(0.1);
 
     /*
-    Test Case 1: Power on Reset of DUT
+    Test Case 0: Power on Reset of DUT
     */
 
     tb_test_num += 1;
@@ -108,6 +151,19 @@ initial begin
     check_diff(1'b0);
     check_obj_code(3'b000);
 
+    reset_dut;
+
+    /*
+    Test Case 1: See if correct obj_code is outputted for x and y value (MAP 1)
+    */
+    tb_test_num += 1;
+    tb_test_case = "Test of Map one";
+    $display("\n\n%s", tb_test_case);
+    reset_dut;
+    for(integer i = 0; i < 192; i = i + 1) begin
+        #(CLK_PERIOD);
+        check_obj_code(map1[tb_x][tb_y]);
+    end
     $finish;
 
 end
