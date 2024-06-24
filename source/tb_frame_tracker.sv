@@ -61,7 +61,7 @@ end
 endtask
 
 task check_obj_code;
-    input obj_code_t expected;
+    input [2:0] expected;
 begin
     @(negedge tb_clk);
     if(expected == obj_code)
@@ -106,7 +106,7 @@ initial begin
     #(CLK_PERIOD * 10);
 
     check_diff(1'b0);
-    check_obj_code(blank);
+    check_obj_code(3'b000);
 
     $finish;
 
