@@ -214,6 +214,65 @@ initial begin
         check_obj_code(map1[tb_x][tb_y]);
 
     end
+
+    reset_dut;
+
+    /*
+    Test Case 3: Enable pin should keep x and y constant
+    */
+    
+    tb_test_num += 1;
+    tb_test_case = "Toggle enable pin to low to not move x and y";
+    $display("\n\n%s", tb_test_case);
+    reset_dut;
+    tb_enable = 1'b1;
+
+    for(integer i = 0; i < 192; i = i + 1) begin
+        #(CLK_PERIOD);
+        if(map1[tb_x][tb_y] == 3'b001)
+            tb_head = 1'b1;
+        else
+            tb_head = 1'b0;
+        if(map1[tb_x][tb_y] == 3'b010)
+            tb_body = 1'b1;
+        else
+            tb_body = 1'b0;
+        if(map1[tb_x][tb_y] == 3'b011) begin
+            tb_apple = 1'b1;
+            tb_enable = 1'b0;
+        end
+        else
+            tb_apple= 1'b0;
+        if(map1[tb_x][tb_y] == 3'b100)
+            tb_border = 1'b1;
+        else
+            tb_border = 1'b0; 
+        check_obj_code(map1[tb_x][tb_y]);
+    end    
+
+    tb_enable = 1'b1;
+
+    for(integer i = 0; i < 192; i = i + 1) begin
+        #(CLK_PERIOD);
+        if(map1[tb_x][tb_y] == 3'b001)
+            tb_head = 1'b1;
+        else
+            tb_head = 1'b0;
+        if(map1[tb_x][tb_y] == 3'b010)
+            tb_body = 1'b1;
+        else
+            tb_body = 1'b0;
+        if(map1[tb_x][tb_y] == 3'b011)
+            tb_apple = 1'b1;
+        else
+            tb_apple= 1'b0;
+        if(map1[tb_x][tb_y] == 3'b100)
+            tb_border = 1'b1;
+        else
+            tb_border = 1'b0; 
+        check_obj_code(map1[tb_x][tb_y]);
+    end        
+
     $finish;
 
 end
