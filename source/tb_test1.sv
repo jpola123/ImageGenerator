@@ -299,7 +299,7 @@ module tb_test1();
             end
             else
                 apple= 1'b0;
-            if((x == 4'b0) || (x == 4'b15) || (y == 4'b0) || (y == 4'b11)) begin
+            if((x == 4'b0) || (x == 4'd15) || (y == 4'b0) || (y == 4'd11)) begin
                 toggle_border();
 /*                 check_coordinates({x, y});
                 check_update(1'b1);
