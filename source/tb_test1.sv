@@ -265,7 +265,7 @@ module tb_test1();
             end
             else
                 border = 1'b0; 
-        check_obj_code(map1[tb_x][tb_y]);
+        check_obj_code(map1[x][y]);
         end
         $finish;
     
