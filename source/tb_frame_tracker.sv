@@ -181,6 +181,10 @@ initial begin
     /*
     Test Case 2: See if correct obj_code is outputted if a new map is put in. 
     */
+    tb_border = 1'b0;
+    tb_apple = 1'b0;
+    tb_body = 1'b0;
+    tb_head = 1'b0;
     tb_test_num += 1;
     tb_test_case = "Changing the map";
     $display("\n\n%s", tb_test_case);
