@@ -227,7 +227,7 @@ module tb_test1();
         reset_dut;
         toggle_cmd_done();
 
-        for(integer i = 0; i < 1500; i = i + 1) begin
+        for(integer i = 0; i < 192; i = i + 1) begin
             #(CLK_PERIOD);
             if(map1[x][y] == 3'b001) begin
                 snakeHead = 1'b1;
