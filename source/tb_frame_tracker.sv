@@ -211,6 +211,7 @@ initial begin
         end
         else
             tb_border = 1'b0; 
+        @(negedge tb_clk);
         check_obj_code(map1[tb_x][tb_y]);
 
     end
