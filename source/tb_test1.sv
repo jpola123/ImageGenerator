@@ -305,6 +305,7 @@ module tb_test1();
                 check_update(1'b1);
                 check_loop(1'b0);
                 toggle_cmd_done(); */
+                toggle_cmd_done();
             end
             else
                 border = 1'b0; 
