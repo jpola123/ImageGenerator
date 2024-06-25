@@ -121,11 +121,11 @@ module tb_test1();
 
     task toggle_cmd_done;
     begin
-        @(negedge tb_clk);
+        @(negedge tb_clk2);
         cmd_done = 1'b1; 
-        @(negedge tb_clk);
+        @(negedge tb_clk2);
         cmd_done = 1'b0; 
-        @(posedge tb_clk);  // Task ends in rising edge of clock: remember this!
+        @(posedge tb_clk2);  // Task ends in rising edge of clock: remember this!
     end
     endtask
 
