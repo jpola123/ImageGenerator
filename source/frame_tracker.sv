@@ -44,10 +44,12 @@ always_ff @(posedge clk, negedge nrst) begin
     if(~nrst) begin
         current_X <= 4'b0;
         current_Y <= 4'b0;
+        d <= 3'b0;
     end
     else begin
         current_X <= next_X;
         current_Y <= next_Y;
+        d <= next_d;
     end
 
 end
@@ -55,7 +57,7 @@ end
 always_comb begin
     next_X = current_X;
     next_Y = current_Y;
-    diff = 1'b0;
+    next_d = 1'b0;
     next_frame = frame;
 
     if(enable) begin
@@ -82,141 +84,141 @@ always_comb begin
         if(border) begin
             next_frame[current_X][current_Y] = 3'b100;
             obj_code = 3'b100;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else if(head) begin
             next_frame[current_X][current_Y] = 3'b001;
             obj_code = 3'b001;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else if(body) begin
             next_frame[current_X][current_Y] = 3'b010;
             obj_code = 3'b010;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else if(apple) begin
             next_frame[current_X][current_Y] = 3'b011;
             obj_code = 3'b011;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else begin
             next_frame[current_X][current_Y] = 3'b000;
             obj_code = 3'b000;
-            diff = 1'b0;
+            next_d = 1'b0;
         end
     end
     3'b001: begin
         if(border) begin
             next_frame[current_X][current_Y] = 3'b100;
             obj_code = 3'b100;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else if(head) begin
             next_frame[current_X][current_Y] = 3'b001;
             obj_code = 3'b001;
-            diff = 1'b0;
+            next_d = 1'b0;
         end
         else if(body) begin
             next_frame[current_X][current_Y] = 3'b010;
             obj_code = 3'b010;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else if(apple) begin
             next_frame[current_X][current_Y] = 3'b011;
             obj_code = 3'b011;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else begin
             next_frame[current_X][current_Y] = 3'b000;
             obj_code = 3'b000;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
     end
     3'b010: begin
         if(border) begin
             next_frame[current_X][current_Y] = 3'b100;
             obj_code = 3'b100;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else if(head) begin
             next_frame[current_X][current_Y] = 3'b001;
             obj_code = 3'b001;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else if(body) begin
             next_frame[current_X][current_Y] = 3'b010;
             obj_code = 3'b010;
-            diff = 1'b0;
+            next_d = 1'b0;
         end
         else if(apple) begin
             next_frame[current_X][current_Y] = 3'b011;
             obj_code = 3'b011;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else begin
             next_frame[current_X][current_Y] = 3'b000;
             obj_code = 3'b000;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
     end
     3'b011: begin
         if(border) begin
             next_frame[current_X][current_Y] = 3'b100;
             obj_code = 3'b100;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else if(head) begin
             next_frame[current_X][current_Y] = 3'b001;
             obj_code = 3'b001;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else if(body) begin
             next_frame[current_X][current_Y] = 3'b010;
             obj_code = 3'b010;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else if(apple) begin
             next_frame[current_X][current_Y] = 3'b011;
             obj_code = 3'b011;
-            diff = 1'b0;
+            next_d = 1'b0;
         end
         else begin
             next_frame[current_X][current_Y] = 3'b000;
             obj_code = 3'b000;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
     end        
     3'b100: begin
         if(border) begin
             next_frame[current_X][current_Y] = 3'b100;
             obj_code = 3'b100;
-            diff = 1'b0;
+            next_d = 1'b0;
         end
         else if(head) begin
             next_frame[current_X][current_Y] = 3'b001;
             obj_code = 3'b001;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else if(body) begin
             next_frame[current_X][current_Y] = 3'b010;
             obj_code = 3'b010;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else if(apple) begin
             next_frame[current_X][current_Y] = 3'b011;
             obj_code = 3'b011;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
         else begin
             next_frame[current_X][current_Y] = 3'b000;
             obj_code = 3'b000;
-            diff = 1'b1;
+            next_d = 1'b1;
         end
     end
     default: begin
         next_frame[current_X][current_Y] = 3'b000;
         obj_code = 3'b000;
-        diff = 1'b0;  
+        next_d = 1'b0;  
     end
     endcase
 
@@ -262,5 +264,5 @@ end
 
 assign x = current_X;
 assign y = current_Y;
-
+assign diff = d;
 endmodule
