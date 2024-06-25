@@ -274,6 +274,7 @@ module tb_test1();
                 check_update(1'b1);
                 check_loop(1'b0);
                 */
+                #(50);
                 toggle_cmd_done(); 
             end
             else
@@ -284,6 +285,7 @@ module tb_test1();
                 check_update(1'b1);
                 check_loop(1'b0);
                 */
+                #(50);
                 toggle_cmd_done(); 
             end
             else
@@ -295,6 +297,7 @@ module tb_test1();
                 check_loop(1'b0);
                 toggle_cmd_done(); 
                 */
+                #(50);
                 toggle_cmd_done(); 
             end
             else
@@ -305,6 +308,7 @@ module tb_test1();
                 check_update(1'b1);
                 check_loop(1'b0);
                 toggle_cmd_done(); */
+                #(50);
                 toggle_cmd_done();
             end
             else
