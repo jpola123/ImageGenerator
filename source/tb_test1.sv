@@ -2,11 +2,12 @@
 
 module tb_test1();
     localparam CLK_PERIOD = 10;
+    localparam CLK2_PERIOD = 20;
     logic tb_checking_outputs;
     integer tb_test_num;
     string tb_test_case;
     
-    logic snakeBody, snakeHead, apple, border, mode_pb, GameOver, tb_clk, nrst, cmd_done, enable_loop, diff, init_cycle, en_update, sync_reset;
+    logic snakeBody, snakeHead, apple, border, mode_pb, GameOver, tb_clk, tb_clk2, nrst, cmd_done, enable_loop, diff, init_cycle, en_update, sync_reset;
     logic [3:0] x, y;
     logic [2:0] obj_code;
     logic [16:0][12:0][2:0] map1;
@@ -149,8 +150,15 @@ module tb_test1();
         #(CLK_PERIOD / 2.0); 
     end
 
+    always begin
+        tb_clk2 = 1'b0; 
+        #(CLK2_PERIOD / 2.0);
+        tb_clk2 = 1'b1; 
+        #(CLK2_PERIOD / 2.0); 
+    end
+
     test1 DUT(.snakeBody(snakeBody), .snakeHead(snakeHead), .apple(apple), .border(border), .mode_pb(mode_pb), .GameOver(GameOver), .clk(tb_clk), 
-              .nrst(nrst), .cmd_done(cmd_done),
+              .clk2(tb_clk2), .nrst(nrst), .cmd_done(cmd_done),
               .enable_loop(enable_loop), .diff(diff), .init_cycle(init_cycle), .en_update(en_update), .sync_reset(sync_reset),
               .x(x), .y(y), .obj_code(obj_code));
 
