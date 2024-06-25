@@ -17,7 +17,7 @@ COMPONENT_FILES	:= synchronizer.sv edge_detect.sv
 
 # Specify the top level testbench to be simulated
 # (do not include the source folder in the name)
-TB 				:= tb_frame_tracker.sv
+TB 				:= 
 
 # Directories where source code is located
 SRC 			:= source
