@@ -300,12 +300,11 @@ module tb_test1();
             else
                 apple= 1'b0;
             if((x == 4'b0) || (x == 4'd15) || (y == 4'b0) || (y == 4'd11)) begin
-                toggle_border();
+                border = 1'b1;
 /*                 check_coordinates({x, y});
                 check_update(1'b1);
                 check_loop(1'b0);
                 toggle_cmd_done(); */
-                toggle_cmd_done(); 
             end
             else
                 border = 1'b0; 
