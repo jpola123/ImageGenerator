@@ -29,7 +29,6 @@ always_comb begin
             if(cmd_done) begin
                 next <= LOOP;
                 init_cycle = 1'b0;
-                enable_loop = 1'b1;
             end
             else begin
                 next <= INIT;
@@ -40,12 +39,10 @@ always_comb begin
             if(diff) begin
                 next <= UPDATE;
                 enable_loop = 1'b0;
-                en_update = 1'b1;
             end
             else if(GameOver) begin
                 next <= OVER;
                 enable_loop = 1'b0;
-                sync_reset = 1'b1;
             end
             else begin
                 next <= LOOP;
@@ -55,7 +52,6 @@ always_comb begin
         UPDATE: begin
             if(cmd_done) begin
                 next <= LOOP;
-                enable_loop = 1'b1;
                 en_update = 1'b0;
             end
             else begin
@@ -66,7 +62,6 @@ always_comb begin
         OVER: begin
             if(detect) begin
                 next <= LOOP;
-                enable_loop = 1'b1;
                 sync_reset = 1'b0;
             end
             else 
