@@ -23,7 +23,7 @@ task check_loop;
 begin
     @(negedge tb_clk);
     tb_checking_outputs = 1'b1;
-    if(expected != enable_loop)
+    if(expected == enable_loop)
         $info("Enable Loop is functioning as expected.");
     else
         $error("Enable Loop is not functioning as expected.");
@@ -38,7 +38,7 @@ task check_update;
 begin
     @(negedge tb_clk);
     tb_checking_outputs = 1'b1;
-    if(expected != en_update)
+    if(expected == en_update)
         $info("Enable Update is functioning as expected.");
     else
         $error("Enable Update is not functioning as expected.");
@@ -53,7 +53,7 @@ task check_init;
 begin
     @(negedge tb_clk);
     tb_checking_outputs = 1'b1;
-    if(expected != init_cycle)
+    if(expected == init_cycle)
         $info("Initial Cycle is functioning as expected.");
     else
         $error("Initial Cycle is not functioning as expected.");
@@ -68,7 +68,7 @@ task check_reset;
 begin
     @(negedge tb_clk);
     tb_checking_outputs = 1'b1;
-    if(expected != sync_reset)
+    if(expected == sync_reset)
         $info("Over is functioning as expected.");
     else
         $error("Over is not functioning as expected.");
