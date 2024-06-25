@@ -230,41 +230,41 @@ module tb_test1();
         for(integer i = 0; i < 192; i = i + 1) begin
             #(CLK_PERIOD);
             if(map1[tb_x][tb_y] == 3'b001) begin
-                tb_head = 1'b1;
+                snakeHead = 1'b1;
                 check_coordinates(8'h44);
                 check_update(1'b1);
                 check_loop(1'b0);
                 toggle_cmd_done();
             end
             else
-                tb_head = 1'b0;
+                snakeHead = 1'b0;
             if(map1[tb_x][tb_y] == 3'b010) begin
-                tb_body = 1'b1;
+                snakeBody = 1'b1;
                 check_coordinates({tb_x, tb_y});
                 check_update(1'b1);
                 check_loop(1'b0);
                 toggle_cmd_done();
             end
             else
-                tb_body = 1'b0;
+                snakeBody = 1'b0;
             if(map1[tb_x][tb_y] == 3'b011) begin
-                tb_apple = 1'b1;
+                apple = 1'b1;
                 check_coordinates({tb_x, tb_y});
                 check_update(1'b1);
                 check_loop(1'b0);
                 toggle_cmd_done();
             end
             else
-                tb_apple= 1'b0;
+                apple= 1'b0;
             if(map1[tb_x][tb_y] == 3'b100) begin
-                tb_border = 1'b1;
+                border = 1'b1;
                 check_coordinates({tb_x, tb_y});
                 check_update(1'b1);
                 check_loop(1'b0);
                 toggle_cmd_done();
             end
             else
-                tb_border = 1'b0; 
+                border = 1'b0; 
         check_obj_code(map1[tb_x][tb_y]);
         end
         $finish;
