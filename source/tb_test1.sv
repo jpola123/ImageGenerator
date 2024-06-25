@@ -158,7 +158,7 @@ module tb_test1();
     end
 
     test1 DUT(.snakeBody(snakeBody), .snakeHead(snakeHead), .apple(apple), .border(border), .mode_pb(mode_pb), .GameOver(GameOver), .clk(tb_clk), 
-              .clk2(tb_clk2), .nrst(nrst), .cmd_done(cmd_done),
+              .clk2(tb_clk), .nrst(nrst), .cmd_done(cmd_done),
               .enable_loop(enable_loop), .diff(diff), .init_cycle(init_cycle), .en_update(en_update), .sync_reset(sync_reset),
               .x(x), .y(y), .obj_code(obj_code));
 
