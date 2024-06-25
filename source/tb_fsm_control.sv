@@ -123,7 +123,7 @@ initial begin
     Test Case 0: Power on Reset
     */
     tb_test_num += 1;
-    tb_test_case = "Power on Reset of DUT";
+    tb_test_case = "Test Case 0: Power on Reset of DUT";
     $display("\n\n%s", tb_test_case);
 
     reset_dut;
@@ -131,6 +131,41 @@ initial begin
     check_update(1'b0);
     check_loop(1'b0);
     check_reset(1'b0);
+
+    /*
+    Test Case 1: Go through the individual states
+    */
+
+    tb_test_num += 1;
+    tb_test_case = "Test Case 1: Go through all of the states";
+    $display("\n\n%s", tb_test_case);
+    reset_dut;
+
+    check_init(1'b1);
+    #(CLK_PERIOD * 50);
+    tb_cmd_done = 1'b1;
+    check_init(1'b0);
+    check_loop(1'b1);
+    #(CLK_PERIOD * 50);
+    tb_cmd_done = 1'b0;
+    tb_diff = 1'b1;
+    check_loop(1'b0);
+    check_update(1'b1);
+    #(CLK_PERIOD * 50);
+    tb_diff = 1'b0;
+    tb_cmd_done = 1'b1;
+    check_loop(1'b1);
+    check_update(1'b0);
+    #(CLK_PERIOD * 50);
+    tb_cmd_done = 1'b0;
+    tb_GameOver = 1'b1;
+    check_loop(1'b0);
+    check_reset(1'b1);
+    #(CLK_PERIOD * 50);
+    tb_GameOver = 1'b0;
+    mode_pb_press();
+    check_reset(1'b0);
+    check_loop(1'b1);
 
     $finish;
 end
