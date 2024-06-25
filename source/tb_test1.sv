@@ -233,25 +233,23 @@ module tb_test1();
             #(CLK_PERIOD);
             if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
                 border = 1'b1;
-                #(CLK_PERIOD * 5);
-                toggle_cmd_done();
             end
             else
                 border = 1'b0;
             if((x == 4'd4) && (y == 4'd4)) begin
                 snakeHead = 1'b1;
-                #(CLK_PERIOD * 5);
-                toggle_cmd_done();
             end
             else
                 snakeHead = 1'b0;
             if((x == 4'd7) && (y == 4'd4)) begin
                 apple = 1'b1;
-                #(CLK_PERIOD * 5);
-                toggle_cmd_done();
             end
             else
                 apple = 1'b0;
+            if(diff) begin
+                #(CLK_PERIOD * 5);
+                toggle_cmd_done();
+            end
             
         end
         $finish;
