@@ -54,7 +54,6 @@ endtask
 task check_diff;
     input logic expected;
 begin
-    @(negedge tb_clk)
     if(expected == tb_diff)
         $info("diff is correct.");
     else
