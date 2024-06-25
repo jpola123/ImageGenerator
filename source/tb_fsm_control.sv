@@ -36,7 +36,7 @@ endtask
 task check_update;
     input logic expected;
 begin
-    @(osedge tb_clk);
+    @(negedge tb_clk);
     tb_checking_outputs = 1'b1;
     if(expected != en_update)
         $info("Enable Update is functioning as expected.");
