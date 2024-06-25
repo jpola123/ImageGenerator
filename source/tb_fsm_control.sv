@@ -164,6 +164,7 @@ initial begin
     #(CLK_PERIOD * 50);
     tb_GameOver = 1'b0;
     mode_pb_press();
+    #(CLK_PERIOD * 10);
     check_reset(1'b0);
     check_loop(1'b1);
 
