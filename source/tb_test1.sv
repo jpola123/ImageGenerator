@@ -229,7 +229,7 @@ module tb_test1();
 
         for(integer i = 0; i < 192; i = i + 1) begin
             #(CLK_PERIOD);
-            if(map1[tb_x][tb_y] == 3'b001) begin
+            if(map1[x][y] == 3'b001) begin
                 snakeHead = 1'b1;
                 check_coordinates(8'h44);
                 check_update(1'b1);
@@ -238,27 +238,27 @@ module tb_test1();
             end
             else
                 snakeHead = 1'b0;
-            if(map1[tb_x][tb_y] == 3'b010) begin
+            if(map1[x][y] == 3'b010) begin
                 snakeBody = 1'b1;
-                check_coordinates({tb_x, tb_y});
+                check_coordinates({x,y});
                 check_update(1'b1);
                 check_loop(1'b0);
                 toggle_cmd_done();
             end
             else
                 snakeBody = 1'b0;
-            if(map1[tb_x][tb_y] == 3'b011) begin
+            if(map1[x][y] == 3'b011) begin
                 apple = 1'b1;
-                check_coordinates({tb_x, tb_y});
+                check_coordinates({x,y});
                 check_update(1'b1);
                 check_loop(1'b0);
                 toggle_cmd_done();
             end
             else
                 apple= 1'b0;
-            if(map1[tb_x][tb_y] == 3'b100) begin
+            if(map1[x][y] == 3'b100) begin
                 border = 1'b1;
-                check_coordinates({tb_x, tb_y});
+                check_coordinates({x, y});
                 check_update(1'b1);
                 check_loop(1'b0);
                 toggle_cmd_done();
