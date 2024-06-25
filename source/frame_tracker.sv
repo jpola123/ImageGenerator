@@ -250,6 +250,5 @@ end
 
 assign x = current_X;
 assign y = current_Y;
-assign diff = d;
 
 endmodule
