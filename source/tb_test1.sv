@@ -118,6 +118,16 @@ module tb_test1();
     end
     endtask
 
+    task toggle_cmd_done;
+    begin
+        @(negedge tb_clk);
+        cmd_done = 1'b1; 
+        @(negedge tb_clk);
+        cmd_done = 1'b0; 
+        @(posedge tb_clk);  // Task ends in rising edge of clock: remember this!
+    end
+    endtask
+
     task check_coordinates;
         input logic [7:0] expected;
     begin
@@ -207,6 +217,56 @@ module tb_test1();
         check_coordinates(8'h00);
         check_init(1'b1);
 
+        /*
+        Test Case 1: Flash map 1 and see if it stops when there's an update.
+        */
+        tb_test_num += 1;
+        tb_test_case = "Test Case 1: Flash map1 and see if it stops when there's a diff";
+        $display("\n\n%s", tb_test_case);
+
+        reset_dut;
+        toggle_cmd_done();
+
+        for(integer i = 0; i < 192; i = i + 1) begin
+            #(CLK_PERIOD);
+            if(map1[tb_x][tb_y] == 3'b001) begin
+                tb_head = 1'b1;
+                check_coordinates(8'h44);
+                check_update(1'b1);
+                check_loop(1'b0);
+                toggle_cmd_done();
+            end
+            else
+                tb_head = 1'b0;
+            if(map1[tb_x][tb_y] == 3'b010) begin
+                tb_body = 1'b1;
+                check_coordinates({tb_x, tb_y});
+                check_update(1'b1);
+                check_loop(1'b0);
+                toggle_cmd_done();
+            end
+            else
+                tb_body = 1'b0;
+            if(map1[tb_x][tb_y] == 3'b011) begin
+                tb_apple = 1'b1;
+                check_coordinates({tb_x, tb_y});
+                check_update(1'b1);
+                check_loop(1'b0);
+                toggle_cmd_done();
+            end
+            else
+                tb_apple= 1'b0;
+            if(map1[tb_x][tb_y] == 3'b100) begin
+                tb_border = 1'b1;
+                check_coordinates({tb_x, tb_y});
+                check_update(1'b1);
+                check_loop(1'b0);
+                toggle_cmd_done();
+            end
+            else
+                tb_border = 1'b0; 
+        check_obj_code(map1[tb_x][tb_y]);
+        end
         $finish;
     
     end
