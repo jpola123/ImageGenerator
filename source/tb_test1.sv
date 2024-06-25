@@ -2,8 +2,8 @@
 
 module tb_test1();
     localparam CLK_PERIOD = 10;
-    localparam CLK2_PERIOD = 20;
-    logic tb_checking_outputs;
+    localparam CLK2_PERIOD = 100;
+    logic tb_checking_output;
     integer tb_test_num;
     string tb_test_case;
     
