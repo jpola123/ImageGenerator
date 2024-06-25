@@ -1,7 +1,3 @@
-typedef enum logic [2:0] {  
-    blank = 0, snake_head = 1, snake_body = 2, apple_c = 3, border_c = 4
-} obj_code_t;
-
 module frame_tracker (
     input logic body, head, apple, border, enable, clk, nrst,
     output logic [2:0] obj_code,

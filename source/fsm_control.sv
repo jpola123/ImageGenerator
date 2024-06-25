@@ -1,7 +1,3 @@
-typedef enum logic [1:0] { 
-    INIT = 0, LOOP = 1, UPDATE = 2, OVER = 3
-} control_state_t;
-
 
 module fsm_control (
     input logic GameOver, cmd_done, diff, clk, nrst, mode_pb,
