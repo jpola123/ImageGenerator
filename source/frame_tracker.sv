@@ -13,12 +13,12 @@ logic [15:0][11:0][2:0] frame, next_frame;
 logic [3:0] current_X, next_X, current_Y, next_Y;
 logic next_d, d;
 
-generate 
+/* generate 
     for(genvar i = 0; i < 16; i = i + 1) begin
         for(genvar j = 0; j < 12; j = j + 1) begin
             always_ff @(posedge clk, negedge nrst) begin
                 if(~nrst) begin
-                    frame[i][j] <= blank;
+                    frame[i][j] <= 3'b000;
                 end
                 else begin
                     frame[i][j] <= next_frame;
@@ -26,7 +26,17 @@ generate
             end
         end
     end
-endgenerate
+endgenerate */
+
+always_ff @(posedge clk, negedge nrst) begin
+    if(~nrst) begin
+        frame <= {16{12{3'b0}}};
+    end
+    else begin
+        frame <= next_frame;
+    end
+end
+
 
 always_ff @(posedge clk, negedge nrst) begin
     if(~nrst) begin
