@@ -234,7 +234,6 @@ module tb_test1();
             apple = 1'b0;
             snakeBody = 1'b0;
             snakeHead = 1'b0;
-            #(CLK_PERIOD);
             if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
                 border = 1'b1;
             end
@@ -254,7 +253,6 @@ module tb_test1();
                 #(CLK_PERIOD * 5);
                 toggle_cmd_done();
             end
-            
         end
         $finish;
     
