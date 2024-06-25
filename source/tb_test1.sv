@@ -144,7 +144,7 @@ module tb_test1();
     begin
         @(negedge tb_clk);
         mode_pb = 1'b1; 
-        @(negedge tb_clk);
+        @(posedge tb_clk);
         mode_pb = 1'b0; 
     end
     endtask
@@ -153,7 +153,7 @@ module tb_test1();
     begin
         @(negedge tb_clk);
         cmd_done = 1'b1; 
-        @(negedge tb_clk);
+        @(posedge tb_clk);
         cmd_done = 1'b0; 
     end
     endtask
@@ -262,7 +262,10 @@ module tb_test1();
         $display("\n\n%s", tb_test_case);
 
         reset_dut;
-        toggle_cmd_done();
+        @(negedge tb_clk);
+        cmd_done = 1'b1;
+        @(posedge tb_clk);
+        cmd_done = 1'b0;
 
         for(integer i = 0; i < 192; i = i + 1) begin
             if(map1[x][y] == 3'b001) begin
