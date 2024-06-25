@@ -28,7 +28,6 @@ module tb_test1();
     snakeBody = 1'b1;
     @(negedge tb_clk);
     snakeBody = 1'b0;   
-    @(posedge tb_clk);
     endtask
 
 
@@ -37,7 +36,6 @@ module tb_test1();
     snakeHead = 1'b1;
     @(negedge tb_clk);
     snakeHead = 1'b0;   
-    @(posedge tb_clk);
     endtask
 
 
@@ -46,7 +44,6 @@ module tb_test1();
     apple = 1'b1;
     @(negedge tb_clk);
     apple = 1'b0;   
-    @(posedge tb_clk); 
     endtask
 
 
@@ -55,7 +52,6 @@ module tb_test1();
     border = 1'b1;
     @(negedge tb_clk);
     border = 1'b0;   
-    @(posedge tb_clk);
     endtask
 
     task check_diff;
@@ -150,7 +146,6 @@ module tb_test1();
         mode_pb = 1'b1; 
         @(negedge tb_clk);
         mode_pb = 1'b0; 
-        @(posedge tb_clk);  // Task ends in rising edge of clock: remember this!
     end
     endtask
 
@@ -160,7 +155,6 @@ module tb_test1();
         cmd_done = 1'b1; 
         @(negedge tb_clk);
         cmd_done = 1'b0; 
-        @(posedge tb_clk);  // Task ends in rising edge of clock: remember this!
     end
     endtask
 
