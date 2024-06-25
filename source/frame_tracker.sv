@@ -176,7 +176,7 @@ always_comb begin
             next_d = 1'b1;
         end
     end        
-    3'b100 begin
+    3'b100: begin
         if(border) begin
             next_frame[current_X][current_Y] = 3'b100;
             obj_code = 3'b100;
