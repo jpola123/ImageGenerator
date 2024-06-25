@@ -111,9 +111,9 @@ module tb_test1();
     task mode_pb_press;
     begin
         @(negedge tb_clk);
-        tb_mode_pb = 1'b1; 
+        mode_pb = 1'b1; 
         @(negedge tb_clk);
-        tb_mode_pb = 1'b0; 
+        mode_pb = 1'b0; 
         @(posedge tb_clk);  // Task ends in rising edge of clock: remember this!
     end
     endtask
@@ -140,7 +140,7 @@ module tb_test1();
     end
 
     test1 DUT(.snakeBody(snakeBody), .snakeHead(snakeHead), .apple(apple), .border(border), .mode_pb(mode_pb), .GameOver(GameOver), .clk(tb_clk), 
-              .nrst(nrst), .cmd_done(cmd_done)
+              .nrst(nrst), .cmd_done(cmd_done),
               .enable_loop(enable_loop), .diff(diff), .init_cycle(init_cycle), .en_update(en_update), .sync_reset(sync_reset),
               .x(x), .y(y), .obj_code(obj_code));
 
