@@ -226,9 +226,9 @@ module tb_test1();
         reset_dut;
         @(negedge tb_clk);
         cmd_done = 1'b1;
-        @(posedge tb_clk);
-        cmd_done = 1'b0;
         @(negedge tb_clk);
+        cmd_done = 1'b0;
+        
 
         for(integer i = 0; i < 384; i = i + 1) begin
             if(i != 192) begin
