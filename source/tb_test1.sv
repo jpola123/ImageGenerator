@@ -153,7 +153,7 @@ module tb_test1();
     begin
         @(negedge tb_clk);
         cmd_done = 1'b1; 
-        @(negedge tb_clk);
+        @(posedge tb_clk);
         cmd_done = 1'b0; 
     end
     endtask
