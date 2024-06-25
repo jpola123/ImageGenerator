@@ -64,7 +64,7 @@ endtask
 task check_obj_code;
     input [2:0] expected;
 begin
-    @(negedge tb_clk);
+    @(posedge tb_clk);
     if(expected == tb_obj_code)
         $info("Object code is correct.");
     else
@@ -211,7 +211,6 @@ initial begin
         end
         else
             tb_border = 1'b0; 
-        @(negedge tb_clk);
         check_obj_code(map1[tb_x][tb_y]);
 
     end
