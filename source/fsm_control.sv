@@ -4,8 +4,7 @@ typedef enum logic [1:0] {
 
 
 module fsm_control (
-    input logic mode_pb;
-    input logic GameOver, cmd_done, diff, clk, nrst,
+    input logic GameOver, cmd_done, diff, clk, nrst, mode_pb,
     output logic enable_loop, init_cycle, en_update, sync_reset
 );
 
