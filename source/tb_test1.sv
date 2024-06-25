@@ -28,7 +28,7 @@ module tb_test1();
     snakeBody = 1'b1;
     @(negedge tb_clk);
     snakeBody = 1'b0;   
-    @(posedge tb_clk)
+    @(posedge tb_clk);
     endtask
 
 
@@ -37,7 +37,7 @@ module tb_test1();
     snakeHead = 1'b1;
     @(negedge tb_clk);
     snakeHead = 1'b0;   
-    @(posedge tb_clk) 
+    @(posedge tb_clk);
     endtask
 
 
@@ -46,7 +46,7 @@ module tb_test1();
     apple = 1'b1;
     @(negedge tb_clk);
     apple = 1'b0;   
-    @(posedge tb_clk) 
+    @(posedge tb_clk); 
     endtask
 
 
@@ -55,7 +55,7 @@ module tb_test1();
     border = 1'b1;
     @(negedge tb_clk);
     border = 1'b0;   
-    @(posedge tb_clk)
+    @(posedge tb_clk);
     endtask
 
     task check_diff;
