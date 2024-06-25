@@ -67,6 +67,150 @@ always_comb begin
         next_Y = current_Y;
     end
 
+    case(frame[current_X][current_Y])
+    3'b000: begin
+        if(border) begin
+            next_frame[current_X][current_Y] = 3'b100;
+            obj_code = 3'b100;
+            next_d = 1'b1;
+        end
+        else if(head) begin
+            next_frame[current_X][current_Y] = 3'b001;
+            obj_code = 3'b001;
+            next_d = 1'b1;
+        end
+        else if(body) begin
+            next_frame[current_X][current_Y] = 3'b010;
+            obj_code = 3'b010;
+            next_d = 1'b1;
+        end
+        else if(apple) begin
+            next_frame[current_X][current_Y] = 3'b011;
+            obj_code = 3'b011;
+            next_d = 1'b1;
+        end
+        else begin
+            next_frame[current_X][current_Y] = 3'b000;
+            obj_code = 3'b000;
+            next_d = 1'b0;
+        end
+    end
+    3'b001: begin
+        if(border) begin
+            next_frame[current_X][current_Y] = 3'b100;
+            obj_code = 3'b100;
+            next_d = 1'b1;
+        end
+        else if(head) begin
+            next_frame[current_X][current_Y] = 3'b001;
+            obj_code = 3'b001;
+            next_d = 1'b0;
+        end
+        else if(body) begin
+            next_frame[current_X][current_Y] = 3'b010;
+            obj_code = 3'b010;
+            next_d = 1'b1;
+        end
+        else if(apple) begin
+            next_frame[current_X][current_Y] = 3'b011;
+            obj_code = 3'b011;
+            next_d = 1'b1;
+        end
+        else begin
+            next_frame[current_X][current_Y] = 3'b000;
+            obj_code = 3'b000;
+            next_d = 1'b1;
+        end
+    end
+    3'b010: begin
+        if(border) begin
+            next_frame[current_X][current_Y] = 3'b100;
+            obj_code = 3'b100;
+            next_d = 1'b1;
+        end
+        else if(head) begin
+            next_frame[current_X][current_Y] = 3'b001;
+            obj_code = 3'b001;
+            next_d = 1'b1;
+        end
+        else if(body) begin
+            next_frame[current_X][current_Y] = 3'b010;
+            obj_code = 3'b010;
+            next_d = 1'b0;
+        end
+        else if(apple) begin
+            next_frame[current_X][current_Y] = 3'b011;
+            obj_code = 3'b011;
+            next_d = 1'b1;
+        end
+        else begin
+            next_frame[current_X][current_Y] = 3'b000;
+            obj_code = 3'b000;
+            next_d = 1'b1;
+        end
+    end
+    3'b011: begin
+        if(border) begin
+            next_frame[current_X][current_Y] = 3'b100;
+            obj_code = 3'b100;
+            next_d = 1'b1;
+        end
+        else if(head) begin
+            next_frame[current_X][current_Y] = 3'b001;
+            obj_code = 3'b001;
+            next_d = 1'b1;
+        end
+        else if(body) begin
+            next_frame[current_X][current_Y] = 3'b010;
+            obj_code = 3'b010;
+            next_d = 1'b1;
+        end
+        else if(apple) begin
+            next_frame[current_X][current_Y] = 3'b011;
+            obj_code = 3'b011;
+            next_d = 1'b0;
+        end
+        else begin
+            next_frame[current_X][current_Y] = 3'b000;
+            obj_code = 3'b000;
+            next_d = 1'b1;
+        end
+    end        
+    3'b100 begin
+        if(border) begin
+            next_frame[current_X][current_Y] = 3'b100;
+            obj_code = 3'b100;
+            next_d = 1'b0;
+        end
+        else if(head) begin
+            next_frame[current_X][current_Y] = 3'b001;
+            obj_code = 3'b001;
+            next_d = 1'b1;
+        end
+        else if(body) begin
+            next_frame[current_X][current_Y] = 3'b010;
+            obj_code = 3'b010;
+            next_d = 1'b1;
+        end
+        else if(apple) begin
+            next_frame[current_X][current_Y] = 3'b011;
+            obj_code = 3'b011;
+            next_d = 1'b1;
+        end
+        else begin
+            next_frame[current_X][current_Y] = 3'b000;
+            obj_code = 3'b000;
+            next_d = 1'b1;
+        end
+    end
+    default: begin
+        next_frame[current_X][current_Y] = 3'b000;
+        obj_code = 3'b000;
+        next_d = 1'b0;  
+    end
+    endcase
+
+/* 
     if((current_X == 4'd0) || (current_X == 4'd15) || (current_Y == 4'd0) || (current_Y == 4'd11)) begin
         if((frame[current_X][current_Y] != 3'b100) && (border)) begin
             next_d = 1'b1;
@@ -103,7 +247,7 @@ always_comb begin
         next_d = 1'b0;
         next_frame[current_X][current_Y] = frame[current_X][current_Y];
         obj_code = frame[current_X][current_Y];
-    end
+    end */
 end
 
 assign x = current_X;
