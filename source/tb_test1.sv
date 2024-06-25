@@ -229,38 +229,13 @@ module tb_test1();
         @(posedge tb_clk);
         cmd_done = 1'b0;
 
-        for(integer i = 0; i < 192; i = i + 1) begin
+        for(integer i = 0; i < 384; i = i + 1) begin
             border = 1'b0;
             apple = 1'b0;
             snakeBody = 1'b0;
             snakeHead = 1'b0;
-            #(CLK_PERIOD)
-            if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
-                border = 1'b1;
-            end
-            else
-                border = 1'b0;
-            if((x == 4'd4) && (y == 4'd4)) begin
-                snakeHead = 1'b1;
-            end
-            else
-                snakeHead = 1'b0;
-            if((x == 4'd7) && (y == 4'd4)) begin
-                apple = 1'b1;
-            end
-            else
-                apple = 1'b0;
-            if(diff) begin
-                #(CLK_PERIOD * 5);
-                toggle_cmd_done();
-            end
-        end
-        for(integer i = 0; i < 192; i = i + 1) begin
-            border = 1'b0;
-            apple = 1'b0;
-            snakeBody = 1'b0;
-            snakeHead = 1'b0;
-            #(CLK_PERIOD)
+            if(i != 192) 
+                #(CLK_PERIOD);
             if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
                 border = 1'b1;
             end
