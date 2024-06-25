@@ -23,6 +23,41 @@ module tb_test1();
     @(posedge tb_clk);
     endtask
 
+    task toggle_body;
+    @(negedge tb_clk);
+    snakeBody = 1'b1;
+    @(negedge tb_clk);
+    snakeBody = 1'b0;   
+    @(posedge tb_clk)
+    endtask
+
+
+    task toggle_head;
+    @(negedge tb_clk);
+    snakeHead = 1'b1;
+    @(negedge tb_clk);
+    snakeHead = 1'b0;   
+    @(posedge tb_clk) 
+    endtask
+
+
+    task toggle_apple;
+    @(negedge tb_clk);
+    apple = 1'b1;
+    @(negedge tb_clk);
+    apple = 1'b0;   
+    @(posedge tb_clk) 
+    endtask
+
+
+    task toggle_border;
+    @(negedge tb_clk);
+    border = 1'b1;
+    @(negedge tb_clk);
+    border = 1'b0;   
+    @(posedge tb_clk)
+    endtask
+
     task check_diff;
         input logic expected;
     begin
@@ -238,7 +273,7 @@ module tb_test1();
         for(integer i = 0; i < 192; i = i + 1) begin
             #(CLK_PERIOD);
             if(map1[x][y] == 3'b001) begin
-                snakeHead = 1'b1;
+                toggle_head();
 /*                 check_coordinates(8'h44);
                 check_update(1'b1);
                 check_loop(1'b0);
@@ -248,7 +283,7 @@ module tb_test1();
             else
                 snakeHead = 1'b0;
             if(map1[x][y] == 3'b010) begin
-                snakeBody = 1'b1;
+                toggle_body();
 /*                 check_coordinates({x,y});
                 check_update(1'b1);
                 check_loop(1'b0);
@@ -258,7 +293,7 @@ module tb_test1();
             else
                 snakeBody = 1'b0;
             if(map1[x][y] == 3'b011) begin
-                apple = 1'b1;
+                toggle_apple();
 /*                 check_coordinates({x,y});
                 check_update(1'b1);
                 check_loop(1'b0);
@@ -269,7 +304,7 @@ module tb_test1();
             else
                 apple= 1'b0;
             if(map1[x][y] == 3'b100) begin
-                border = 1'b1;
+                toggle_border();
 /*                 check_coordinates({x, y});
                 check_update(1'b1);
                 check_loop(1'b0);
