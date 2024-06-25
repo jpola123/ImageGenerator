@@ -227,14 +227,16 @@ module tb_test1();
         reset_dut;
         toggle_cmd_done();
 
-        for(integer i = 0; i < 192; i = i + 1) begin
+        for(integer i = 0; i < 1500; i = i + 1) begin
             #(CLK_PERIOD);
             if(map1[x][y] == 3'b001) begin
                 snakeHead = 1'b1;
 /*                 check_coordinates(8'h44);
                 check_update(1'b1);
                 check_loop(1'b0);
-                toggle_cmd_done(); */
+                */
+                #(CLK_PERIOD * 50);
+                toggle_cmd_done(); 
             end
             else
                 snakeHead = 1'b0;
@@ -243,7 +245,9 @@ module tb_test1();
 /*                 check_coordinates({x,y});
                 check_update(1'b1);
                 check_loop(1'b0);
-                toggle_cmd_done(); */
+                */
+                #(CLK_PERIOD * 50);
+                toggle_cmd_done(); 
             end
             else
                 snakeBody = 1'b0;
@@ -252,7 +256,10 @@ module tb_test1();
 /*                 check_coordinates({x,y});
                 check_update(1'b1);
                 check_loop(1'b0);
-                toggle_cmd_done(); */
+                toggle_cmd_done(); 
+                */
+                #(CLK_PERIOD * 50);
+                toggle_cmd_done(); 
             end
             else
                 apple= 1'b0;
@@ -262,6 +269,8 @@ module tb_test1();
                 check_update(1'b1);
                 check_loop(1'b0);
                 toggle_cmd_done(); */
+                #(CLK_PERIOD * 50);
+                toggle_cmd_done(); 
             end
             else
                 border = 1'b0; 
