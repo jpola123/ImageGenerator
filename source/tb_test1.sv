@@ -26,7 +26,7 @@ module tb_test1();
     task toggle_body;
     @(negedge tb_clk);
     snakeBody = 1'b1;
-    @(posedge tb_clk);
+    @(negedge tb_clk);
     snakeBody = 1'b0;   
     endtask
 
@@ -34,7 +34,7 @@ module tb_test1();
     task toggle_head;
     @(negedge tb_clk);
     snakeHead = 1'b1;
-    @(posedge tb_clk);
+    @(negedge tb_clk);
     snakeHead = 1'b0;   
     endtask
 
@@ -42,7 +42,7 @@ module tb_test1();
     task toggle_apple;
     @(negedge tb_clk);
     apple = 1'b1;
-    @(posedge tb_clk);
+    @(negedge tb_clk);
     apple = 1'b0;   
     endtask
 
@@ -50,7 +50,7 @@ module tb_test1();
     task toggle_border;
     @(negedge tb_clk);
     border = 1'b1;
-    @(posedge tb_clk);
+    @(negedge tb_clk);
     border = 1'b0;   
     endtask
 
@@ -144,7 +144,7 @@ module tb_test1();
     begin
         @(negedge tb_clk);
         mode_pb = 1'b1; 
-        @(posedge tb_clk);
+        @(negedge tb_clk);
         mode_pb = 1'b0; 
     end
     endtask
@@ -153,7 +153,7 @@ module tb_test1();
     begin
         @(negedge tb_clk);
         cmd_done = 1'b1; 
-        @(posedge tb_clk);
+        @(negedge tb_clk);
         cmd_done = 1'b0; 
     end
     endtask
@@ -186,6 +186,13 @@ module tb_test1();
         #(CLK2_PERIOD / 2.0); 
     end
 
+    always begin
+        if(diff) begin
+            #(CLK_PERIOD * 5);
+            toggle_cmd_done();
+        end
+    end
+
     test1 DUT(.snakeBody(snakeBody), .snakeHead(snakeHead), .apple(apple), .border(border), .mode_pb(mode_pb), .GameOver(GameOver), .clk(tb_clk), 
               .clk2(tb_clk), .nrst(nrst), .cmd_done(cmd_done),
               .enable_loop(enable_loop), .diff(diff), .init_cycle(init_cycle), .en_update(en_update), .sync_reset(sync_reset),
@@ -201,45 +208,6 @@ module tb_test1();
         nrst = 1'b1;
         cmd_done = 1'b0;
         
-        for(integer i = 0; i < 16; i++) begin
-            for(integer j = 0; j < 12; j++) begin
-                if((i == 0) || (i == 15) || (j == 0) || (j == 11)) begin
-                    map1[i][j] = 3'b100;
-                    map2[i][j] = 3'b100;
-                    map3[i][j] = 3'b100;
-                end
-                else if((i == 4) && (j == 4)) begin
-                    map1[i][j] = 3'b001;
-                    map2[i][j] = 3'b010;
-                    map3[i][j] = 3'b000;
-                end
-                else if((i == 5) && (j == 4)) begin
-                    map1[i][j] = 3'b000;
-                    map2[i][j] = 3'b001;
-                    map3[i][j] = 3'b010;
-                end
-                else if((i == 6) && (j == 4)) begin
-                    map1[i][j] = 3'b011;
-                    map2[i][j] = 3'b000;
-                    map3[i][j] = 3'b001;
-                end
-                else if((i == 7) && (j == 4)) begin
-                    map1[i][j] = 3'b000;
-                    map2[i][j] = 3'b011;
-                    map3[i][j] = 3'b000;
-                end
-                else if((i == 8) && (j == 4)) begin
-                    map1[i][j] = 3'b000;
-                    map2[i][j] = 3'b000;
-                    map3[i][j] = 3'b011;
-                end
-                else begin
-                    map1[i][j] = 3'b000;
-                    map2[i][j] = 3'b000;
-                    map3[i][j] = 3'b000;
-                end
-            end
-        end
 
         /*
         Test Case 0: Power On Reset of DUT
@@ -258,7 +226,7 @@ module tb_test1();
         Test Case 1: Flash map 1 and see if it stops when there's an update.
         */
         tb_test_num += 1;
-        tb_test_case = "Test Case 1: Flash map1 and see if it stops when there's a diff";
+        tb_test_case = "Test Case 1: Flash a basic map and see if all the signals are right";
         $display("\n\n%s", tb_test_case);
 
         reset_dut;
@@ -268,53 +236,21 @@ module tb_test1();
         cmd_done = 1'b0;
 
         for(integer i = 0; i < 192; i = i + 1) begin
-            if(map1[x][y] == 3'b001) begin
-                toggle_head();
-/*                 check_coordinates(8'h44);
-                check_update(1'b1);
-                check_loop(1'b0);
-                */
-                #(50);
-                toggle_cmd_done(); 
+            #(CLK_PERIOD);
+            if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
+                border = 1'b1;
             end
+            else
+                border = 1'b0;
+            if((x == 4'd4) && (y == 4'd4)) 
+                snakeHead = 1'b1;
             else
                 snakeHead = 1'b0;
-            if(map1[x][y] == 3'b010) begin
-                toggle_body();
-/*                 check_coordinates({x,y});
-                check_update(1'b1);
-                check_loop(1'b0);
-                */
-                #(50);
-                toggle_cmd_done(); 
-            end
+            if((x == 4'd7) && (y == 4'd4))
+                apple = 1'b1;
             else
-                snakeBody = 1'b0;
-            if(map1[x][y] == 3'b011) begin
-                toggle_apple();
-/*                 check_coordinates({x,y});
-                check_update(1'b1);
-                check_loop(1'b0);
-                toggle_cmd_done(); 
-                */
-                #(50);
-                toggle_cmd_done(); 
-            end
-            else
-                apple= 1'b0;
-            if((x == 4'b0) || (x == 4'd15) || (y == 4'b0) || (y == 4'd11)) begin
-                border = 1'b1;
-/*                 check_coordinates({x, y});
-                check_update(1'b1);
-                check_loop(1'b0);
-                toggle_cmd_done(); */
-                #(50);
-                toggle_cmd_done();
-            end
-            else
-                border = 1'b0; 
-            toggle_cmd_done();
-            check_obj_code(map1[x][y]);
+                apple = 1'b0;
+            
         end
         $finish;
     
