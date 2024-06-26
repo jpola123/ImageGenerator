@@ -9,7 +9,7 @@ module tb_test1();
     
     logic snakeBody, snakeHead, apple, border, mode_pb, GameOver, tb_clk, tb_clk2, nrst, cmd_done, enable_loop, diff, init_cycle, en_update, sync_reset;
     logic [3:0] x, y;
-    logic [2:0] obj_code;
+    logic [2:0] obj_code, map;
     logic [16:0][12:0][2:0] map1;
     logic [16:0][12:0][2:0] map2;
     logic [16:0][12:0][2:0] map3;
@@ -187,6 +187,9 @@ module tb_test1();
     end
 
     always @(x, y) begin
+        if((x == 0) && (y == 0))
+            map = map + 2'b1;
+        if(map = 2'd1) begin
             if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
                 border = 1'b1;
             end
@@ -202,6 +205,29 @@ module tb_test1();
             end
             else
                 apple = 1'b0;
+        end
+        else begin
+            if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
+                border = 1'b1;
+            end
+            else
+                border = 1'b0;
+            if((x == 4'd5) && (y == 4'd4)) begin
+                snakeHead = 1'b1;
+            end
+            else
+                snakeHead = 1'b0;
+            if((x == 4'd4) && (y == 4'd4)) begin
+                snakeBody = 1'b1;
+            end
+            else
+                snakeBody = 1'b0;
+            if((x == 4'd7) && (y == 4'd4)) begin
+                apple = 1'b1;
+            end
+            else
+                apple = 1'b0;
+        end
     
     end
 
@@ -219,6 +245,7 @@ module tb_test1();
         GameOver = 1'b0;
         nrst = 1'b1;
         cmd_done = 1'b0;
+        map = 2'b0;
         
 
         /*
