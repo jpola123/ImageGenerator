@@ -231,7 +231,6 @@ module tb_test1();
         
 
         for(integer i = 0; i < 384; i = i + 1) begin
-            #(CLK_PERIOD);
             if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
                 border = 1'b1;
             end
@@ -251,7 +250,9 @@ module tb_test1();
                 #(CLK_PERIOD * 5);
                 toggle_cmd_done();
             end
+            #(CLK_PERIOD);
         end
+        
         $finish;
     
     end
