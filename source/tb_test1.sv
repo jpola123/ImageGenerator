@@ -237,9 +237,7 @@ module tb_test1();
             if((x == 4'd6) && (y == 4'd4)) begin
                 snakeBody = 1'b1;
             end
-            else
-                snakeBody = 1'b0;
-            if((x == 4'd5) && (y == 4'd4)) begin
+            else if((x == 4'd5) && (y == 4'd4)) begin
                 snakeBody = 1'b1;
             end
             else
