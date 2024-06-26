@@ -9,7 +9,7 @@ module tb_test1();
     
     logic snakeBody, snakeHead, apple, border, mode_pb, GameOver, tb_clk, tb_clk2, nrst, cmd_done, enable_loop, diff, init_cycle, en_update, sync_reset;
     logic [3:0] x, y, map;
-    logic [1:0] obj_code;
+    logic [2:0] obj_code;
     logic [16:0][12:0][2:0] map1;
     logic [16:0][12:0][2:0] map2;
     logic [16:0][12:0][2:0] map3;
@@ -186,7 +186,7 @@ module tb_test1();
         #(CLK2_PERIOD / 2.0); 
     end
 
-    always @(x, y, map) begin
+    always @(x, y) begin
         if((x == 0) && (y == 0))
             map = map + 3'b1;
         if(map == 3'd1) begin
@@ -257,19 +257,19 @@ module tb_test1();
             else
                 border = 1'b0;
             if((x == 4'd5) && (y == 4'd4)) begin
-                snakeBody = 1'b0;
+                snakeBody = 1'b1;
             end
             else if((x == 4'd6) && (y == 4'd4)) begin
                 snakeBody = 1'b1;
             end
             else
                 snakeBody = 1'b0;
-            if((x == 4'd6) && (y == 4'd5)) begin
+            if((x == 4'd7) && (y == 4'd4)) begin
                 snakeHead = 1'b1;
             end
             else
                 snakeHead = 1'b0;
-            if((x == 4'd7) && (y == 4'd4)) begin
+            if((x == 4'd13) && (y == 4'd7)) begin
                 apple = 1'b1;
             end
             else
@@ -337,7 +337,7 @@ module tb_test1();
         Test Case 1: Flash map 1 and see if it stops when there's an update.
         */
         tb_test_num += 1;
-        tb_test_case = "Test Case 1: Flash multiple maps and see if the waveforms are good";
+        tb_test_case = "Test Case 1: Flash a basic map and see if all the signals are right";
         $display("\n\n%s", tb_test_case);
 
         reset_dut;
@@ -353,10 +353,6 @@ module tb_test1();
                 toggle_cmd_done();
             end
         end;
-
-        /*
-        Test Case 2: See if toggling game over sends out the sync reset and pauses 
-        */
         
         $finish;
     

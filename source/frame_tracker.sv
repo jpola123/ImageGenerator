@@ -1,11 +1,11 @@
 module frame_tracker (
     input logic body, head, apple, border, enable, clk, nrst,
-    output logic [1:0] obj_code,
+    output logic [2:0] obj_code,
     output logic [3:0] x, y,
     output logic diff
 );
 
-logic [15:0][11:0][1:0] frame, next_frame;
+logic [15:0][11:0][2:0] frame, next_frame;
 logic [3:0] current_X, next_X, current_Y, next_Y;
 logic next_d, d;
 
@@ -28,7 +28,7 @@ always_ff @(posedge clk, negedge nrst) begin
     if(~nrst) begin
         {frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7],
         frame[8], frame[9], frame[10], frame[11], frame[12], frame[13], frame[14], frame[15]} = 
-        {16*12{2'b00}};
+        {16*12{3'b000}};
     end
     else begin
         frame <= next_frame;
@@ -76,97 +76,144 @@ always_comb begin
     end
 
     case(frame[current_X][current_Y])
-    2'b00: begin
+    3'b000: begin
         if(border) begin
-            next_frame[current_X][current_Y] = 2'b11;
-            obj_code = 2'b11;
+            next_frame[current_X][current_Y] = 3'b100;
+            obj_code = 3'b100;
             next_d = 1'b1;
         end
-        else if((head) || (body)) begin
-            next_frame[current_X][current_Y] = 2'b01;
-            obj_code = 2'b01;
+        else if(head) begin
+            next_frame[current_X][current_Y] = 3'b001;
+            obj_code = 3'b001;
+            next_d = 1'b1;
+        end
+        else if(body) begin
+            next_frame[current_X][current_Y] = 3'b010;
+            obj_code = 3'b010;
             next_d = 1'b1;
         end
         else if(apple) begin
-            next_frame[current_X][current_Y] = 2'b10;
-            obj_code = 2'b10;
+            next_frame[current_X][current_Y] = 3'b011;
+            obj_code = 3'b011;
             next_d = 1'b1;
         end
         else begin
-            next_frame[current_X][current_Y] = 2'b00;
-            obj_code = 2'b00;
+            next_frame[current_X][current_Y] = 3'b000;
+            obj_code = 3'b000;
             next_d = 1'b0;
         end
     end
-    2'b01: begin
+    3'b001: begin
         if(border) begin
-            next_frame[current_X][current_Y] = 2'b11;
-            obj_code = 2'b11;
+            next_frame[current_X][current_Y] = 3'b100;
+            obj_code = 3'b100;
             next_d = 1'b1;
         end
-        else if((head) || (body)) begin
-            next_frame[current_X][current_Y] = 2'b01;
-            obj_code = 2'b01;
+        else if(head) begin
+            next_frame[current_X][current_Y] = 3'b001;
+            obj_code = 3'b001;
             next_d = 1'b0;
         end
+        else if(body) begin
+            next_frame[current_X][current_Y] = 3'b010;
+            obj_code = 3'b010;
+            next_d = 1'b1;
+        end
         else if(apple) begin
-            next_frame[current_X][current_Y] = 2'b10;
-            obj_code = 2'b10;
+            next_frame[current_X][current_Y] = 3'b011;
+            obj_code = 3'b011;
             next_d = 1'b1;
         end
         else begin
-            next_frame[current_X][current_Y] = 2'b00;
-            obj_code = 2'b00;
+            next_frame[current_X][current_Y] = 3'b000;
+            obj_code = 3'b000;
             next_d = 1'b1;
         end
     end
-    2'b10: begin
+    3'b010: begin
         if(border) begin
-            next_frame[current_X][current_Y] = 2'b11;
-            obj_code = 2'b11;
+            next_frame[current_X][current_Y] = 3'b100;
+            obj_code = 3'b100;
             next_d = 1'b1;
         end
-        else if((head) || (body)) begin
-            next_frame[current_X][current_Y] = 2'b01;
-            obj_code = 2'b01;
+        else if(head) begin
+            next_frame[current_X][current_Y] = 3'b001;
+            obj_code = 3'b001;
+            next_d = 1'b1;
+        end
+        else if(body) begin
+            next_frame[current_X][current_Y] = 3'b010;
+            obj_code = 3'b010;
             next_d = 1'b0;
         end
         else if(apple) begin
-            next_frame[current_X][current_Y] = 2'b10;
-            obj_code = 2'b10;
+            next_frame[current_X][current_Y] = 3'b011;
+            obj_code = 3'b011;
+            next_d = 1'b1;
+        end
+        else begin
+            next_frame[current_X][current_Y] = 3'b000;
+            obj_code = 3'b000;
+            next_d = 1'b1;
+        end
+    end
+    3'b011: begin
+        if(border) begin
+            next_frame[current_X][current_Y] = 3'b100;
+            obj_code = 3'b100;
+            next_d = 1'b1;
+        end
+        else if(head) begin
+            next_frame[current_X][current_Y] = 3'b001;
+            obj_code = 3'b001;
+            next_d = 1'b1;
+        end
+        else if(body) begin
+            next_frame[current_X][current_Y] = 3'b010;
+            obj_code = 3'b010;
+            next_d = 1'b1;
+        end
+        else if(apple) begin
+            next_frame[current_X][current_Y] = 3'b011;
+            obj_code = 3'b011;
             next_d = 1'b0;
         end
         else begin
-            next_frame[current_X][current_Y] = 2'b00;
-            obj_code = 2'b00;
+            next_frame[current_X][current_Y] = 3'b000;
+            obj_code = 3'b000;
             next_d = 1'b1;
         end
     end        
-    2'b11: begin
+    3'b100: begin
         if(border) begin
-            next_frame[current_X][current_Y] = 2'b11;
-            obj_code = 2'b11;
+            next_frame[current_X][current_Y] = 3'b100;
+            obj_code = 3'b100;
             next_d = 1'b0;
         end
-        else if((head) || (body)) begin
-            next_frame[current_X][current_Y] = 2'b01;
-            obj_code = 2'b01;
-            next_d = 1'b0;
+        else if(head) begin
+            next_frame[current_X][current_Y] = 3'b001;
+            obj_code = 3'b001;
+            next_d = 1'b1;
+        end
+        else if(body) begin
+            next_frame[current_X][current_Y] = 3'b010;
+            obj_code = 3'b010;
+            next_d = 1'b1;
         end
         else if(apple) begin
-            next_frame[current_X][current_Y] = 2'b10;
-            obj_code = 2'b10;
+            next_frame[current_X][current_Y] = 3'b011;
+            obj_code = 3'b011;
             next_d = 1'b1;
         end
         else begin
-            next_frame[current_X][current_Y] = 2'b00;
-            obj_code = 2'b00;
+            next_frame[current_X][current_Y] = 3'b000;
+            obj_code = 3'b000;
             next_d = 1'b1;
         end
     end
     default: begin
-        next_frame[current_X][current_Y] = 2'b00;
-        obj_code = 2'b00;
+        next_frame[current_X][current_Y] = 3'b000;
+        obj_code = 3'b000;
         next_d = 1'b0;  
     end
     endcase
