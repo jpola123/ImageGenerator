@@ -226,7 +226,7 @@ module tb_test1();
         reset_dut;
         @(negedge tb_clk);
         cmd_done = 1'b1;
-        @(negedge tb_clk);
+        @(posedge tb_clk);
         cmd_done = 1'b0;
         
 
