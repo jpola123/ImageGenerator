@@ -275,7 +275,7 @@ module tb_test1();
             else
                 apple = 1'b0;
         end
-        else (map == 3'd5) begin
+        else begin
             if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
                 border = 1'b1;
             end
