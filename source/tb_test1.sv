@@ -189,7 +189,7 @@ module tb_test1();
     always @(x, y) begin
         if((x == 0) && (y == 0))
             map = map + 2'b1;
-        if(map = 2'd1) begin
+        if(map == 2'd1) begin
             if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
                 border = 1'b1;
             end
