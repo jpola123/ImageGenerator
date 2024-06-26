@@ -206,7 +206,7 @@ module tb_test1();
             else
                 apple = 1'b0;
         end
-        else begin
+        else if(map == 2'd2) begin
             if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
                 border = 1'b1;
             end
@@ -227,6 +227,28 @@ module tb_test1();
             end
             else
                 apple = 1'b0;
+        end
+        else begin
+            if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
+                border = 1'b1;
+            end
+            else
+                border = 1'b0;
+            if((x == 4'd6) && (y == 4'd5)) begin
+                snakeBody = 1'b1;
+            end
+            else
+                snakeBody = 1'b0;
+            if((x == 4'd5) && (y == 4'd)) begin
+                snakeBody = 1'b1;
+            end
+            else
+                snakeBody = 1'b0;
+            if((x == 4'd7) && (y == 4'd4)) begin
+                snakeHead = 1'b1;
+            end
+            else
+                snakeHead = 1'b0;
         end
     
     end
@@ -274,7 +296,7 @@ module tb_test1();
         @(negedge tb_clk);
         cmd_done = 1'b0;
         
-        for(integer i = 0; i < 500; i++) begin
+        for(integer i = 0; i < 700; i++) begin
             #(CLK_PERIOD);
             if(diff) begin
                 #(CLK_PERIOD * 5);
