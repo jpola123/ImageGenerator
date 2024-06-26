@@ -274,7 +274,7 @@ module tb_test1();
         @(negedge tb_clk);
         cmd_done = 1'b0;
         
-        for(integer i = 0; i < 384; i++) begin
+        for(integer i = 0; i < 500; i++) begin
             #(CLK_PERIOD);
             if(diff) begin
                 #(CLK_PERIOD * 5);
