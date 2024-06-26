@@ -186,7 +186,7 @@ module tb_test1();
         #(CLK2_PERIOD / 2.0); 
     end
 
-    always begin
+    always @(x, y) begin
             if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
                 border = 1'b1;
             end
