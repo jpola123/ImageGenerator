@@ -251,6 +251,9 @@ module tb_test1();
                 toggle_cmd_done();
             end
             #(CLK_PERIOD);
+            border = 1'b0;
+            apple = 1'b0;
+            snakeHead = 1'b0;
         end
         $finish;
     
