@@ -202,10 +202,6 @@ module tb_test1();
             end
             else
                 apple = 1'b0;
-            if(diff) begin
-                #(CLK_PERIOD * 5);
-                toggle_cmd_done();
-            end
     
     end
 
@@ -251,8 +247,13 @@ module tb_test1();
         @(negedge tb_clk);
         cmd_done = 1'b0;
         
-
-        #(CLK_PERIOD * 384);
+        for(integer i = 0; i < 384; i++) begin
+            #(CLK_PERIOD);
+            if(diff) begin
+                #(CLK_PERIOD * 5);
+                toggle_cmd_done();
+            end
+        end;
         
         $finish;
     
