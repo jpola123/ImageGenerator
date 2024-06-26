@@ -232,17 +232,17 @@ module tb_test1();
 
         for(integer i = 0; i < 384; i = i + 1) begin
             if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
-                border = 1'b1;
+                border = (obj_code != 3'b100);
             end
             else
                 border = 1'b0;
             if((x == 4'd4) && (y == 4'd4)) begin
-                snakeHead = 1'b1;
+                snakeHead = (obj_code != 3'b001);
             end
             else
                 snakeHead = 1'b0;
             if((x == 4'd7) && (y == 4'd4)) begin
-                apple = 1'b1;
+                apple = (obj_code != 3'b011);
             end
             else
                 apple = 1'b0;
