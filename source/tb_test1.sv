@@ -226,12 +226,12 @@ module tb_test1();
         reset_dut;
         @(negedge tb_clk);
         cmd_done = 1'b1;
-        @(posedge tb_clk);
+        @(negedge tb_clk);
         cmd_done = 1'b0;
         
 
         for(integer i = 0; i < 384; i = i + 1) begin
-            #(CLK_PERIOD);
+            @(negedge tb_clk);
             if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
                 border = 1'b1;
             end
