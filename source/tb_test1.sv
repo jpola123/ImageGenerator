@@ -186,6 +186,28 @@ module tb_test1();
         #(CLK2_PERIOD / 2.0); 
     end
 
+    always begin
+            if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
+                border = 1'b1;
+            end
+            else
+                border = 1'b0;
+            if((x == 4'd4) && (y == 4'd4)) begin
+                snakeHead = 1'b1;
+            end
+            else
+                snakeHead = 1'b0;
+            if((x == 4'd7) && (y == 4'd4)) begin
+                apple = 1'b1;
+            end
+            else
+                apple = 1'b0;
+            if(diff) begin
+                #(CLK_PERIOD * 5);
+                toggle_cmd_done();
+            end
+    
+    end
 
     test1 DUT(.snakeBody(snakeBody), .snakeHead(snakeHead), .apple(apple), .border(border), .mode_pb(mode_pb), .GameOver(GameOver), .clk(tb_clk), 
               .clk2(tb_clk), .nrst(nrst), .cmd_done(cmd_done),
@@ -230,28 +252,7 @@ module tb_test1();
         cmd_done = 1'b0;
         
 
-        for(integer i = 0; i < 384; i = i + 1) begin
-            if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
-                border = 1'b1;
-            end
-            else
-                border = 1'b0;
-            if((x == 4'd4) && (y == 4'd4)) begin
-                snakeHead = 1'b1;
-            end
-            else
-                snakeHead = 1'b0;
-            if((x == 4'd7) && (y == 4'd4)) begin
-                apple = 1'b1;
-            end
-            else
-                apple = 1'b0;
-            if(diff) begin
-                #(CLK_PERIOD * 5);
-                toggle_cmd_done();
-            end
-            @(posedge tb_clk);
-        end
+        #(CLK_PERIOD * 384);
         
         $finish;
     
