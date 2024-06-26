@@ -40,12 +40,12 @@ always_ff @(posedge clk, negedge nrst) begin
     if(~nrst) begin
         current_X <= 4'b0;
         current_Y <= 4'b0;
-        d <= 3'b0;
+        //d <= 3'b0;
     end
     else begin
         current_X <= next_X;
         current_Y <= next_Y;
-        d <= next_d;
+        //d <= next_d;
     end
 
 end
@@ -260,5 +260,5 @@ end
 
 assign x = current_X;
 assign y = current_Y;
-assign diff = d;
+assign diff = next_d;
 endmodule
