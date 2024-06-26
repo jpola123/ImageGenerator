@@ -257,19 +257,19 @@ module tb_test1();
             else
                 border = 1'b0;
             if((x == 4'd5) && (y == 4'd4)) begin
-                snakeBody = 1'b1;
+                snakeBody = 1'b0;
             end
             else if((x == 4'd6) && (y == 4'd4)) begin
                 snakeBody = 1'b1;
             end
             else
                 snakeBody = 1'b0;
-            if((x == 4'd7) && (y == 4'd4)) begin
+            if((x == 4'd6) && (y == 4'd5)) begin
                 snakeHead = 1'b1;
             end
             else
                 snakeHead = 1'b0;
-            if((x == 4'd13) && (y == 4'd7)) begin
+            if((x == 4'd7) && (y == 4'd4)) begin
                 apple = 1'b1;
             end
             else
