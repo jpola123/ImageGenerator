@@ -1,4 +1,4 @@
-`timescale 1ms/100
+`timescale 1ms/100us
 
 module tb_image_generator();
     localparam CLK_PERIOD = 10;
