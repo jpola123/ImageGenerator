@@ -32,7 +32,7 @@ always_comb begin
     SP = 16'b0;
     EP = 16'b0;
     D = 8'b0;
-    dcx = 1'b1;
+    dcx = 1'b0;
     if((mode == SET_I) || (mode == SEND_I)) begin
         if(mode == SET_I) begin
             if(cmd_num == 3'd1 || cmd_num == 3'd3) begin

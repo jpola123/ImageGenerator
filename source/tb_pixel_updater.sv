@@ -68,6 +68,20 @@ module tb_pixel_updater();
         init_cycle = 1'b1;
         #(CLK_PERIOD * 150000);
 
+        /*
+        Test Case 2: Test to see if correct commands are being fed to set pixel at 4,4 to snake head
+        */
+        tb_test_num += 1;
+        tb_test_case = "Set display";
+        $display("\n\n%s", tb_test_case);
+
+        x = 4'd4;
+        y = 4'd4;
+        obj_code = 3'b001;
+        en_update = 1'b1;
+
+        #(CLK_PERIOD * 850);
+
         $finish;
     
     end
