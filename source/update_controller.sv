@@ -8,7 +8,7 @@ update_t current, next;
 logic [8:0] count, next_count;
 
 always_ff @(posedge clk, negedge nrst) begin
-    if(nrst)
+    if(~nrst)
         current <= IDLE;
     else
         current <= next;
