@@ -168,6 +168,7 @@ module tb_image_generator();
         tb_checking_outputs = 1'b0;
         tb_test_case = "Initializing";
         tb_test_num = -1;
+        map = 3'b0;
 
         /*
         Test Case 0: Power on Reset
