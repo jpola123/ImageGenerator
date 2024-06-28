@@ -1,7 +1,7 @@
 module update_controller(
     input logic init_cycle, en_update, clk, nrst, cmd_finished, pause,
     output logic cmd_done, wr,
-    output update_t mode;
+    output update_t mode
 );
 
 update_t current, next;

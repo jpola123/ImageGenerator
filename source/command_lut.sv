@@ -35,8 +35,8 @@ always_comb begin
     dcx = 1'b1;
     if((mode == SET_I) || (mode == SEND_I)) begin
         if(mode == SET_I) begin
-            if(cmd_num == 3'd1 || cmd_num == 3'd23) begin
-                if(count > 15'd50000) begin
+            if(cmd_num == 3'd1 || cmd_num == 3'd3) begin
+                if(count > 16'd50000) begin
                     next_count = 0;
                     next_cmd_num = cmd_num + 3'd1;
                     pause = 1'b0;
