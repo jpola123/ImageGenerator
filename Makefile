@@ -17,7 +17,7 @@ COMPONENT_FILES	:=  command_lut.sv update_controller.sv
 
 # Specify the top level testbench to be simulated
 # (do not include the source folder in the name)
-TB 				:= 
+TB 				:= tb_pixel_updater.sv
 
 # Directories where source code is located
 SRC 			:= source
