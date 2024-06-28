@@ -74,6 +74,7 @@ always_comb begin
             D = 8'b00101001;
             dcx = 1'b0;
             cmd_finished = 1'b1;
+            next_cmd_num = 4'b0;
         end
         default: begin
             D = 8'b00000000;
@@ -189,6 +190,7 @@ always_comb begin
             D = 8'b00000000;
             dcx = 1'b0;
             cmd_finished = 1'b1;
+            next_cmd_num = 4'b0;
         end
         default: begin
             D = 8'b0;
