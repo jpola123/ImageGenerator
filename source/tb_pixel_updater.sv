@@ -82,6 +82,8 @@ module tb_pixel_updater();
 
         #(CLK_PERIOD * 1700);
 
+        
+
         $finish;
     
     end

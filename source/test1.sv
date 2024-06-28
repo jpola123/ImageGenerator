@@ -1,6 +1,4 @@
-typedef enum logic [1:0] { 
-    INIT = 0, LOOP = 1, UPDATE = 2, OVER = 3
-} control_state_t;
+
 
 module test1 (
     input logic snakeBody, snakeHead, apple, border, mode_pb, GameOver, clk, clk2, nrst, cmd_done, 
