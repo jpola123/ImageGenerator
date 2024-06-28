@@ -163,7 +163,7 @@ module tb_image_generator();
         snakeBody = 1'b0;
         apple = 1'b0;
         border = 1'b0;
-        KeyEnc = 1'b0;
+        mode_pb = 1'b0;
         GameOver = 1'b0;
         tb_checking_outputs = 1'b0;
         tb_test_case = "Initializing";
@@ -177,7 +177,7 @@ module tb_image_generator();
         tb_test_case = "Power on reset";
         $display("\n\n%s", tb_test_case);
 
-        reset_dut()
+        reset_dut();
         #(CLK_PERIOD * 10);
 
         /*
