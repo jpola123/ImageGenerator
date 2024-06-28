@@ -66,7 +66,7 @@ module tb_pixel_updater();
         reset_dut();
 
         init_cycle = 1'b1;
-        #(CLK_PERIOD * 100100);
+        #(CLK_PERIOD * 200000);
 
         $finish;
     
