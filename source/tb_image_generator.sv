@@ -189,7 +189,7 @@ module tb_image_generator();
         $display("\n\n%s", tb_test_case);
 
         reset_dut();
-        #(CLK_PERIOD * 150000);
+        #(CLK_PERIOD * 10030);
         mode_pb_press();
         #(CLK_PERIOD * 326400);
         mode_pb_press();
