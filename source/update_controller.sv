@@ -3,8 +3,7 @@ typedef enum logic [2:0] {
 } update_t;
 
 module update_controller #(localparam init_length = 40, localparam pix_len = 811)(
-    input logic init_cycle, en_update, clk, nrst,
-    input logic cmd_finished,
+    input logic init_cycle, en_update, clk, nrst, cmd_finished,
     output logic enable, cmd_done, wr,
     output update_t mode;
 );
@@ -39,24 +38,20 @@ always_comb begin
     end
     SEND_I: begin
         wr = 1'b1;
-        if(count > init_len) begin
+        if(cmd_finished) begin
             next = DONE; 
-            next_count = 0;
         end
         else begin
             next = SET_I;
-            next_count = count + 9'b1;
         end
     end
     SEND: begin
         wr = 1'b1;
-        if(count > pix_len) begin
-            next = DONE; 
-            next_count = 0;
+        if(cmd_finished) begin
+            next = DONE;
         end
         else begin
             next = SET;
-            next_count = count + 9'b1;
         end
     end
     DONE: begin
