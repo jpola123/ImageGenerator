@@ -1,10 +1,6 @@
-typedef enum logic [2:0] { 
-    IDLE = 0, SET_I = 1, SET = 2, SEND_I = 3, SEND = 4, DONE = 5
-} update_t;
-
-module update_controller #(localparam init_length = 40, localparam pix_len = 811)(
-    input logic init_cycle, en_update, clk, nrst, cmd_finished,
-    output logic enable, cmd_done, wr,
+module update_controller(
+    input logic init_cycle, en_update, clk, nrst, cmd_finished, pause,
+    output logic cmd_done, wr,
     output update_t mode;
 );
 
@@ -22,7 +18,6 @@ always_comb begin
     wr = 1'b0;
     next_count = count;
     cmd_done = 1'b0;
-    enable = 1'b0;
     case(current)
     IDLE: begin
         if(init_cycle)
@@ -32,9 +27,17 @@ always_comb begin
         else
             next = IDLE;
     end
-    SET_I, SET: begin
-        next = SEND;
-        enable = 1'b1;
+    SET_I: begin
+        if(pause)
+            next = SET_I;
+        else
+            next = SEND_I;
+    end
+    SET: begin
+        if(pause)
+            next = SET;
+        else
+            next = SEND;
     end
     SEND_I: begin
         wr = 1'b1;

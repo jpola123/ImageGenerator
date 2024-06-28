@@ -2,7 +2,7 @@ module command_lut(
     input update_t mode,
     input logic clk, nrst, 
     input logic [2:0] obj_code,
-    input logic [4:0] X, Y,
+    input logic [3:0] X, Y,
     output logic cmd_finished,
     output logic [7:0] D,
     output logic dcx, pause
@@ -31,6 +31,8 @@ always_comb begin
     EC = 16'b0;
     SP = 16'b0;
     EP = 16'b0;
+    D = 8'b0;
+    dcx = 1'b1;
     if((mode == SET_I) || (mode == SEND_I)) begin
         if(mode == SET_I) begin
             if(cmd_num == 3'd1 || cmd_num == 3'd23) begin
