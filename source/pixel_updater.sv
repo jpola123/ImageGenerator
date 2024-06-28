@@ -3,7 +3,7 @@ typedef enum logic [2:0] {
 } update_t;
 
 module pixel_updater (
-    input logic init_cycle, en_update, clk, nrst
+    input logic init_cycle, en_update, clk, nrst,
     input logic [3:0] x, y,
     input logic [2:0] obj_code,
     output logic cmd_done, wr, dcx,
