@@ -74,13 +74,16 @@ always_comb begin
             D = 8'b00101001;
             dcx = 1'b0;
             cmd_finished = 1'b1;
-            next_cmd_num = 4'b0;
+            if(mode == SEND_I) begin
+                next_cmd_num = 4'b0;
+            end
         end
         default: begin
             D = 8'b00000000;
             dcx = 1'b0;
         end
         endcase
+        
     end
     else if((mode == SET) || (mode == SEND)) begin
         if(mode == SET) begin
@@ -190,7 +193,9 @@ always_comb begin
             D = 8'b00000000;
             dcx = 1'b0;
             cmd_finished = 1'b1;
-            next_cmd_num = 4'b0;
+            if(mode == SEND) begin
+                next_cmd_num = 4'b0;
+            end
         end
         default: begin
             D = 8'b0;
