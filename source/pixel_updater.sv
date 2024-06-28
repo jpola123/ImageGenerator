@@ -7,7 +7,8 @@ module pixel_updater (
     input logic [3:0] x, y,
     input logic [2:0] obj_code,
     output logic cmd_done, wr, dcx,
-    output logic [7:0] D
+    output logic [7:0] D,
+    output logic [2:0] mode_o
 );
 
 update_t mode;
@@ -17,6 +18,7 @@ update_controller update(.init_cycle(init_cycle), .en_update(en_update), .clk(cl
 command_lut commands(.mode(mode), .clk(clk), .nrst(nrst), .obj_code(obj_code), .X(x), .Y(y), 
                      .cmd_finished(cmd_finished), .D(D), .dcx(dcx), .pause(pause));
 
+assign mode_o = mode;
 
 
 endmodule

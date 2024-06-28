@@ -8,7 +8,7 @@ module tb_pixel_updater();
 
     logic init_cycle, en_update, tb_clk, nrst, cmd_done, wr, dcx;
     logic [3:0] x, y;
-    logic [2:0] obj_code;
+    logic [2:0] obj_code, mode_o;
     logic [7:0] D;
 
     task reset_dut;
@@ -32,7 +32,7 @@ module tb_pixel_updater();
         #(CLK_PERIOD / 2.0); 
     end
 
-    pixel_updater DUT(.init_cycle(init_cycle), .en_update(en_update), .clk(tb_clk), .nrst(nrst), .x(x), .y(y), .obj_code(obj_code), .wr(wr), .cmd_done(cmd_done), .dcx(dcx), .D(D));
+    pixel_updater DUT(.init_cycle(init_cycle), .en_update(en_update), .clk(tb_clk), .nrst(nrst), .x(x), .y(y), .obj_code(obj_code), .wr(wr), .cmd_done(cmd_done), .dcx(dcx), .D(D), .mode_o(mode_o));
 
     initial begin
         $dumpfile("dump.vcd");

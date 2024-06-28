@@ -69,6 +69,4 @@ end
 assign mode = current;
 
 
-
-
 endmodule
