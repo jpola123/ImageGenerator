@@ -80,7 +80,7 @@ module tb_pixel_updater();
         obj_code = 3'b001;
         en_update = 1'b1;
 
-        #(CLK_PERIOD * 850);
+        #(CLK_PERIOD * 1700);
 
         $finish;
     
