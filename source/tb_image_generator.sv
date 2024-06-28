@@ -37,7 +37,6 @@ module tb_image_generator();
 
     always @(x, y) begin
         if((x == 0) && (y == 0))
-            #(CLK_PERIOD * 100000);
             map = map + 3'b1;
         if(map == 3'd1) begin
             if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
