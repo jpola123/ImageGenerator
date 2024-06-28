@@ -13,7 +13,7 @@ fsm_control control(.GameOver(GameOver), .cmd_done(cmd_done), .diff(diff), .clk(
                     .enable_loop(enable_loop), .init_cycle(init_cycle), .en_update(en_update), .sync_reset(sync));
 frame_tracker tracker(.body(snakeBody), .head(snakeHead), .apple(apple), .border(border), .enable(enable_loop), .clk(clk), .nrst(nrst), 
                       .obj_code(obj_code), .x(x), .y(y), .diff(diff));
-pixel_updater updater(.init_cycle(init_cycle), .en_update(en_update), .clk(clk), .nrst(nrst), .x(x), .y(y), .obj_code(.obj_code), 
+pixel_updater updater(.init_cycle(init_cycle), .en_update(en_update), .clk(clk), .nrst(nrst), .x(x), .y(y), .obj_code(obj_code), 
                       .cmd_done(cmd_done), .wr(wr), .dcx(.dcx), .D(D));
 
 endmodule;
