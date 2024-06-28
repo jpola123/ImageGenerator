@@ -190,8 +190,9 @@ module tb_image_generator();
 
         reset_dut();
         #(CLK_PERIOD * 100030);
-        #(CLK_PERIOD * 326400);
-        #(CLK_PERIOD * 326400);
+        while(map < 3'd5) begin
+            #(CLK_PERIOD);
+        end 
 
         $finish;
 
