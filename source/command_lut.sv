@@ -91,7 +91,7 @@ always_comb begin
                 next_cmd_num = 4'd13;
                 next_count = count;
             end
-            else if(count>= 800) begin
+            else if(count >= 799) begin
                 next_count = 0;
                 next_cmd_num = 4'd14;
             end
