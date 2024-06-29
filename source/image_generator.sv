@@ -3,10 +3,11 @@ module image_generator (
     input logic snakeBody, snakeHead, apple, border, KeyEnc, GameOver, clk, nrst,
     output logic sync, dcx, wr, 
     output logic [7:0] D,
-    output logic [3:0] x, y
+    output logic [3:0] x, y,
+    output logic [3:0] obj_code
 );
 
-logic [2:0] obj_code;
+
 logic cmd_done, enable_loop, init_cycle, en_update, diff;
 
 fsm_control control(.GameOver(GameOver), .cmd_done(cmd_done), .diff(diff), .clk(clk), .nrst(nrst), .mode_pb(KeyEnc),

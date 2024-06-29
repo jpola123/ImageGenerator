@@ -11,6 +11,6 @@ always_ff @(posedge clk, negedge nrst)
     else
         Q <= {Q[0], button};
 
-assign signal = Q;
+assign signal = Q[1];
 
 endmodule
