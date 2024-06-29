@@ -53,7 +53,7 @@ always_comb begin
                 next_cmd_num = 5'd20;
             end
             else if(cmd_num == 5'd17) begin
-                next_cmd_num = 5'd20;
+                next_cmd_num = 5'd19;
             end
             else if(cmd_num == 5'd18) begin
                 next_cmd_num = 5'd19;
