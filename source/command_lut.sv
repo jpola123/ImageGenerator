@@ -8,7 +8,7 @@ module command_lut(
     output logic dcx, pause
 );
 
-logic [15:0] count, next_count, SC, EC, SP, EP, color;
+logic [16:0] count, next_count, SC, EC, SP, EP, color;
 logic [4:0] cmd_num, next_cmd_num;
 
 always_ff @(posedge clk, negedge nrst) begin
@@ -37,31 +37,31 @@ always_comb begin
     if((mode == SET_I) || (mode == SEND_I)) begin
         if(mode == SET_I) begin
             if(cmd_num == 5'd1 || cmd_num == 5'd5) begin
-                if(count > 16'd60000) begin
+                if(count > 17'd60000) begin
                     next_count = 0;
                     next_cmd_num = cmd_num + 5'd1;
                     pause = 1'b0;
                 end
                 else begin
-                    next_count = count + 16'b1;
+                    next_count = count + 17'b1;
                     next_cmd_num = cmd_num;
                     pause = 1'b1;
                 end
             end
-            else if (count > 16'd76900) begin
-                next_count = 16'd0;
+            else if (count > 17'd76900) begin
+                next_count = 17'd0;
                 next_cmd_num = 5'd20;
             end
             else if(cmd_num == 5'd17) begin
-                next_cmd_num = 5'd19;
+                next_cmd_num = 5'd20;
             end
             else if(cmd_num == 5'd18) begin
                 next_cmd_num = 5'd19;
-                next_count = count + 16'b1;
+                next_count = count + 17'b1;
             end
             else if(cmd_num == 5'd19) begin
                 next_cmd_num = 5'd18;
-                next_count = count + 16'b1;
+                next_count = count + 17'b1;
             end
             else begin
                 next_cmd_num = cmd_num + 5'd1;
@@ -171,17 +171,17 @@ always_comb begin
                 next_cmd_num = 5'd13;
                 next_count = count;
             end
-            else if(count >= 900) begin
+            else if(count >= 17'd900) begin
                 next_count = 0;
                 next_cmd_num = 5'd14;
             end
             else if(cmd_num == 5'd12) begin
                 next_cmd_num = 5'd13;
-                next_count = count + 16'b1;
+                next_count = count + 17'b1;
             end
             else if(cmd_num == 5'd13) begin
                 next_cmd_num = 5'd12;
-                next_count = count + 16'b1;
+                next_count = count + 17'b1;
             end
             else
                 next_cmd_num = cmd_num + 5'd1;
