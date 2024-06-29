@@ -4,7 +4,7 @@
 
 module top (
   // I/O ports
-  input  logic hz100, reset,
+  input  logic hwclk, reset,
   input  logic [20:0] pb,
   output logic [7:0] left, right,
          ss7, ss6, ss5, ss4, ss3, ss2, ss1, ss0,
@@ -16,22 +16,32 @@ module top (
   output logic txclk, rxclk,
   input  logic txready, rxready
 );
-  logic [5:0] time_o;
-  logic [2:0] mode_o;
-  logic [7:0] converted_s;
-  logic [7:0] converted_m, converted_h;
-  logic [5:0] minutes, hours;
-  stop_watch stopwatch(.clk(hz100), .nRst_i(~pb[19]), .button_i(pb[0]), .time_o(time_o), .mode_o(mode_o), .minutes(minutes), .hours(hours));
-  bcd convert_s(.raw(time_o), .converted(converted_s));
-  bcd convert_m(.raw(minutes), .converted(converted_m));
-  bcd convert_h(.raw(hours), .converted(converted_h));
-  assign left[2:0] = mode_o;
-  ssdec s0(.in(converted_s[3:0]), .enable(1'b1), .out(ss0[6:0]));
-  ssdec s1(.in(converted_s[7:4]), .enable(1'b1), .out(ss1[6:0]));
-  assign ss2[7] = 1;
-  assign ss5[7] = 1;
-  ssdec s3(.in(converted_m[3:0]), .enable(1'b1), .out(ss3[6:0]));
-  ssdec s4(.in(converted_m[7:4]), .enable(1'b1), .out(ss4[6:0]));
-  ssdec s6(.in(converted_h[3:0]), .enable(1'b1), .out(ss6[6:0]));
-  ssdec s7(.in(converted_h[7:4]), .enable(1'b1), .out(ss7[6:0]));
+
+  logic snakeBody, snakeHead, apple, border, GameOver;
+  logic [3:0] x, y;
+
+  image_generator img_gen(.snakeBody(snakeBody), .snakeHead(snakeHead), .apple(apple), .border(border), .KeyEnc(pb[0]), .GameOver(GameOver), .clk(hwclk), .nrst(~reset),
+                          .sync(left[2]), .wr(left[0]), .dcx(left[1]), .D(right[7:0]), .x(x), .y(y));
+  ssdec s0(.in(y), .enable(1'b1), .out(ss0));
+  ssdec s1(.in(x), .enable(1'b1), .out(ss1));
+  always_comb begin
+    GameOver = 1'b0;
+    if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
+      border = 1'b0;
+    end
+    else
+      border = 1'b0;
+    if((x == 4'd10) && (y == 4'd4)) begin
+      snakeHead = 1'b1;
+    end
+    else
+      snakeHead = 1'b0;
+    if((x == 4'd7) && (y == 4'd4)) begin
+      apple = 1'b0;
+    end
+    else
+      apple = 1'b0;
+  end
+
+
 endmodule

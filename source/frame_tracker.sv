@@ -8,7 +8,7 @@ module frame_tracker (
 logic [15:0][11:0][2:0] frame, next_frame;
 logic [3:0] current_X, next_X, current_Y, next_Y;
 logic next_d, d;
-
+logic [2:0] temp_obj_code;
 /* generate 
     for(genvar i = 0; i < 16; i = i + 1) begin
         for(genvar j = 0; j < 12; j = j + 1) begin
@@ -74,8 +74,8 @@ always_comb begin
         next_X = current_X;
         next_Y = current_Y;
     end
-
-    case(frame[current_X][current_Y])
+    temp_obj_code = frame[current_X][current_Y];
+    case(temp_obj_code)
     3'b000: begin
         if(border) begin
             next_frame[current_X][current_Y] = 3'b100;

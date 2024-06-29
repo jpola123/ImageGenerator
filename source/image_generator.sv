@@ -16,4 +16,4 @@ frame_tracker tracker(.body(snakeBody), .head(snakeHead), .apple(apple), .border
 pixel_updater updater(.init_cycle(init_cycle), .en_update(en_update), .clk(clk), .nrst(nrst), .x(x), .y(y), .obj_code(obj_code), 
                       .cmd_done(cmd_done), .wr(wr), .dcx(dcx), .D(D));
 
-endmodule;
+endmodule

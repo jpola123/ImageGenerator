@@ -33,10 +33,11 @@ always_comb begin
     EP = 16'b0;
     D = 8'b0;
     dcx = 1'b0;
+    cmd_finished = 1'b0;
     if((mode == SET_I) || (mode == SEND_I)) begin
         if(mode == SET_I) begin
-            if(cmd_num == 3'd1 || cmd_num == 3'd3) begin
-                if(count > 16'd50000) begin
+            if(cmd_num == 3'd1 || cmd_num == 3'd5) begin
+                if(count > 16'd5) begin
                     next_count = 0;
                     next_cmd_num = cmd_num + 3'd1;
                     pause = 1'b0;
@@ -67,10 +68,18 @@ always_comb begin
             dcx = 1'b0;
         end
         4'd3: begin
-            D = 8'b00010001;
+            D = 8'b00111010;
             dcx = 1'b0;
         end
         4'd4: begin
+            D = 8'b01010101;
+            dcx = 1'b1;
+        end
+        4'd5: begin
+            D = 8'b00010001;
+            dcx = 1'b0;
+        end
+        4'd6: begin
             D = 8'b00101001;
             dcx = 1'b0;
             cmd_finished = 1'b1;
@@ -111,9 +120,9 @@ always_comb begin
             next_cmd_num = cmd_num;
         end
         SC = X * 20;
-        EC = (X + 4'd1) * 20;
+        EC = (X + 1) * 20;
         SP = Y * 20;
-        EP = (Y + 4'd1) * 20;
+        EP = (Y + 1) * 20;
         case(obj_code)
         3'b000: begin
             color = 16'hffff;
@@ -182,11 +191,11 @@ always_comb begin
             dcx = 1'b0;
         end
         4'd12: begin
-            D = color[7:0];
+            D = color[15:8];
             dcx = 1'b1;
         end
         4'd13: begin
-            D = color[15:8];
+            D = color[7:0];
             dcx = 1'b1;
         end
         4'd14: begin    

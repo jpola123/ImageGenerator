@@ -13,7 +13,7 @@ TOP_FILE		:= image_generator.sv
 
 # Specify the name of component or sub-module files
 # (do not include the source folder in the name)
-COMPONENT_FILES	:=  fsm_control.sv frame_tracker.sv pixel_updater.sv command_lut.sv edge_detect.sv synchronizer.sv update_controller.sv 
+COMPONENT_FILES	:=  fsm_control.sv frame_tracker.sv pixel_updater.sv command_lut.sv edge_detect.sv synchronizer.sv update_controller.sv ssdec.sv
 
 # Specify the top level testbench to be simulated
 # (do not include the source folder in the name)
