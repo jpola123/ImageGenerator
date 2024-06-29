@@ -61,16 +61,22 @@ always_comb begin
             end
             else if(cmd_num == 5'd19) begin
                 next_cmd_num = 5'd18;
-                next_count = count + 17'b1;
             end
             else begin
                 next_cmd_num = cmd_num + 5'd1;
+            end
+
+            if(count < 17'd4320) begin
+                color = 16'h0814;
+            end
+            else begin
+                color = 16'h1408;
             end
         end
         else begin
             next_cmd_num = cmd_num;
             pause = 1'b0;
-            next_count = 0;
+            next_count = count;
         end
         cmd_finished = 1'b0;
         case(next_cmd_num)
@@ -143,11 +149,11 @@ always_comb begin
             dcx = 1'b0;
         end
         5'd18: begin
-            D = 8'h08;
+            D = color[7:0];
             dcx = 1'b1;
         end
         5'd19: begin
-            D = 8'h14;
+            D = color[15:8];
             dcx = 1'b1;
         end
         5'd20: begin    
@@ -196,7 +202,7 @@ always_comb begin
         EC = (Y + 1) * 20;
         case(obj_code)
         3'b000: begin
-            color = 16'hffff;
+            color = 16'h1408;
         end
         3'b001: begin
             color = 16'h901E;
@@ -211,7 +217,7 @@ always_comb begin
             color = 16'h0814;
         end
         default: begin
-            color = 16'hffff;
+            color = 16'h1408;
         end
         endcase
 
