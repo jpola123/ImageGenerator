@@ -9,7 +9,7 @@ export LD_LIBRARY_PATH := /home/shay/a/ece270/lib:$(LD_LIBRARY_PATH)
 
 # Specify the name of the top level file
 # (do not include the source folder in the name)
-TOP_FILE		:= image_generator.sv
+TOP_FILE		:= complete.sv
 
 # Specify the name of component or sub-module files
 # (do not include the source folder in the name)
@@ -17,7 +17,7 @@ COMPONENT_FILES	:=  fsm_control.sv frame_tracker.sv pixel_updater.sv command_lut
 
 # Specify the top level testbench to be simulated
 # (do not include the source folder in the name)
-TB 				:= tb_image_generator.sv
+TB 				:= tb_complete.sv
 
 # Directories where source code is located
 SRC 			:= source
