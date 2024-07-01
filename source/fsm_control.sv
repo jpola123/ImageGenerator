@@ -64,7 +64,7 @@ always_comb begin
         end
         OVER: begin
             if(detect) begin
-                next <= LOOP;
+                next <= INIT;
                 sync_reset = 1'b0;
             end
             else 

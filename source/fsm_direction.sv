@@ -14,18 +14,18 @@ module fsm_direction (
             current <= next;
     
     always_comb begin
-        if((direction_a == 4'b0001) && (current != RIGHT))
-            next = LEFT;
-        else if((direction_a == 4'b0010) && (current != LEFT))
-            next = RIGHT;
-        else if((direction_a == 4'b0100) && (current != UP))
-            next = DOWN;
-        else if((direction_a == 4'b1000) && (current != DOWN))
-            next = UP;
-        else if(sync)
-            next = STOP;
-        else
-            next = current;
+            if((direction_a == 4'b0001) && (current != RIGHT))
+                next = LEFT;
+            else if((direction_a == 4'b0010) && (current != LEFT))
+                next = RIGHT;
+            else if((direction_a == 4'b0100) && (current != UP))
+                next = DOWN;
+            else if((direction_a == 4'b1000) && (current != DOWN))
+                next = UP;
+            else if(sync)
+                next = STOP;
+            else
+                next = current;
     end
 
     assign direction = current;

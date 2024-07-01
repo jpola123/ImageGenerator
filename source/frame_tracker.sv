@@ -1,5 +1,5 @@
 module frame_tracker (
-    input logic body, head, apple, border, enable, clk, nrst,
+    input logic body, head, apple, border, enable, clk, nrst, sync,
     output logic [2:0] obj_code,
     output logic [3:0] x, y,
     output logic diff
@@ -55,7 +55,6 @@ always_comb begin
     next_Y = current_Y;
     next_d = 1'b0;
     next_frame = frame;
-
     if(enable) begin
         if((current_X == 4'd15) && (current_Y == 4'd11)) begin
             next_X = 4'b0;
@@ -75,6 +74,14 @@ always_comb begin
         next_Y = current_Y;
     end
     temp_obj_code = frame[current_X][current_Y];
+    if(sync) begin
+        {next_frame[0], next_frame[1], next_frame[2], next_frame[3], next_frame[4], next_frame[5], next_frame[6], next_frame[7],
+        next_frame[8], next_frame[9], next_frame[10], next_frame[11], next_frame[12], next_frame[13], next_frame[14], next_frame[15]} = 
+        {16*12{3'b000}};
+    end
+    else begin
+        next_frame = frame;
+    end
     case(temp_obj_code)
     3'b000: begin
         if(border) begin

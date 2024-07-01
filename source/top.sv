@@ -31,7 +31,7 @@ module top (
   ssdec s1(.in(x), .enable(1'b1), .out(ss1));
   assign left[7:5] = obj_code;
   curr_length_increment increase(.button(pb[1]), .clk(hwclk), .nrst(~reset), .sync(sync), .curr_length(curr_length));
-  synchronizer synch(.button(pb[1]), .clk(hwclk), .nrst(~reset), .signal(next_map_i));
+  synchronizer synch(.button(pb[2]), .clk(hwclk), .nrst(~reset), .signal(next_map_i));
   edge_detect detect(.signal(next_map_i), .clk(hwclk), .nrst(~reset), .change_state(next_map_a));
   snake_body_controller control(.direction_pb({pb[10], pb[6], pb[5], pb[7]}), .x(x), .y(y), .clk(hwclk), .pb_mode(pb[9]), .nrst(~reset), .sync(sync), .curr_length(curr_length), .body(body), .snakeHead(snakeHead), .snakeBody(snakeBody));
 
@@ -44,8 +44,8 @@ module top (
   end
 
   always_comb begin
+    if(map == 4'd0 || map > 4'd1) begin
     GameOver = 1'b0;
-    if(map == 4'd0) begin
     if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
       border = 1'b1;
     end
@@ -63,23 +63,10 @@ module top (
       apple = 1'b0;
     end
     else begin
-    if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
-      border = 1'b1;
-    end
-    else
-      border = 1'b0;
-    if((x == 4'd4) && (y == 4'd4)) begin
-      snakeHead = 1'b1;
-    end
-    else
+      GameOver = 1'b1;
       snakeHead = 1'b0;
-    if((x == 4'd7) && (y == 4'd4)) begin
-      apple = 1'b1;
-    end
-    else
+      border = 1'b0;
       apple = 1'b0;
     end
   end
-
-
 endmodule

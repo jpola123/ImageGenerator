@@ -1,5 +1,5 @@
 typedef enum logic [2:0] { 
-    IDLE = 0, SET_I = 1, SET = 2, SEND_I = 3, SEND = 4, DONE = 5
+    IDLE = 0, SET_I = 1, SET = 2, SEND_I = 3, SEND = 4, DONE = 5, OVER_SET = 6, OVER_SEND = 7
 } update_t;
 
 module pixel_updater (
