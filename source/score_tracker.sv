@@ -1,6 +1,6 @@
 module score_tracker(
     input logic clk, nRst, goodColl, badColl,
-    input logic [6:0] current_score,
+    output logic [6:0] current_score,
     output logic [6:0] dispScore,
     output logic [3:0] bcd_ones, bcd_tens,
     output logic isGameComplete
