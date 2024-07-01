@@ -20,7 +20,7 @@ module complete (
   image_generator img_gen(.snakeBody(snakeBody), .snakeHead(snakeHead), .apple(apple), .border(border), .KeyEnc(KeyEnc), .GameOver(GameOver), .clk(hwclk), .nrst(nrst),
                           .sync(sync), .wr(wr), .dcx(dcx), .D(D), .x(x), .y(y));
   //curr_length_increment increase(.button(pb[1]), .clk(hwclk), .nrst(~reset), .sync(sync), .curr_length(curr_length));
-  snake_body_controller control(.direction_pb({up, down, left, right}), .x(x), .y(y), .clk(hwclk), .pb_mode(pb[9]), .nrst(~reset), .sync(sync), .curr_length(curr_length), .body(body), .snakeHead(snakeHead), .snakeBody(snakeBody));
+  snake_body_controller control(.direction_pb({up, down, left, right}), .x(x), .y(y), .clk(hwclk), .pb_mode(mode_pb), .nrst(nrst), .sync(sync), .curr_length(curr_length), .body(body), .snakeHead(snakeHead), .snakeBody(snakeBody));
   random rand123(.clk(hwclk), .nRst(nrst), .randX(randX), .randY(randY));
   applegenerator2 ag2(.x(x), .y(y), .randX(randX), .randY(randY), .goodColl(goodColl), .clk(hwclk), .reset(nrst), .s_reset(sync), .body(body), .apple(apple));
   collision coll(.clk(hwclk), .nRst(nrst), .snakeHead(snakeHead), .snakeBody(snakeBody), .border(border), .apple(apple), .goodColl(goodColl), .badColl(GameOver));
