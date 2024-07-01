@@ -9,11 +9,11 @@ export LD_LIBRARY_PATH := /home/shay/a/ece270/lib:$(LD_LIBRARY_PATH)
 
 # Specify the name of the top level file
 # (do not include the source folder in the name)
-TOP_FILE		:= image_generator.sv
+TOP_FILE		:= complete.sv
 
 # Specify the name of component or sub-module files
 # (do not include the source folder in the name)
-COMPONENT_FILES	:=  fsm_control.sv frame_tracker.sv pixel_updater.sv command_lut.sv edge_detect.sv synchronizer.sv update_controller.sv ssdec.sv snake_body_controller.sv curr_length_increment.sv variable_clock_divider.sv fsm_direction.sv fsm_mode.sv location_check.sv update_body.sv random.sv applegenerator2.sv collision.sv score_tracker.sv
+COMPONENT_FILES	:=  image_generator.sv fsm_control.sv frame_tracker.sv pixel_updater.sv command_lut.sv edge_detect.sv synchronizer.sv update_controller.sv ssdec.sv snake_body_controller.sv curr_length_increment.sv variable_clock_divider.sv fsm_direction.sv fsm_mode.sv location_check.sv update_body.sv random.sv applegenerator2.sv collision.sv score_tracker.sv
 
 # Specify the top level testbench to be simulated
 # (do not include the source folder in the name)
