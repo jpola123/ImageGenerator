@@ -7,8 +7,9 @@ module frame_tracker (
 
 logic [15:0][11:0][2:0] frame, next_frame;
 logic [3:0] current_X, next_X, current_Y, next_Y;
-logic next_d, d;
+logic next_d, d, pulse;
 logic [2:0] temp_obj_code;
+logic [2:0] count, next_count;
 /* generate 
     for(genvar i = 0; i < 16; i = i + 1) begin
         for(genvar j = 0; j < 12; j = j + 1) begin
@@ -48,6 +49,25 @@ always_ff @(posedge clk, negedge nrst) begin
         //d <= next_d;
     end
 
+end
+
+always_ff @(posedge clk, negedge nrst) begin
+    if(~nrst) begin
+        count <= 0;
+    end
+    else
+        count <= next_count;
+end
+
+always_comb begin
+    if(count == 2) begin
+        pulse = 1'b1;
+        next_count= 3'b0;
+    end
+    else begin
+        next_count = count + 3'b1;
+        pulse = 1'b0;
+    end
 end
 
 always_comb begin

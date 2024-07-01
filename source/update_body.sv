@@ -14,7 +14,7 @@ generate
         always_ff @(posedge clk or negedge nrst) begin
             if (~nrst) begin
                 if (i == 0) begin
-                    current[i] <= 8'b01000100;
+                    current[i] <= 8'h45;
                 end else begin
                     current[i] <= 8'b0;
                 end
@@ -55,7 +55,7 @@ always_comb begin
     if (sync) begin
         for (integer i = 0; i < MAX_LENGTH; i = i + 1) begin
             if (i == 0) begin
-                next[i] = 8'b01000100;
+                next[i] = 8'h45;
             end else begin
                 next[i] = 8'b0;
             end
