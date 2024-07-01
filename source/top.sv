@@ -19,17 +19,15 @@ module top (
 
   logic snakeBody, snakeHead, apple, border, GameOver;
   logic [3:0] x, y, map, next_map;
-  logic [2:0] obj_code;
   logic next_map_i, next_map_a;
   logic sync;
   logic [6:0] curr_length;
   logic [49:0][7:0] body;
 
   image_generator img_gen(.snakeBody(snakeBody), .snakeHead(snakeHead), .apple(apple), .border(border), .KeyEnc(pb[0]), .GameOver(GameOver), .clk(hwclk), .nrst(~reset),
-                          .sync(sync), .wr(left[0]), .dcx(left[1]), .D(right[7:0]), .x(x), .y(y), .obj_code(obj_code));
+                          .sync(sync), .wr(left[0]), .dcx(left[1]), .D(right[7:0]), .x(x), .y(y));
   ssdec s0(.in(y), .enable(1'b1), .out(ss0));
   ssdec s1(.in(x), .enable(1'b1), .out(ss1));
-  assign left[7:5] = obj_code;
   curr_length_increment increase(.button(pb[1]), .clk(hwclk), .nrst(~reset), .sync(sync), .curr_length(curr_length));
   synchronizer synch(.button(pb[2]), .clk(hwclk), .nrst(~reset), .signal(next_map_i));
   edge_detect detect(.signal(next_map_i), .clk(hwclk), .nrst(~reset), .change_state(next_map_a));
