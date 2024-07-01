@@ -21,9 +21,9 @@ module tb_complete();
     task left_button_press;
     begin
         @(negedge tb_clk);
-        tb_direction_pb[0] = 1'b1;
+        left = 1'b1;
         @(negedge tb_clk)
-        tb_direction_pb[0] = 1'b0;
+        left = 1'b0;
         @(posedge tb_clk);
     end
     endtask
@@ -31,9 +31,9 @@ module tb_complete();
     task right_button_press;
     begin
         @(negedge tb_clk);
-        tb_direction_pb[1] = 1'b1;
+        right = 1'b1;
         @(negedge tb_clk)
-        tb_direction_pb[1] = 1'b0;
+        right = 1'b0;
         @(posedge tb_clk);
     end
     endtask
@@ -41,9 +41,9 @@ module tb_complete();
     task down_button_press;
     begin
         @(negedge tb_clk);
-        tb_direction_pb[2] = 1'b1;
+        down = 1'b1;
         @(negedge tb_clk)
-        tb_direction_pb[2] = 1'b0;
+        down = 1'b0;
         @(posedge tb_clk);
     end
     endtask
@@ -51,9 +51,9 @@ module tb_complete();
     task up_button_press;
     begin
         @(negedge tb_clk);
-        tb_direction_pb[3] = 1'b1;
+        up = 1'b1;
         @(negedge tb_clk)
-        tb_direction_pb[3] = 1'b0;
+        up = 1'b0;
         @(posedge tb_clk);
     end
     endtask
