@@ -16,14 +16,14 @@ module score_tracker2(
             currScore <= 7'b0;
             highScore <= 7'b0;
             dispScore <= 7'b0;
-            isGameComplete <= 1'b0;
+            //isGameComplete <= 1'b0;
             bcd_ones <= 0;
             bcd_tens <= 0;
             last_collision <= 0;
         end else begin
             currScore <= nextCurrScore;
             highScore <= nextHighScore;
-            isGameComplete <= isGameComplete_nxt;
+            //isGameComplete <= isGameComplete_nxt;
             dispScore <= nextDispScore;
             bcd_ones <= next_bcd_ones;
             bcd_tens <= next_bcd_tens;
@@ -33,7 +33,7 @@ module score_tracker2(
 
     always_comb begin
         nextCurrScore = currScore;
-        isGameComplete_nxt = isGameComplete;
+        isGameComplete = 1'b0;
         nextHighScore = highScore;
         next_bcd_ones = bcd_ones;
         next_bcd_tens = bcd_tens;
@@ -41,7 +41,7 @@ module score_tracker2(
         current_collision = last_collision;
         
         if (goodColl && last_collision == 0) begin
-            isGameComplete_nxt = 1'b0;
+            isGameComplete = 1'b0;
             nextCurrScore = currScore + 1;
             current_collision = 1;
             
@@ -80,7 +80,7 @@ module score_tracker2(
         end
         if (badColl || currScore >= maxScore) begin
             nextCurrScore = 0;
-            isGameComplete_nxt = 1'b1;
+            isGameComplete = 1'b1;
 
             if (nextHighScore > 49) begin
                 deconcatenate = nextHighScore - 50;

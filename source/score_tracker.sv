@@ -6,7 +6,7 @@ module score_tracker(
 );
     logic [7:0] nextCurrScore, nextHighScore, maxScore, deconcatenate;
     logic [7:0] currScore, highScore, nextLength;
-    logic isGameComplete_nxt;
+    logic isGameComplete_nxt, last_collision, current_collision;
     logic [3:0] next_bcd_ones, next_bcd_tens, next_bcd_hundreds;
     assign maxScore = 8'd140;
    
@@ -39,7 +39,8 @@ module score_tracker(
         next_bcd_hundreds = bcd_hundreds;
         nextLength = length;
         deconcatenate = 0;
-        if (goodColl) begin
+        if (goodColl && last_collision == 0) begin
+            isGameComplete = 1'b0;
             isGameComplete_nxt = 1'b0;
             nextCurrScore = currScore + 1;
             if (nextCurrScore > 139) begin
@@ -227,6 +228,9 @@ module score_tracker(
                 next_bcd_tens = 0;
                 next_bcd_hundreds = 0;
             end
+        end
+        if(goodColl == 0 || last_collision == 1) begin
+            current_collision = 0;
         end
         if (!isGameComplete_nxt) begin
                 nextLength = nextCurrScore;

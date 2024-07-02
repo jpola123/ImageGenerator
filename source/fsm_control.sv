@@ -57,6 +57,10 @@ always_comb begin
                 next <= LOOP;
                 en_update = 1'b0;
             end
+            else if(GameOver) begin
+                next <= OVER;
+                en_update = 1'b0;
+            end
             else begin
                 next <= UPDATE;
                 en_update = 1'b1;

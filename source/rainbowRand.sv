@@ -6,7 +6,7 @@ module rainbowRand(
 
     logic feedback;
 
-    always_ff @(posedge clk or posedge reset) begin
+    always_ff @(posedge clk, negedge reset) begin
         if (~reset) begin
             // Initialize LFSR with a non-zero value
             rainbowRNG <= 16'h5a08;

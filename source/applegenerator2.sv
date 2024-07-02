@@ -46,6 +46,10 @@ module applegenerator2 #(parameter MAX_LENGTH = 50) (
             apple = 0;
         end
 
+        if (s_reset) begin
+            next_apple_cord = 8'b11000101; // default location
+        end
+
     end
 
     always_ff @(posedge clk, negedge reset) begin

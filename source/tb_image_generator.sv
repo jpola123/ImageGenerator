@@ -92,6 +92,7 @@ module tb_image_generator();
                 snakeHead = 1'b1;
             end
             else
+                //hello world
                 snakeHead = 1'b0;
             if((x == 4'd7) && (y == 4'd4)) begin
                 apple = 1'b1;
