@@ -76,7 +76,7 @@ module tb_complete();
     mode_pb = 1'b0;
     KeyEnc = 1'b0;
     reset_dut();
-    #(CLK_PERIOD * 550000);
+    #(CLK_PERIOD * 750000);
     right_button_press();
     #(CLK_PERIOD * 200000);
     up_button_press();
