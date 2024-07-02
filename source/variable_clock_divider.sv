@@ -26,11 +26,11 @@ always_ff @(posedge clk, negedge nrst)
 always_comb begin
     case(mode)
     FAST: 
-        MAX_COUNT = 8;
+        MAX_COUNT = 1000;
     SLOW:
-        MAX_COUNT = 8;
+        MAX_COUNT = 1000;
     default: 
-        MAX_COUNT = 8;
+        MAX_COUNT = 1000;
     endcase
     
     if(count >= (MAX_COUNT - 1)) begin
