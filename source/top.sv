@@ -48,8 +48,6 @@
 //   sound_generator sound_gen(.clk(hwclk), .rst(reset), .goodColl_i(goodColl), .badColl_i(badColl), .button_i(1'b1), .direction_i({pb[10], pb[6], pb[5], pb[7]}), .soundOut({left[7:2], junk}));
 // endmodule
 
-// FPGA Top Level
-
 `default_nettype none
 
 module top (
@@ -83,12 +81,12 @@ module top (
   //curr_length_increment increase(.button(pb[1]), .clk(hwclk), .nrst(~reset), .sync(sync), .curr_length(curr_length));
   synchronizer synch(.button(pb[2]), .clk(hwclk), .nrst(~reset), .signal(next_map_i));
   edge_detect detect(.signal(next_map_i), .clk(hwclk), .nrst(~reset), .change_state(next_map_a));
-  snake_body_controller #(.MAX_LENGTH(140)) control(.direction_pb({pb[10], pb[6], pb[5], pb[7]}), .x(x), .y(y), .clk(hwclk), .pb_mode(pb[9]), .nrst(~reset), .sync(sync), .curr_length(curr_length), .body(body), .snakeHead(snakeHead), .snakeBody(snakeBody));
+  snake_body_controller #(.MAX_LENGTH(80)) control(.direction_pb({pb[10], pb[6], pb[5], pb[7]}), .x(x), .y(y), .clk(hwclk), .pb_mode(pb[9]), .nrst(~reset), .sync(sync), .curr_length(curr_length), .body(body), .snakeHead(snakeHead), .snakeBody(snakeBody));
   //random rand123(.clk(hwclk), .nRst(~reset), .randX(randX), .randY(randY));
   obstacleMode obsmode(.sync_reset(sync), .obstacle_pb(pb[11]), .clk(hwclk), .nrst(~reset), .obstacleFlag(obstacleFlag));
   obstacle_random obsrand1(.clk(hwclk), .nRst(~reset), .randX(randX), .randY(randY), .randX2(randX2), .randY2(randY2), .obstacleFlag(obstacleFlag));
-  applegenerator2 #(.MAX_LENGTH(140)) ag2(.x(x), .y(y), .randX(randX), .randY(randY), .goodColl(goodColl), .clk(hwclk), .reset(~reset), .s_reset(sync), .body(body), .apple(apple));
-  obstaclegen2 #(.MAX_LENGTH(140)) obsg2(.clk(hwclk), .nRst(~reset), .body(body), .x(x), .y(y), .randX(randX2), .randY(randY2), .goodColl(goodColl), .obstacle(obstacle), .obstacleFlag(obstacleFlag));
+  applegenerator2 #(.MAX_LENGTH(80)) ag2(.x(x), .y(y), .randX(randX), .randY(randY), .goodColl(goodColl), .clk(hwclk), .reset(~reset), .s_reset(sync), .body(body), .apple(apple));
+  obstaclegen2 #(.MAX_LENGTH(80)) obsg2(.clk(hwclk), .nRst(~reset), .body(body), .x(x), .y(y), .randX(randX2), .randY(randY2), .goodColl(goodColl), .obstacle(obstacle), .obstacleFlag(obstacleFlag));
   collision coll(.clk(hwclk), .nRst(~reset), .snakeHead(snakeHead), .snakeBody(snakeBody), .border(border || obstacle), .apple(apple), .goodColl(goodColl), .badColl(badColl));
   // collision coll(.clk(hwclk), .nRst(~reset), .snakeHead(snakeHead), .snakeBody(snakeBody), .border(border), .apple(apple), .goodColl(goodColl), .badColl(badColl));
   //score_tracker2 track(.clk(hwclk), .nRst(~reset), .goodColl(goodColl), .badColl(badColl), .current_score(curr_length), .dispScore(dispScore), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .isGameComplete(isGameComplete));
