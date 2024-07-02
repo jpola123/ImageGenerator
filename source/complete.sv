@@ -24,7 +24,7 @@ module complete (
   random rand123(.clk(hwclk), .nRst(nrst), .randX(randX), .randY(randY));
   applegenerator2 ag2(.x(x), .y(y), .randX(randX), .randY(randY), .goodColl(goodColl), .clk(hwclk), .reset(nrst), .s_reset(sync), .body(body), .apple(apple));
   collision coll(.clk(hwclk), .nRst(nrst), .snakeHead(snakeHead), .snakeBody(snakeBody), .border(border), .apple(apple), .goodColl(goodColl), .badColl(GameOver));
-  score_tracker track(.clk(hwclk), .nRst(nrst), .goodColl(goodColl), .badColl(GameOver), .current_score(curr_length), .dispScore(dispScore), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .isGameComplete(isGameComplete));
+  score_tracker2 track(.clk(hwclk), .nRst(nrst), .goodColl(goodColl), .badColl(GameOver), .current_score(curr_length), .dispScore(dispScore), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .isGameComplete(isGameComplete));
 
   assign border = 1'b0;
 endmodule
