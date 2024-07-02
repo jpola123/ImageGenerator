@@ -1,7 +1,7 @@
 module location_check #(parameter MAX_LENGTH = 50) (
     input logic [7:0] coordinate, 
     input logic [MAX_LENGTH - 1: 0][7:0] body,
-    input logic [6:0] curr_length,
+    input logic [7:0] curr_length,
     input logic clk, nrst,
     output logic snakeBody, snakeHead
 );

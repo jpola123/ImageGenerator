@@ -5,7 +5,7 @@ typedef enum logic[2:0] {
 module snake_body_controller #(parameter MAX_LENGTH = 50) (
     input logic [3:0] direction_pb, x, y,
     input logic clk, pb_mode, nrst, sync,
-    input logic [6:0] curr_length, 
+    input logic [7:0] curr_length, 
     output logic [MAX_LENGTH - 1 : 0][7:0] body,
     output logic snakeHead, snakeBody
 );
@@ -27,7 +27,7 @@ edge_detect detect3(.signal(direction_i[2]), .clk(clk), .nrst(nrst), .change_sta
 edge_detect detect4(.signal(direction_i[3]), .clk(clk), .nrst(nrst), .change_state(direction_a[3]));
 
 
-fsm_direction fsm(.direction_a(direction_a), .clk(clk), .nrst(nrst), .sync(sync), .direction(direction));
+fsm_direction fsm(.direction_a(direction_a), .clk(clk), .nrst(nrst), .pulse(pulse), .sync(sync), .direction(direction));
 update_body #(MAX_LENGTH) body_update(.clk(clk), .nrst(nrst), .pulse(pulse), .sync(sync), .direction(direction), .curr_length(curr_length), .body(temp_body), .head(head));
 location_check #(MAX_LENGTH) check(.coordinate({x, y}), .body(temp_body), .curr_length(curr_length), .clk(clk), .nrst(nrst), .snakeBody(snakeBody), .snakeHead(snakeHead));
 //hello world

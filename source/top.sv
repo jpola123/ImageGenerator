@@ -22,14 +22,13 @@ module top (
   logic next_map_i, next_map_a;
   logic sync;
   logic [7:0] curr_length, dispScore;
-  logic [3:0] bcd_ones, bcd_tens, bcd_hundreds;
+  logic [3:0] bcd_ones, bcd_tens, bcd_hundreds, displayOut;
   logic isGameComplete;
   logic [139:0][7:0] body;
+  logic [1:0] blinkToggle;
 
   image_generator img_gen(.snakeBody(snakeBody), .snakeHead(snakeHead), .apple(apple), .border(border), .KeyEnc(pb[0]), .GameOver(isGameComplete), .clk(hwclk), .nrst(~reset),
                           .sync(sync), .wr(left[0]), .dcx(left[1]), .D(right[7:0]), .x(x), .y(y));
-  ssdec s0(.in(y), .enable(1'b1), .out(ss0));
-  ssdec s1(.in(x), .enable(1'b1), .out(ss1));
   //curr_length_increment increase(.button(pb[1]), .clk(hwclk), .nrst(~reset), .sync(sync), .curr_length(curr_length));
   assign GameOver = badColl;
   synchronizer synch(.button(pb[2]), .clk(hwclk), .nrst(~reset), .signal(next_map_i));
@@ -40,19 +39,10 @@ module top (
   collision coll(.clk(hwclk), .nRst(~reset), .snakeHead(snakeHead), .snakeBody(snakeBody), .border(border), .apple(apple), .goodColl(goodColl), .badColl(GameOver));
   //score_tracker2 track(.clk(hwclk), .nRst(~reset), .goodColl(goodColl), .badColl(badColl), .current_score(curr_length), .dispScore(dispScore), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .isGameComplete(isGameComplete));
   score_tracker3 track(.clk(hwclk), .nRst(~reset), .goodColl(goodColl), .current_score(curr_length), .badColl(badColl), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .bcd_hundreds(bcd_hundreds), .dispScore(dispScore), .isGameComplete(isGameComplete));
-  toggle_screen toggle1(.displayOut(displayOut), .blinkToggle(blinkToggle), .clk(hwclk), .rst(reset), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .bcd_hundreds(bcd_hundreds));
+  /* toggle_screen toggle1(.displayOut(displayOut), .blinkToggle(blinkToggle), .clk(hwclk), .rst(~reset), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .bcd_hundreds(bcd_hundreds));
   ssdec ssdec1(.in(displayOut), .enable(blinkToggle == 1), .out(ss0[6:0]));
   ssdec ssdec2(.in(displayOut), .enable(blinkToggle == 2), .out(ss1[6:0]));
-  ssdec ssdec3(.in(displayOut), .enable(blinkToggle == 0), .out(ss2[6:0]));
-  assign left[3] = goodColl;
-  assign left[2] = GameOver;
-  always @(posedge next_map_a, posedge reset) begin
-    if(reset)
-      map <= 0;
-    else
-      map <= map + 4'd1;
-  
-  end
+  ssdec ssdec3(.in(displayOut), .enable(blinkToggle == 0), .out(ss2[6:0])); */
 
   always_comb begin
     if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin

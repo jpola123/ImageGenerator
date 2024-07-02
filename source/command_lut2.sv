@@ -70,7 +70,7 @@ always_comb begin
             end
 
             if(count < 17'd4320) begin
-                color = 16'h0814;
+                color = 16'h0000;
             end
             else begin
                 color = 16'h1408;
@@ -214,10 +214,10 @@ always_comb begin
             color = rainbowRNG;
         end
         3'b011: begin //apple
-            color = 16'hf800;
+            color = 16'h00f8;
         end
         3'b100: begin //border
-            color = 16'h0814;
+            color = 16'h0000;
         end
         default: begin
             color = 16'h1408;

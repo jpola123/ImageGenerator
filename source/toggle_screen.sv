@@ -7,8 +7,8 @@ module toggle_screen (
 logic [1:0] nextBlinkToggle;
 logic [3:0] nextDisplayOut;
 
-always_ff @(posedge clk or posedge rst) begin
-    if (rst) begin
+always_ff @(posedge clk, negedge rst) begin
+    if (~rst) begin
         blinkToggle <= 2'b0;
         displayOut <= 0;
     end else begin
