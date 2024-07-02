@@ -29,6 +29,7 @@ module top (
     MODE_TYPES mode_o;
     logic at_max;
     logic [7:0] soundOut;
+    logic [1:0] junk;
 
     assign clk = hz100;
     assign rst = reset;
@@ -36,7 +37,7 @@ module top (
     assign goodColl_i = pb[0];
     assign badColl_i = pb[1];
     assign toggleMode_i = pb[2];
-    assign soundOut = {right[7], right[6], right[5], right[4], right[3], right[2], right[1], right[0]};
+    assign soundOut = {left[7], left[6], left[5], left[4], left[3], left[2], junk};
 
     posedge_detector posDetector1 (.clk(clk), .nRst(~rst), .button_i(toggleMode_i), .button(toggleMode), .goodColl_i(goodColl_i), .badColl_i(badColl_i), .direction_i(direction_i), .goodColl(goodColl), .badColl(badColl), .direction(newDirection));
     freq_selector_12M freq_12 (.freq(freq), .goodColl_i(goodColl_i), .badColl_i(badColl_i), .direction_i(direction_i));
