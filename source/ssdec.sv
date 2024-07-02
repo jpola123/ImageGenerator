@@ -24,5 +24,5 @@ always_comb begin
     {4'd15}: begin {code} = 7'b1110001; end
   endcase
 end
-  assign out = code & {7{enable}};
+  assign out = code & {7{enable}}; //hello world
 endmodule
