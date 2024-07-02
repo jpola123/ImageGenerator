@@ -26,6 +26,7 @@ module top (
   logic isGameComplete;
   logic [139:0][7:0] body;
   logic [1:0] blinkToggle;
+  logic [1:0] junk;
 
   image_generator img_gen(.snakeBody(snakeBody), .snakeHead(snakeHead), .apple(apple), .border(border), .KeyEnc(pb[0]), .GameOver(isGameComplete), .clk(hwclk), .nrst(~reset),
                           .sync(sync), .wr(left[0]), .dcx(left[1]), .D(right[7:0]), .x(x), .y(y));
@@ -43,4 +44,5 @@ module top (
   ssdec ssdec2(.in(displayOut), .enable(blinkToggle == 2), .out(ss1[6:0]));
   ssdec ssdec3(.in(displayOut), .enable(blinkToggle == 0), .out(ss2[6:0]));
   border_generator border_gen(.x(x), .y(y), .isBorder(border));
+  sound_generator sound_gen(.clk(hwclk), .nRst(~reset), .goodColl_i(goodColl), .badColl_i(badColl), .button_i(1'b1), .direction_i({pb[10], pb[6], pb[5], pb[7]}), .dacCount({left[7:2], junk}));
 endmodule
