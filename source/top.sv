@@ -45,5 +45,5 @@ module top (
   ssdec ssdec2(.in(displayOut), .enable(blinkToggle == 2), .out(ss1[6:0]));
   ssdec ssdec3(.in(displayOut), .enable(blinkToggle == 0), .out(ss2[6:0]));
   border_generator border_gen(.x(x), .y(y), .isBorder(border));
-  sound_generator sound_gen(.clk(hwclk), .nRst(~reset), .goodColl_i(goodColl), .badColl_i(badColl), .button_i(1'b1), .direction_i({pb[10], pb[6], pb[5], pb[7]}), .dacCount({left[7:2], junk}));
+  sound_generator sound_gen(.clk(hwclk), .rst(~reset), .goodColl_i(goodColl), .badColl_i(badColl), .button_i(1'b1), .direction_i({pb[10], pb[6], pb[5], pb[7]}), .soundOut({left[7:2], junk}));
 endmodule
