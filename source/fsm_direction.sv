@@ -5,28 +5,32 @@ module fsm_direction (
     output logic[2:0] direction
 );
 
-    direction_t current, temp, next;
+    direction_t current, temp, temp_next, next;
 
     always_ff @(posedge clk, negedge nrst)
-        if(~nrst)
-            current <= {STOP, STOP};
-        else
+        if(~nrst) begin
+            current <= STOP;
+            temp <= STOP;
+        end
+        else begin
             current <= next;
+            temp <= temp_next;
+        end
     
     always_comb begin
         if((direction_a == 4'b0001) && (current != RIGHT))
-            temp = LEFT;
+            temp_next = LEFT;
         else if((direction_a == 4'b0010) && (current != LEFT))
-            temp = RIGHT;
+            temp_next = RIGHT;
         else if((direction_a == 4'b0100) && (current != UP))
-            temp = DOWN;
+            temp_next = DOWN;
         else if((direction_a == 4'b1000) && (current != DOWN))
-            temp = UP;
+            temp_next = UP;
         else if(sync)
-            temp = STOP;
+            temp_next = STOP;
         else
-            temp = current;
-        
+            temp_next = temp;
+            
         if(pulse)
             next = temp;
         else
