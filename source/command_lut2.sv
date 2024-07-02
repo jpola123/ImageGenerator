@@ -11,8 +11,9 @@ module command_lut2(
 logic [16:0] count, next_count, SC, EC, SP, EP, color;
 logic [4:0] cmd_num, next_cmd_num;
 logic [15:0] rainbowRNG;
+logic enable;
 
-rainbowRand rR1 (.clk(clk), .reset(nrst), .rainbowRNG(rainbowRNG));
+// rainbowRand rR1 (.clk(clk), .reset(nrst), .rainbowRNG(rainbowRNG));
 
 always_ff @(posedge clk, negedge nrst) begin
     if(~nrst) begin
@@ -24,6 +25,16 @@ always_ff @(posedge clk, negedge nrst) begin
         cmd_num <= next_cmd_num;
     end
 end
+
+always_comb begin
+    if(obj_code == 4'b010) begin
+        enable = 1;
+    end else begin
+        enable = 0;
+    end
+end
+
+rainbowRand rR1 (.clk(clk), .reset(nrst), .rainbowRNG(rainbowRNG), .enable(enable));
 
 always_comb begin
     next_count = count;
