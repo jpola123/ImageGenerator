@@ -22,7 +22,7 @@ module top (
   logic next_map_i, next_map_a;
   logic sync;
   logic [7:0] curr_length, dispScore;
-  logic [3:0] bcd_ones, bcd_tens;
+  logic [3:0] bcd_ones, bcd_tens, bcd_hundreds;
   logic isGameComplete;
   logic [139:0][7:0] body;
 
@@ -38,7 +38,8 @@ module top (
   random rand123(.clk(hwclk), .nRst(~reset), .randX(randX), .randY(randY));
   applegenerator2 #(.MAX_LENGTH(140)) ag2(.x(x), .y(y), .randX(randX), .randY(randY), .goodColl(goodColl), .clk(hwclk), .reset(~reset), .s_reset(sync), .body(body), .apple(apple));
   collision coll(.clk(hwclk), .nRst(~reset), .snakeHead(snakeHead), .snakeBody(snakeBody), .border(border), .apple(apple), .goodColl(goodColl), .badColl(GameOver));
-  score_tracker track(.clk(hwclk), .nRst(~reset), .goodColl(goodColl), .badColl(badColl), .current_score(curr_length), .dispScore(dispScore), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .isGameComplete(isGameComplete));
+  //score_tracker2 track(.clk(hwclk), .nRst(~reset), .goodColl(goodColl), .badColl(badColl), .current_score(curr_length), .dispScore(dispScore), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .isGameComplete(isGameComplete));
+  score_tracker3 track(.clk(hwclk), .nRst(~reset), .goodColl(goodColl), .current_score(curr_length), .badColl(badColl), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .bcd_hundreds(bcd_hundreds), .dispScore(dispScore), .isGameComplete(isGameComplete));
   assign left[3] = goodColl;
   assign left[2] = GameOver;
   always @(posedge next_map_a, posedge reset) begin
