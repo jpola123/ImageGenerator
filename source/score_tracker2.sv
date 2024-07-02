@@ -1,4 +1,4 @@
-module score_tracker(
+module score_tracker2(
     input logic clk, nRst, goodColl, badColl,
     output logic [6:0] current_score,
     output logic [6:0] dispScore,
