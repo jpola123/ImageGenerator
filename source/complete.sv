@@ -26,11 +26,5 @@ module complete (
   collision coll(.clk(hwclk), .nRst(nrst), .snakeHead(snakeHead), .snakeBody(snakeBody), .border(border), .apple(apple), .goodColl(goodColl), .badColl(GameOver));
   score_tracker track(.clk(hwclk), .nRst(nrst), .goodColl(goodColl), .badColl(GameOver), .current_score(curr_length), .dispScore(dispScore), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .isGameComplete(isGameComplete));
 
-  always_comb begin
-    if((x == 4'd0) || (x == 4'd15) || (y == 4'd0) || (y == 4'd11)) begin
-      border = 1'b1;
-    end
-    else
-      border = 1'b0;
-    end
+  assign border = 1'b0;
 endmodule
