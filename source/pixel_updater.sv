@@ -14,9 +14,8 @@ update_t mode;
 logic cmd_finished, pause;
 update_controller update(.init_cycle(init_cycle), .en_update(en_update), .clk(clk), .nrst(nrst), .cmd_finished(cmd_finished), .pause(pause),
                   .cmd_done(cmd_done), .wr(wr), .mode(mode));
-command_lut commands(.mode(mode), .clk(clk), .nrst(nrst), .obj_code(obj_code), .X(x), .Y(y), 
+command_lut2 commands(.mode(mode), .clk(clk), .nrst(nrst), .obj_code(obj_code), .X(x), .Y(y), 
                      .cmd_finished(cmd_finished), .D(D), .dcx(dcx), .pause(pause));
-
 
 
 

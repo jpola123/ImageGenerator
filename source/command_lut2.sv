@@ -1,4 +1,4 @@
-module command_lut(
+module command_lut2(
     input update_t mode,
     input logic clk, nrst, 
     input logic [2:0] obj_code,
@@ -10,6 +10,9 @@ module command_lut(
 
 logic [16:0] count, next_count, SC, EC, SP, EP, color;
 logic [4:0] cmd_num, next_cmd_num;
+logic [15:0] rainbowRNG;
+
+rainbowRand rR1 (.clk(clk), .reset(nrst), .rainbowRNG(rainbowRNG));
 
 always_ff @(posedge clk, negedge nrst) begin
     if(~nrst) begin
@@ -208,7 +211,7 @@ always_comb begin
             color = 16'h901E;
         end
         3'b010: begin //body
-            color = 16'h6815;
+            color = rainbowRNG;
         end
         3'b011: begin //apple
             color = 16'hf800;
