@@ -6,15 +6,16 @@ module tb_complete();
     integer tb_test_num;
     string tb_test_case;
 
-    logic tb_clk, nrst, left, right, up, down, mode_pb, KeyEnc, dcx, wr;
+    logic tb_clk, reset, left, right, up, down, mode_pb, KeyEnc, dcx, wr;
     logic [7:0] D;
+    logic [5:0] sound_out;
 
     task reset_dut;
     @(negedge tb_clk);
-    nrst = 1'b0; 
+    reset = 1'b1; 
     @(negedge tb_clk);
     @(negedge tb_clk);
-    nrst = 1'b1;
+    reset = 1'b0;
     @(posedge tb_clk);
     endtask
 
@@ -65,11 +66,11 @@ module tb_complete();
     #(CLK_PERIOD / 2.0); 
     end
 
-    complete DUT(.hwclk(tb_clk), .nrst(nrst), .left(left), .right(right), .up(up), .down(down), .mode_pb(mode_pb), .KeyEnc(KeyEnc), .dcx(dcx), .wr(wr), .D(D));
+    complete DUT(.hwclk(tb_clk), .reset(reset), .left(left), .right(right), .up(up), .down(down), .mode_pb(mode_pb), .KeyEnc(KeyEnc), .dcx(dcx), .wr(wr), .D(D), .sound_out(sound_out));
     initial begin
     $dumpfile("dump.vcd");
     $dumpvars();
-    nrst = 1'b1;
+    reset = 1'b0;
     left = 1'b0;
     right = 1'b0;
     down = 1'b0;
@@ -78,10 +79,8 @@ module tb_complete();
     reset_dut();
     #(CLK_PERIOD * 750000);
     right_button_press();
-    #(CLK_PERIOD * 200000);
-    up_button_press();
-    left_button_press();
-    #(CLK_PERIOD * 50000);
+    #(CLK_PERIOD * 5000000);
+
     $finish;
     end
 
