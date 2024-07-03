@@ -206,37 +206,6 @@ always_comb begin
             end
             else
                 next_cmd_num = cmd_num + 5'd1;
-            if(obj_code == 3'b011) begin
-                if(((count >= 18) && (count < 30)) ||
-                   ((count >= 54) && (count < 72)) ||
-                   ((count >= 92) && (count < 116)) ||
-                   ((count >= 128) && (count < 158)) ||
-                   ((count >= 188) && (count < 200)) ||
-                   ((count >= 248) && (count < 280)) ||
-                   ((count >= 290) && (count < 320)) ||
-                   ((count >= 208) && (count < 240)) ||
-                   ((count >= 330) && (count < 360)) ||
-                   ((count >= 374) && (count < 398)) ||
-                   ((count >= 414) && (count < 438)) ||
-                   ((count >= 454) && (count < 480)) ||
-                   ((count >= 490) && (count < 520)) ||
-                   ((count >= 528) && (count < 560)) ||
-                   ((count >= 578) && (count < 600)) ||
-                   ((count >= 608) && (count < 638)) ||
-                   ((count >= 650) && (count < 676)) ||
-                   ((count >= 690) && (count < 720)) ||
-                   ((count >= 732) && (count < 754)) ||
-                   ((count >= 778) && (count < 790))) begin
-                    apple_color = 16'he7f9;   
-                end
-                else if(((count >= 364) && (count < 374)) || ((count >= 400) && (count < 414)) || ((count >= 440) && (count < 444)) || ((count >= 450) && (count < 454)) || ((count >= 480) && (count < 484))) begin
-                    apple_color = 16'ha071;
-                end
-                else
-                    apple_color = 16'h1408;
-             end
-            else
-                apple_color = 16'h0000;
         end
         else begin
             next_count = count;
@@ -257,7 +226,34 @@ always_comb begin
             color = rainbowRNG;
         end
         3'b011: begin //apple
-            color = apple_color;
+/*                 if(((count >= 18) && (count < 30)) ||
+                   ((count >= 54) && (count < 72)) ||
+                   ((count >= 92) && (count < 116)) ||
+                   ((count >= 128) && (count < 158)) ||
+                   ((count >= 188) && (count < 200)) ||
+                   ((count >= 248) && (count < 280)) ||
+                   ((count >= 290) && (count < 320)) ||
+                   ((count >= 208) && (count < 240)) ||
+                   ((count >= 330) && (count < 360)) ||
+                   ((count >= 374) && (count < 398)) ||
+                   ((count >= 414) && (count < 438)) ||
+                   ((count >= 454) && (count < 480)) ||
+                   ((count >= 490) && (count < 520)) ||
+                   ((count >= 528) && (count < 560)) ||
+                   ((count >= 578) && (count < 600)) ||
+                   ((count >= 608) && (count < 638)) ||
+                   ((count >= 650) && (count < 676)) ||
+                   ((count >= 690) && (count < 720)) ||
+                   ((count >= 732) && (count < 754)) ||
+                   ((count >= 778) && (count < 790))) begin
+                    color = 16'hf9e7;   
+                end
+                else if(((count >= 364) && (count < 374)) || ((count >= 400) && (count < 414)) || ((count >= 440) && (count < 444)) || ((count >= 450) && (count < 454)) || ((count >= 480) && (count < 484))) begin
+                    color = 16'h710a;
+                end
+                else
+                    color = 16'h1408; */
+            color = 16'h00f8;
         end
         3'b100: begin //border
             color = 16'h0000;
