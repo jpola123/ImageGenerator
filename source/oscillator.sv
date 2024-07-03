@@ -55,10 +55,10 @@ always_comb begin
             keepCounting_nxt = 1'b0;
             stayCount_nxt = 0;
         end
-    end else if (~keepCounting_nxt) begin
-        count_nxt = 0;
-        at_max_nxt = 1'b0;
-    end
+     end //else if (~keepCounting_nxt) begin
+    //     count_nxt = count;
+    //     at_max_nxt = 1'b0;
+    // end
 end
 
 endmodule
