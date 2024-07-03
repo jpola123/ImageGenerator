@@ -106,7 +106,7 @@ module obstaclegen2 #(parameter MAX_LENGTH = 50) (
 
                     if (randError == 0) begin
                         isArraySet = 1;
-                        if(curr_length < 4 || obsCount8 < curr_length + 2) begin
+                        if(curr_length < 3 || obsCount8 < curr_length + 2) begin
                             nextObstacleArray[randCordCombo] = 1;
                             nextObstacleCount = obstacleCount + 1;
                         end
