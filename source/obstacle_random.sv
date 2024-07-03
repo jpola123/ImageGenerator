@@ -84,21 +84,6 @@ always_comb begin
 
     next_randX2 = randX2;
     next_randY2 = randY2;
-    // if(obstacleFlag == 1) begin
-    //     next_randX = randX + 1;
-    //     if(next_randX > 14) begin
-	//         next_randX = 1;
-    //     end
-
-    //     next_randX2 = randX2 + 1;
-    //     if(next_randX2 > 14) begin
-	//         next_randX2 = 1;
-    //     end
-
-    //     next_randY2 = randY2 + 1;
-    //     if(next_randY2 > 10) begin
-	//       next_randY2 = 1;
-    //     end
     if(obstacleFlag == 1) begin
         next_randX = randX + 1;
         if(next_randX > 14) begin
@@ -106,14 +91,29 @@ always_comb begin
         end
 
         next_randX2 = randX2 + 1;
-        if(next_randX2 > 12) begin
-	        next_randX2 = 3;
+        if(next_randX2 > 14) begin
+	        next_randX2 = 1;
         end
 
         next_randY2 = randY2 + 1;
-        if(next_randY2 > 8) begin
-	      next_randY2 = 3;
+        if(next_randY2 > 10) begin
+	      next_randY2 = 1;
         end
+    // if(obstacleFlag == 1) begin
+    //     next_randX = randX + 1;
+    //     if(next_randX > 14) begin
+	//         next_randX = 1;
+    //     end
+
+    //     next_randX2 = randX2 + 1;
+    //     if(next_randX2 > 12) begin
+	//         next_randX2 = 3;
+    //     end
+
+    //     next_randY2 = randY2 + 1;
+    //     if(next_randY2 > 8) begin
+	//       next_randY2 = 3;
+    //     end
     end else begin
         next_randX = randX;
         if(randX >= 14 && randY == 10) begin
