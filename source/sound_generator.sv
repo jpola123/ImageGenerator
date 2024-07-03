@@ -24,6 +24,6 @@ module sound_generator
     sound_posedge_detector posDetector1 (.clk(clk), .nRst(~rst), .button_i(button_i), .button(toggleMode), .goodColl_i(goodColl_i), .badColl_i(badColl_i), .direction_i(direction_i), .goodColl(goodColl), .badColl(badColl), .direction(newDirection));
     //freq_selector_12M freq_12 (.freq(freq), .goodColl_i(goodColl_i), .badColl_i(badColl_i), .direction_i(direction_i));
     //sound_fsm fsm1 (.playSound(playSound), .mode_o(mode_o), .clk(clk), .nRst(~rst), .goodColl(goodColl), .badColl(badColl), .button(toggleMode), .direction(newDirection));
-    oscillator osc1 (.at_max(at_max), .clk(clk), .nRst(~rst), .state(mode_o), .goodColl(goodColl), .badColl(badColl), .direction(direction));
+    oscillator osc1 (.at_max(at_max), .clk(clk), .nRst(~rst), .state(mode_o), .goodColl(goodColl), .badColl(badColl), .direction(direction_i));
     dac_counter dac1 (.dacCount(soundOut), .clk(clk), .nRst(~rst), .at_max(at_max));
 endmodule
