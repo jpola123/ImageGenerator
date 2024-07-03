@@ -76,7 +76,7 @@ module top (
   logic [1:0] blinkToggle;
   logic [1:0] junk;
 
-  localparam MAX_LENGTH = 70;
+  localparam MAX_LENGTH = 65;
 
   image_generator img_gen(.snakeBody(snakeBody), .snakeHead(snakeHead), .apple(apple), .border(border || obstacle), .KeyEnc(pb[0]), .GameOver(isGameComplete), .clk(hwclk), .nrst(~reset),
                           .sync(sync), .wr(left[0]), .dcx(left[1]), .D(right[7:0]), .x(x), .y(y));
@@ -101,5 +101,5 @@ module top (
   ssdec ssdec4(.in({3'b0, obstacleFlag}), .enable(1), .out(ss3[6:0]));
   ssdec ssdec5(.in(dispObs), .enable(1), .out(ss4[6:0]));
   border_generator border_gen(.x(x), .y(y), .isBorder(border));
-  sound_generator sound_gen(.clk(hwclk), .rst(reset), .goodColl_i(goodColl), .badColl_i(badColl), .button_i(1'b0), .direction_i({pb[10], pb[6], pb[5], pb[7]}), .soundOut({left[7:2], junk}));
+  sound_generator sound_gen(.clk(hwclk), .rst(reset), .goodColl_i(goodColl), .badColl_i(badColl), .button_i(1'b0), .soundOut({left[7:2], junk}));
 endmodule
