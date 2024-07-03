@@ -41,7 +41,7 @@ always_comb begin
     freq_nxt = freq;
     // 12Mhz is for FPGA, 10Mhz is for final chip
     if (goodColl && ~keepCounting) begin
-        freq_nxt = 8'd53; // 12M / 1/((1/880) / 256) - (SWITCH OUT TO 44 FOR FINAL)
+        freq_nxt = 8'd107; // 12M / 1/((1/440) / 256) - (SWITCH OUT TO 89 FOR FINAL)
         timer_nxt = 3000000;
     end
     if (badColl && ~keepCounting) begin
