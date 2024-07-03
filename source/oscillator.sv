@@ -15,6 +15,7 @@ module oscillator
     input logic [3:0] direction,
     output logic at_max
 );
+logic [23:0] timer, timer_nxt;
 logic [7:0] freq, freq_nxt;
 logic [N - 1:0] count, count_nxt;
 logic [23:0] stayCount, stayCount_nxt;
@@ -26,12 +27,14 @@ always_ff @(posedge clk, negedge nRst) begin
         stayCount <= 0;
         keepCounting <= 0;
         freq <= 0;
+        timer <= 0;
     end else begin
         count <= count_nxt;
         at_max <= at_max_nxt;
         stayCount <= stayCount_nxt;
         keepCounting <= keepCounting_nxt;
         freq <= freq_nxt;
+        timer <= timer_nxt;
     end
 end
 
@@ -40,17 +43,20 @@ always_comb begin
     count_nxt = count;
     keepCounting_nxt = keepCounting;
     stayCount_nxt = stayCount;
-
+    timer_nxt = timer;
     freq_nxt = freq;
     if (goodColl && ~keepCounting) begin
         freq_nxt = 8'd107; // 12M / ((1/440) / 256) - A
+        timer_nxt = 3000000;
     end
     if (badColl && ~keepCounting) begin
         freq_nxt = 8'd151; // 12M / ((1/311) / 256) - D Sharp
+        timer_nxt = 10000000;
     end
-    if (|direction && ~keepCounting) begin
-        freq_nxt = 8'd179; // 12M / ((1/262) / 256) - C
-    end
+    // if (|direction && ~keepCounting) begin
+    //     freq_nxt = 8'd179; // 12M / ((1/262) / 256) - C
+    //     timer_nxt = 2000000;
+    // end
 
     if (at_max == 1'b1) begin
         at_max_nxt = 1'b0;
@@ -59,7 +65,7 @@ always_comb begin
         keepCounting_nxt = 1'b1;
     end
     if (keepCounting_nxt) begin
-        if (stayCount < 10000000) begin
+        if (stayCount < timer) begin
             if (count < freq_nxt) begin
                 count_nxt = count + 1;
             end else if (count >= freq_nxt) begin 
