@@ -13,7 +13,7 @@ TOP_FILE		:= complete.sv
 
 # Specify the name of component or sub-module files
 # (do not include the source folder in the name)
-COMPONENT_FILES	:= iamge_generator.sv apple_sprite.sv obstaclegen2.sv obstacleMode.sv obstacle_sync_edge.sv obstacle_random.sv fsm_control.sv score_posedge_detector.sv frame_tracker.sv pixel_updater.sv command_lut2.sv edge_detect.sv synchronizer.sv update_controller.sv ssdec.sv snake_body_controller.sv curr_length_increment.sv variable_clock_divider.sv fsm_direction.sv fsm_mode.sv location_check.sv update_body.sv random.sv applegenerator2.sv collision.sv score_tracker3.sv rainbowRand.sv toggle_screen.sv border_generator.sv sound_posedge_detector.sv freq_selector_12M.sv sound_fsm.sv oscillator.sv dac_counter.sv sound_generator.sv
+COMPONENT_FILES	:= image_generator.sv apple_sprite.sv obstaclegen2.sv obstacleMode.sv obstacle_sync_edge.sv obstacle_random.sv fsm_control.sv score_posedge_detector.sv frame_tracker.sv pixel_updater.sv command_lut2.sv edge_detect.sv synchronizer.sv update_controller.sv ssdec.sv snake_body_controller.sv curr_length_increment.sv variable_clock_divider.sv fsm_direction.sv fsm_mode.sv location_check.sv update_body.sv random.sv applegenerator2.sv collision.sv score_tracker3.sv rainbowRand.sv toggle_screen.sv border_generator.sv sound_posedge_detector.sv freq_selector_12M.sv sound_fsm.sv oscillator.sv dac_counter.sv sound_generator.sv
 
 # Specify the top level testbench to be simulated
 # (do not include the source folder in the name)
