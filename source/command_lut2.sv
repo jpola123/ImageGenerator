@@ -35,7 +35,7 @@ always_comb begin
     end
 end
 
-apple_sprite as1 (.count(count[9:0]), .apple_rgb(apple_rgb));
+//apple_sprite as1 (.count(count[9:0]), .apple_rgb(apple_rgb));
 rainbowRand rR1 (.clk(clk), .reset(nrst), .rainbowRNG(rainbowRNG), .enable(enable));
 
 always_comb begin
@@ -227,11 +227,12 @@ always_comb begin
             color = rainbowRNG;
         end
         3'b011: begin //apple
-            if(apple_rgb == 1) begin 
-                color = 16'h00f8;
-            end else begin
-                color = 16'h1408;
-            end
+            // if(apple_rgb == 1) begin 
+            //     color = 16'h00f8;
+            // end else begin
+            //     color = 16'h1408;
+            // end
+            color = 16'h00f8;
         end
         3'b100: begin //border
             color = 16'h0000;

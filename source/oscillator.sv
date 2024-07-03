@@ -41,6 +41,7 @@ always_comb begin
     end
     if (playSound) begin
         keepCounting_nxt = 1'b1;
+        stayCount_nxt = 0;
     end
     if (keepCounting_nxt) begin
         if (stayCount < 10000000) begin
