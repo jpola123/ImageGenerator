@@ -4,7 +4,7 @@
 
 module complete (
   // I/O ports
-  input logic hwclk, reset, left, right, up, down, mode_pb, KeyEnc, obstacle_pb
+  input logic hwclk, reset, left, right, up, down, mode_pb, KeyEnc, obstacle_pb,
   output logic dcx, wr,
   output logic [7:0] D,
   output logic [5:0] sound_out
