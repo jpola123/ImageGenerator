@@ -1,20 +1,21 @@
 module obstaclegen2 #(parameter MAX_LENGTH = 50) (
     input logic [MAX_LENGTH - 1:0][7:0] body,
-    input logic clk, nRst, goodColl, obstacleFlag,
+    input logic clk, nRst, goodColl, obstacleFlag, s_reset,
     input logic [3:0] randX, randY, x, y,
     output logic obstacle
 );
 
     logic [7:0] cornerNE, cornerNW, cornerSE, cornerSW, randCord, cord, randCordCombo, cordCombo;
     logic [139:0] obstacleArray, nextObstacleArray;
-    logic obsNeeded, isObsNeeded, arraySet, isArraySet, randError;
+    logic arraySet, isArraySet, randError;
     logic [4:0] obstacleCount, nextObstacleCount; 
+    logic [2:0] obsNeeded, isObsNeeded;
 
     always_ff @(posedge clk, negedge nRst) begin
         if (nRst == 0) begin
             obstacleCount <= 5'b0;
             obstacleArray <= 140'b0;
-            obsNeeded     <= 1'b0;
+            obsNeeded     <= 3'b0;
             arraySet      <= 1'b0;
         end else begin
             obstacleCount <= nextObstacleCount;
@@ -33,19 +34,27 @@ module obstaclegen2 #(parameter MAX_LENGTH = 50) (
         randError = 0;
         nextObstacleCount = obstacleCount;
         nextObstacleArray = obstacleArray;
+        // if(s_reset) begin
+        //     nextObstacleArray = 0;
+        // end
         isArraySet = arraySet;
         cornerNE = 0;
         cornerNW = 0;
         cornerSE = 0;
         cornerSW = 0;
         obstacle = 0;
-        if(obstacleFlag == 1)begin
+         if(obstacleFlag == 1 && ~s_reset) begin
+        //if(obstacleFlag == 1) begin
             if (obstacleCount < 25) begin
                 if (goodColl == 1) begin
                     if (obsNeeded == 0) begin
                         isObsNeeded = 1;
                         isArraySet = 0;
-                    end else begin
+                    end else if (obsNeeded == 1) begin
+                        isObsNeeded = 2;
+                    end else if (obsNeeded == 2) begin
+                        isObsNeeded = 3;
+                    end else if (obsNeeded == 3) begin
                         isObsNeeded = 0;
                     end
                 end
@@ -102,15 +111,16 @@ module obstaclegen2 #(parameter MAX_LENGTH = 50) (
                 end
             end
 
-            if (obstacleArray[cordCombo]) begin
-                obstacle = 1;
-            end
         end else begin
             nextObstacleCount = 0;
-            nextObstacleArray = 0;
+            nextObstacleArray = 140'b0;
             isObsNeeded = 0;
-            isArraySet = 0;
+            isArraySet = 1;
         end
+
+        if (obstacleArray[cordCombo]) begin
+            obstacle = 1;
+        end 
     end
 
 endmodule

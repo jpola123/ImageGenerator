@@ -37,7 +37,7 @@ PROJ	         := ice40
 PINMAP 	         := $(PROJ)/pinmap.pcf
 ICE   	         := $(PROJ)/ice40hx8k.sv
 UART	         := $(addprefix $(PROJ)/uart/, uart.v uart_tx.v uart_rx.v)
-FILES            := $(ICE) $(SRC)/sound_top.sv $(addprefix $(SRC)/, $(TOP_FILE) $(COMPONENT_FILES)) $(UART)
+FILES            := $(ICE) $(SRC)/top.sv $(addprefix $(SRC)/, $(TOP_FILE) $(COMPONENT_FILES)) $(UART)
 FPGA_BUILD       := ./$(PROJ)/build
 
 # FPGA specific configuration
@@ -134,7 +134,7 @@ $(SIM_SOURCE): $(SRC)
 ##############################################################################
 
 # this target checks your code and synthesizes it into a netlist
-$(FPGA_BUILD)/$(PROJ).json : $(ICE) $(addprefix $(SRC)/, $(COMPONENT_FILES) $(TOP_FILE)) $(PINMAP) $(SRC)/sound_top.sv
+$(FPGA_BUILD)/$(PROJ).json : $(ICE) $(addprefix $(SRC)/, $(COMPONENT_FILES) $(TOP_FILE)) $(PINMAP) $(SRC)/top.sv
 	@mkdir -p $(FPGA_BUILD)
 	@echo "----------------------------------------------------------------"
 	@echo "Synthesizing to ice40 ....."
