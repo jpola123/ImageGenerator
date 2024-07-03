@@ -12,6 +12,7 @@ logic [16:0] count, next_count, SC, EC, SP, EP, color;
 logic [4:0] cmd_num, next_cmd_num;
 logic [15:0] rainbowRNG;
 logic enable;
+logic apple_rgb;
 
 // rainbowRand rR1 (.clk(clk), .reset(nrst), .rainbowRNG(rainbowRNG));
 
@@ -34,6 +35,7 @@ always_comb begin
     end
 end
 
+apple_sprite as1 (.count(count[9:0]), .apple_rgb(apple_rgb));
 rainbowRand rR1 (.clk(clk), .reset(nrst), .rainbowRNG(rainbowRNG), .enable(enable));
 
 always_comb begin
@@ -225,7 +227,11 @@ always_comb begin
             color = rainbowRNG;
         end
         3'b011: begin //apple
-            color = 16'h00f8;
+            if(apple_rgb == 1) begin 
+                color = 16'h00f8;
+            end else begin
+                color = 16'h1408;
+            end
         end
         3'b100: begin //border
             color = 16'h0000;
