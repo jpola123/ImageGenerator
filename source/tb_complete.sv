@@ -74,13 +74,13 @@ module tb_complete();
     left = 1'b0;
     right = 1'b0;
     down = 1'b0;
+    up = 1'b0;
     mode_pb = 1'b0;
     KeyEnc = 1'b0;
     reset_dut();
     #(CLK_PERIOD * 750000);
     right_button_press();
     #(CLK_PERIOD * 5000000);
-
     $finish;
     end
 
