@@ -4,10 +4,10 @@ module apple_sprite(
 );
 
     always_comb begin
-        if ((count <= 399)) begin
-            apple_rgb = 0;
-        end else begin
+        if ((count <= 799)) begin
             apple_rgb = 1;
+        end else begin
+            apple_rgb = 0;
         end
     end
 
