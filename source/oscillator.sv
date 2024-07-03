@@ -66,7 +66,7 @@ always_comb begin
             
         end
     end else if (~keepCounting_nxt) begin
-        count_nxt = 0;
+        //count_nxt = 0;
         at_max_nxt = 1'b0;
         stayCount_nxt = 0;
     end
