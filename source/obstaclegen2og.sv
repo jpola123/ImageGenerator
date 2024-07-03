@@ -2,19 +2,18 @@ module obstaclegen2 #(parameter MAX_LENGTH = 50) (
     input logic [MAX_LENGTH - 1:0][7:0] body,
     input logic clk, nRst, goodColl, obstacleFlag, s_reset,
     input logic [3:0] randX, randY, x, y,
-    output logic obstacle,
-    output logic [3:0] obstacleCount
+    output logic obstacle
 );
 
     logic [7:0] cornerNE, cornerNW, cornerSE, cornerSW, randCord, cord, randCordCombo, cordCombo;
     logic [139:0] obstacleArray, nextObstacleArray;
     logic arraySet, isArraySet, randError;
-    logic [3:0] nextObstacleCount; 
+    logic [4:0] obstacleCount, nextObstacleCount; 
     logic [2:0] obsNeeded, isObsNeeded;
 
     always_ff @(posedge clk, negedge nRst) begin
         if (nRst == 0) begin
-            obstacleCount <= 4'b0;
+            obstacleCount <= 5'b0;
             obstacleArray <= 140'b0;
             obsNeeded     <= 3'b0;
             arraySet      <= 1'b0;
@@ -46,7 +45,7 @@ module obstaclegen2 #(parameter MAX_LENGTH = 50) (
         obstacle = 0;
          if(obstacleFlag == 1 && ~s_reset) begin
         //if(obstacleFlag == 1) begin
-            if (obstacleCount < 15) begin
+            if (obstacleCount < 25) begin
                 if (goodColl == 1) begin
                     if (obsNeeded == 0) begin
                         isObsNeeded = 1;
