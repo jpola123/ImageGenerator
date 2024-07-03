@@ -15,7 +15,7 @@ module oscillator
     output logic at_max
 );
 logic [N - 1:0] count, count_nxt;
-logic [19:0] stayCount, stayCount_nxt;
+logic [23:0] stayCount, stayCount_nxt;
 logic at_max_nxt, keepCounting, keepCounting_nxt;
 always_ff @(posedge clk, negedge nRst) begin
     if (~nRst) begin
@@ -43,7 +43,7 @@ always_comb begin
         keepCounting_nxt = 1'b1;
     end
     if (keepCounting_nxt) begin
-        if (stayCount < 1000000) begin
+        if (stayCount < 10000000) begin
             if (count < freq) begin
                 count_nxt = count + 1;
             end else if (count >= freq) begin 
@@ -53,6 +53,7 @@ always_comb begin
             stayCount_nxt = stayCount + 1;
         end else begin
             keepCounting_nxt = 1'b0;
+            stayCount_nxt = 0;
         end
     end else if (~keepCounting_nxt) begin
         count_nxt = 0;
