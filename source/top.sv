@@ -76,7 +76,7 @@ module top (
   logic [1:0] blinkToggle;
   logic [1:0] junk;
 
-  localparam MAX_LENGTH = 70;
+  localparam MAX_LENGTH = 65;
 
   image_generator img_gen(.snakeBody(snakeBody), .snakeHead(snakeHead), .apple(apple), .border(border || obstacle), .KeyEnc(pb[0]), .GameOver(isGameComplete), .clk(hwclk), .nrst(~reset),
                           .sync(sync), .wr(left[0]), .dcx(left[1]), .D(right[7:0]), .x(x), .y(y));

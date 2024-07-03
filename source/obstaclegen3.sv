@@ -2,12 +2,11 @@ module obstaclegen2 #(parameter MAX_LENGTH = 50) (
     input logic [MAX_LENGTH - 1:0][7:0] body,
     input logic clk, nRst, goodColl, obstacleFlag, s_reset,
     input logic [3:0] randX, randY, x, y,
-    input logic [7:0] curr_length,
     output logic obstacle,
     output logic [3:0] obstacleCount
 );
 
-    logic [7:0] cornerNE, cornerNW, cornerSE, cornerSW, randCord, cord, randCordCombo, cordCombo, obsCount8;
+    logic [7:0] cornerNE, cornerNW, cornerSE, cornerSW, randCord, cord, randCordCombo, cordCombo;
     logic [139:0] obstacleArray, nextObstacleArray;
     logic arraySet, isArraySet, randError;
     logic [3:0] nextObstacleCount; 
@@ -31,7 +30,6 @@ module obstaclegen2 #(parameter MAX_LENGTH = 50) (
         isObsNeeded = obsNeeded;
         randCord = {randX, randY};
         cord = {x, y};
-        obsCount8 = ({4'b0, obstacleCount} + 1) * 2;
         randCordCombo = {4'b0, randX} + ({4'b0, randY} - 1) * 14;
         cordCombo = {4'b0, x} + ({4'b0, y} - 1) * 14;
         randError = 0;
@@ -105,10 +103,9 @@ module obstaclegen2 #(parameter MAX_LENGTH = 50) (
                     end
 
                     if (randError == 0) begin
-                        isArraySet = 1;
-                        if(obsCount8 < curr_length + 1)
                         nextObstacleArray[randCordCombo] = 1;
                         nextObstacleCount = obstacleCount + 1;
+                        isArraySet = 1;
                     end else begin
                         isArraySet = 0;
                     end
