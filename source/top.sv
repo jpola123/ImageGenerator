@@ -65,7 +65,7 @@ module top (
   input  logic txready, rxready
 );
 
-  logic snakeBody, snakeHead, apple, border, badColl, goodColl, obstacleFlag, obstacle;
+  logic snakeBody, snakeHead, apple, border, badColl, goodColl, obstacleFlag, obstacle, good_coll, bad_coll;
   logic [3:0] x, y, map, next_map, randX, randY, randX2, randY2;
   logic next_map_i, next_map_a;
   logic sync;
@@ -94,12 +94,13 @@ module top (
   collision coll(.clk(hwclk), .nRst(~reset), .snakeHead(snakeHead), .snakeBody(snakeBody), .border(border || obstacle), .apple(apple), .goodColl(goodColl), .badColl(badColl));
   // collision coll(.clk(hwclk), .nRst(~reset), .snakeHead(snakeHead), .snakeBody(snakeBody), .border(border), .apple(apple), .goodColl(goodColl), .badColl(badColl));
   //score_tracker2 track(.clk(hwclk), .nRst(~reset), .goodColl(goodColl), .badColl(badColl), .current_score(curr_length), .dispScore(dispScore), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .isGameComplete(isGameComplete));
-  score_tracker3 track(.clk(hwclk), .nRst(~reset), .goodColl(goodColl), .current_score(curr_length), .badColl(badColl), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .bcd_hundreds(bcd_hundreds), .dispScore(dispScore), .isGameComplete(isGameComplete));
+  score_posedge_detector score_detect(.clk(hwclk), .nRst(~reset), .goodColl_i(goodColl), .badColl_i(badColl), .goodColl(good_coll), .badColl(bad_coll));
+  score_tracker3 track(.clk(hwclk), .nRst(~reset), .goodColl(good_coll), .current_score(curr_length), .badColl(bad_coll), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .bcd_hundreds(bcd_hundreds), .dispScore(dispScore), .isGameComplete(isGameComplete));
   toggle_screen toggle1(.displayOut(displayOut), .blinkToggle(blinkToggle), .clk(hwclk), .rst(~reset), .bcd_ones(bcd_ones), .bcd_tens(bcd_tens), .bcd_hundreds(bcd_hundreds));
   ssdec ssdec1(.in(displayOut), .enable(blinkToggle == 1), .out(ss0[6:0]));
   ssdec ssdec2(.in(displayOut), .enable(blinkToggle == 2), .out(ss1[6:0]));
   ssdec ssdec3(.in(displayOut), .enable(blinkToggle == 0), .out(ss2[6:0]));
   ssdec ssdec4(.in({3'b0, obstacleFlag}), .enable(1), .out(ss3[6:0]));
   border_generator border_gen(.x(x), .y(y), .isBorder(border));
-  //sound_generator sound_gen(.clk(hwclk), .rst(reset), .goodColl_i(goodColl), .badColl_i(badColl), .button_i(1'b1), .direction_i({pb[10], pb[6], pb[5], pb[7]}), .soundOut({left[7:2], junk}));
+  sound_generator sound_gen(.clk(hwclk), .rst(reset), .goodColl_i(goodColl), .badColl_i(badColl), .button_i(1'b0), .direction_i({pb[10], pb[6], pb[5], pb[7]}), .soundOut({left[7:2], junk}));
 endmodule

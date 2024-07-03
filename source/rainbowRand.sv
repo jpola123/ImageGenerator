@@ -1,14 +1,14 @@
 module rainbowRand(
     input logic clk,
-    input logic nRst,
+    input logic reset,
     input logic enable,
     output logic [15:0] rainbowRNG
 );
 
 logic [15:0] next_rainbowRNG;
 
-always_ff @(posedge clk, negedge nRst) begin
-	if(nRst == 0) begin
+always_ff @(posedge clk, negedge reset) begin
+	if(reset == 0) begin
 		rainbowRNG <= 0;
 	end else begin
 		rainbowRNG <= next_rainbowRNG;
