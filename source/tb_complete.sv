@@ -80,7 +80,7 @@ module tb_complete();
     reset_dut();
     #(CLK_PERIOD * 750000);
     right_button_press();
-    #(CLK_PERIOD * 5000000);
+    #(CLK_PERIOD * 15000000);
     $finish;
     end
 
