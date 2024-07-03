@@ -9,6 +9,7 @@ module complete (
   output logic [7:0] D,
   output logic [5:0] sound_out
 );
+  localparam MAX_LENGTH = 70;
 
   logic snakeBody, snakeHead, apple, border, badColl, goodColl, obstacleFlag, obstacle, good_coll, bad_coll;
   logic [3:0] x, y, randX, randY, randX2, randY2;
@@ -21,7 +22,7 @@ module complete (
   logic [1:0] blinkToggle;
   logic [1:0] junk;
 
-  localparam MAX_LENGTH = 70;
+  
 
   image_generator img_gen(.snakeBody(snakeBody), .snakeHead(snakeHead), .apple(apple), .border(border || obstacle), .KeyEnc(KeyEnc), .GameOver(isGameComplete), .clk(hwclk), .nrst(~reset),
                           .sync(sync), .wr(wr), .dcx(dcx), .D(D), .x(x), .y(y));
