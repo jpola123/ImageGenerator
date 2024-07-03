@@ -79,9 +79,9 @@ module tb_complete();
     KeyEnc = 1'b0;
     reset_dut();
     #(CLK_PERIOD * 750000);
-    right_button_press();
+    left_button_press();
     #(CLK_PERIOD * 2500000);
-    up_button_press();
+    down_button_press();
     #(CLK_PERIOD * 2500000);
     $finish;
     end
