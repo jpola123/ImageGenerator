@@ -99,6 +99,7 @@ module top (
   ssdec ssdec2(.in(displayOut), .enable(blinkToggle == 2), .out(ss1[6:0]));
   ssdec ssdec3(.in(displayOut), .enable(blinkToggle == 0), .out(ss2[6:0]));
   ssdec ssdec4(.in({3'b0, obstacleFlag}), .enable(1), .out(ss3[6:0]));
+  ssdec ssdec5(.in(dispObs), .enable(1), .out(ss4[6:0]));
   border_generator border_gen(.x(x), .y(y), .isBorder(border));
   sound_generator sound_gen(.clk(hwclk), .rst(reset), .goodColl_i(goodColl), .badColl_i(badColl), .button_i(1'b0), .direction_i({pb[10], pb[6], pb[5], pb[7]}), .soundOut({left[7:2], junk}));
 endmodule
