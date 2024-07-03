@@ -65,7 +65,7 @@ logic [3:0] next_randY, next_randY2;
 always_ff @(posedge clk, negedge nRst) begin
 	if(nRst == 0) begin
 		randX <= 4'b1000;
-		randY <= 4'b0011;
+		randY <= 4'b0010;
         randX2 <= 4'b0011;
         randY2 <= 4'b0101;
 	end else begin
