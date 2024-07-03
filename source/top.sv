@@ -72,11 +72,11 @@ module top (
   logic [7:0] curr_length, dispScore;
   logic [3:0] bcd_ones, bcd_tens, bcd_hundreds, displayOut;
   logic isGameComplete;
-  logic [139:0][7:0] body;
+  logic [MAX_LENGTH-1:0][7:0] body;
   logic [1:0] blinkToggle;
   logic [1:0] junk;
 
-  localparam MAX_LENGTH = 80;
+  localparam MAX_LENGTH = 70;
 
   image_generator img_gen(.snakeBody(snakeBody), .snakeHead(snakeHead), .apple(apple), .border(border || obstacle), .KeyEnc(pb[0]), .GameOver(isGameComplete), .clk(hwclk), .nrst(~reset),
                           .sync(sync), .wr(left[0]), .dcx(left[1]), .D(right[7:0]), .x(x), .y(y));
