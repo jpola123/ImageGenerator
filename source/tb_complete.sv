@@ -81,7 +81,7 @@ module tb_complete();
     #(CLK_PERIOD * 750000);
     right_button_press();
     #(CLK_PERIOD * 2500000);
-    left_button_press();
+    up_button_press();
     #(CLK_PERIOD * 2500000);
     $finish;
     end
