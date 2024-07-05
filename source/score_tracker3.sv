@@ -70,6 +70,7 @@ module score_tracker3(
                 deconcatenate = nextCurrScore - 110;
                 next_bcd_ones = deconcatenate[3:0];
                 next_bcd_tens = 1;
+                next_bcd_hundreds = 1;
             end
             else if (nextCurrScore > 99) begin
                 deconcatenate = nextCurrScore - 100;
