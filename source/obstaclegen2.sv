@@ -123,7 +123,7 @@ module obstaclegen2 #(parameter MAX_LENGTH = 50) (
         end
 
         for (int k = 0; k < 15; k++) begin
-            if (obstacleArray[k] == cordCombo && cordCombo != 0) begin
+            if (obstacleArray[k] == cordCombo && x != 0 && x != 15 && y != 0 && y != 11) begin
                 obstacle = 1;
             end
         end
