@@ -67,7 +67,7 @@ always_ff @(posedge clk, negedge nRst) begin
 		randX <= 4'b1000;
 		randY <= 4'b0010;
         randX2 <= 4'b0011;
-        randY2 <= 4'b0100; //0101
+        randY2 <= 4'b0101; //0101
 	end else begin
 		randX <= next_randX;
 		randY <= next_randY; 
