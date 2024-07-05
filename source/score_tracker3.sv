@@ -49,7 +49,9 @@ module score_tracker3(
             current_collision = 1;
             
             if (nextCurrScore > 139) begin
-                next_bcd_tens= 1;
+                deconcatenate = nextCurrScore - 140;
+                next_bcd_ones = deconcatenate[3:0];
+                next_bcd_tens= 4;
                 next_bcd_hundreds = 1;
             end
             else if (nextCurrScore > 129) begin
@@ -67,6 +69,7 @@ module score_tracker3(
             else if (nextCurrScore > 109) begin
                 deconcatenate = nextCurrScore - 110;
                 next_bcd_ones = deconcatenate[3:0];
+                next_bcd_tens = 1;
             end
             else if (nextCurrScore > 99) begin
                 deconcatenate = nextCurrScore - 100;
