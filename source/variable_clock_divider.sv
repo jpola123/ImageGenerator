@@ -1,5 +1,5 @@
-typedef enum logic {
-    SLOW = 0, FAST = 1
+typedef enum logic [1:0]{
+    TURTLE = 0, SLOW = 1, FAST = 2, 
 } mode_t;
 
 module variable_clock_divider (
@@ -29,8 +29,10 @@ always_comb begin
         MAX_COUNT = 750000;
     SLOW:
         MAX_COUNT = 1500000;
+    TURTLE: 
+        MAX_COUNT = 2000000;
     default: 
-        MAX_COUNT = 1500000;
+        MAX_COUNT = 2000000;
     endcase
     
     if(count >= (MAX_COUNT - 1)) begin

@@ -16,6 +16,8 @@ always_comb begin
         if (current_mode == SLOW)
             next_mode = FAST;
         else if (current_mode == FAST)
+            next_mode = TURTLE;
+        else if (current_mode == TURTLE)
             next_mode = SLOW;
         else
             next_mode = SLOW;
