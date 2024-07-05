@@ -8,8 +8,7 @@ module obstaclegen2 #(parameter MAX_LENGTH = 50) (
 );
 
     logic [7:0] cornerNE, cornerNW, cornerSE, cornerSW, randCord, cord, randCordCombo, cordCombo, obsCount8;
-    //logic [139:0] obstacleArray, nextObstacleArray;
-    logic [14:0][7:0] obstacleArray, nextObstacleArray;
+    logic [139:0] obstacleArray, nextObstacleArray;
     logic arraySet, isArraySet, randError;
     logic [3:0] nextObstacleCount; 
     logic [2:0] obsNeeded, isObsNeeded;
@@ -17,7 +16,7 @@ module obstaclegen2 #(parameter MAX_LENGTH = 50) (
     always_ff @(posedge clk, negedge nRst) begin
         if (nRst == 0) begin
             obstacleCount <= 4'b0;
-            obstacleArray <= 0;
+            obstacleArray <= 140'b0;
             obsNeeded     <= 3'b0;
             arraySet      <= 1'b0;
         end else begin
@@ -33,8 +32,8 @@ module obstaclegen2 #(parameter MAX_LENGTH = 50) (
         randCord = {randX, randY};
         cord = {x, y};
         obsCount8 = ({4'b0, obstacleCount} + 1) * 2;
-        //randCordCombo = {4'b0, randX} + ({4'b0, randY} - 1) * 14;
-        //cordCombo = {4'b0, x} + ({4'b0, y} - 1) * 14;
+        randCordCombo = {4'b0, randX} + ({4'b0, randY} - 1) * 14;
+        cordCombo = {4'b0, x} + ({4'b0, y} - 1) * 14;
         randError = 0;
         nextObstacleCount = obstacleCount;
         nextObstacleArray = obstacleArray;
@@ -77,36 +76,38 @@ module obstaclegen2 #(parameter MAX_LENGTH = 50) (
                     end
 
                     if (randX == 1 || randY == 1) begin
-                        cornerNW = randCord;
+                        cornerNW = randCordCombo;
                     end else begin
-                        cornerNW = {(randY - 4'b1), (randX - 4'b1)};
+                        cornerNW = randCordCombo - 15;
                     end
                     if (randX == 14 || randY == 1) begin
-                        cornerNE = randCord;
+                        cornerNE = randCordCombo;
                     end else begin
-                        cornerNE = {(randY - 4'b1), (randX + 4'b1)};
+                        cornerNE = randCordCombo - 13;
                     end
                     if (randX == 1 || randY == 10) begin
-                        cornerSW = randCord;
+                        cornerSW = randCordCombo;
                     end else begin
-                        cornerSW = {(randY + 4'b1), (randX - 4'b1)};
+                        cornerSW = randCordCombo + 13;
                     end
                     if (randX == 14 || randY == 10) begin
-                        cornerSE = randCord;
+                        cornerSE = randCordCombo;
                     end else begin
-                        cornerSE = {(randY + 4'b1), (randX + 4'b1)};
+                        cornerSE = randCordCombo + 15;
                     end
 
-                    for (int j = 0; j < 15; j++) begin
-                        if (cornerNW == obstacleArray[j] || cornerNE == obstacleArray[j] || cornerSW == obstacleArray[j] || cornerSE == obstacleArray[j]) begin
-                            randError = 1;
-                        end
+                    if (obstacleArray[cornerNW] || 
+                        obstacleArray[cornerNE] || 
+                        obstacleArray[cornerSW] || 
+                        obstacleArray[cornerSE] || 
+                        obstacleArray[randCordCombo]) begin
+                        randError = 1;
                     end
 
                     if (randError == 0) begin
                         isArraySet = 1;
                         if(curr_length < 3 || obsCount8 < curr_length + 2) begin
-                            nextObstacleArray[obstacleCount] = randCord;
+                            nextObstacleArray[randCordCombo] = 1;
                             nextObstacleCount = obstacleCount + 1;
                         end
                     end else begin
@@ -117,16 +118,14 @@ module obstaclegen2 #(parameter MAX_LENGTH = 50) (
 
         end else begin
             nextObstacleCount = 0;
-            nextObstacleArray = 0;
+            nextObstacleArray = 140'b0;
             isObsNeeded = 0;
             isArraySet = 1;
         end
 
-        for (int k = 0; k < 15; k++) begin
-            if (obstacleArray[k] == cordCombo) begin
-                obstacle = 1;
-            end
-        end
+        if (obstacleArray[cordCombo]) begin
+            obstacle = 1;
+        end 
     end
 
 endmodule
