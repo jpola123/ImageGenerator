@@ -89,6 +89,10 @@ always_comb begin
             next_Y = current_Y;
         end
     end
+    else if(sync) begin
+        next_X = 0;
+        next_Y = 0;
+    end
     else begin
         next_X = current_X;
         next_Y = current_Y;
