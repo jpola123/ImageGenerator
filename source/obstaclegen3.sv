@@ -249,19 +249,3 @@ endmodule
 //                     end
 //                 end
 //             end
-
-//         end else begin
-//             nextObstacleCount = 0;
-//             nextObstacleArray = 0;
-//             isObsNeeded = 0;
-//             isArraySet = 1;
-//         end
-
-//         for (int k = 0; k < 15; k++) begin
-//             if (obstacleArray[k] == cordCombo) begin
-//                 obstacle = 1;
-//             end
-//         end
-//     end
-
-// endmodule
