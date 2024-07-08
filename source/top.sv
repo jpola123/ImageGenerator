@@ -57,7 +57,7 @@ module top (
   // Handles the logic that determines whether a good collision, a bad collision, or no collision have occured at a particular pixel
   collision coll(.clk(hwclk), .nRst(~reset), .snakeHead(snakeHead), .snakeBody(snakeBody), .border(border || obstacle), .apple(apple), .goodColl(goodColl), .badColl(badColl));
   
-  // Edge Detector to prevent issues with the score updating incorrectly when a good collision is triggered.
+  // Edge Detector to prevent issues with the score updating incorrectly when a good collision is triggered
   score_posedge_detector score_detect(.clk(hwclk), .nRst(~reset), .goodColl_i(goodColl), .badColl_i(badColl), .goodColl(good_coll), .badColl(bad_coll));
   
   // Keeps track of both the high score and current score during a game session. High score shows once player dies, and current score shows 
