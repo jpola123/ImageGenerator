@@ -4,7 +4,7 @@ module oscillator
 )
 (
     input logic clk, nRst,
-    input MODE_TYPES state,
+    input logic state,
     input logic goodColl, badColl,
     output logic at_max
 );
@@ -69,8 +69,8 @@ always_comb begin
             stayCount_nxt = 0;
         end
     end else if (~keepCounting_nxt) begin
-        count_nxt = count;
-        at_max_nxt = at_max;
+        count_nxt = 0;
+        at_max_nxt = 0;
     end
 end
 

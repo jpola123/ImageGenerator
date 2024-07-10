@@ -1,10 +1,10 @@
 module update_controller(
     input logic init_cycle, en_update, clk, nrst, cmd_finished, pause,
     output logic cmd_done, wr,
-    output update_t mode
+    output logic [2:0] mode
 );
 
-update_t current, next;
+logic [2:0] current, next;
 logic [8:0] count, next_count;
 
 always_ff @(posedge clk, negedge nrst) begin
